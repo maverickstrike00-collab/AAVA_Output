@@ -1,0 +1,2834 @@
+{
+  "batch_metadata": {
+    "batch_id": 2,
+    "total_batches": 353,
+    "remaining_after_this": 351,
+    "analyzed_at": "2025-01-15T10:45:00Z",
+    "analyzer": "Senior Codebase Analyst Agent",
+    "files_in_batch": 5,
+    "files_succeeded": 5,
+    "files_failed": 0,
+    "failed_files": [],
+    "storage_repo": "AAVA_Output",
+    "report_path": "codebase_batches/batch_2_report.json"
+  },
+  "analyzed_files": [
+    "EndToEnd/EIT_NPI/UI_AUTOMATION/HPSmart_Work/src/__init__.py",
+    "EndToEnd/EIT_NPI/UI_AUTOMATION/SMBPortal/conftest.py",
+    "EndToEnd/EIT_NPI/UI_AUTOMATION/SMBPortal/test_check.py",
+    "Pages/__init__.py",
+    "Pages/account_hp_smart_dashboard.py"
+  ],
+  "file_analyses": [
+    {
+      "file_path": "EndToEnd/EIT_NPI/UI_AUTOMATION/HPSmart_Work/src/__init__.py",
+      "file_name": "__init__.py",
+      "file_extension": ".py",
+      "file_size_bytes": 0,
+      "language": "Python",
+      "file_category": "other",
+      "file_purpose": "Empty Python package initialization file that marks the HPSmart_Work/src directory as a Python package, allowing modules within this directory to be imported. Contains no code or logic.",
+      "imports": [],
+      "classes": [],
+      "locators": [],
+      "functions": [],
+      "inner_classes": [],
+      "variables_and_constants": [],
+      "analysis_notes": "This is an empty __init__.py file with zero bytes. It serves only as a package marker for Python's import system. No automation logic, no fixtures, no locators. This file is part of the EndToEnd test structure but contains no executable code."
+    },
+    {
+      "file_path": "EndToEnd/EIT_NPI/UI_AUTOMATION/SMBPortal/conftest.py",
+      "file_name": "conftest.py",
+      "file_extension": ".py",
+      "file_size_bytes": 702,
+      "language": "Python",
+      "file_category": "config",
+      "file_purpose": "pytest configuration file for SMBPortal tests that defines a session-scoped fixture appium_driver_chrome which launches Chrome browser via Appium WinAppDriver for web-based SMB Portal automation. Provides the Chrome WebDriver instance to all tests in the SMBPortal test suite.",
+      "imports": [
+        {
+          "import_statement": "import pytest",
+          "module": "pytest",
+          "imported_names": [
+            "pytest"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "from appium import webdriver",
+          "module": "appium",
+          "imported_names": [
+            "webdriver"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "from appium.options.common import AppiumOptions",
+          "module": "appium.options.common",
+          "imported_names": [
+            "AppiumOptions"
+          ],
+          "is_external": true,
+          "is_internal": false
+        }
+      ],
+      "classes": [],
+      "locators": [],
+      "functions": [
+        {
+          "method_name": "appium_driver_chrome",
+          "method_signature": "@pytest.fixture(scope=\"session\")\ndef appium_driver_chrome():",
+          "parameters": [],
+          "return_type": null,
+          "decorators": [
+            "@pytest.fixture(scope=\"session\")"
+          ],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "setup",
+          "what_it_does": "pytest session-scoped fixture that initializes and provides an Appium WebDriver instance for Chrome browser automation on Windows. Creates a desired_caps dictionary with Chrome app identifier, Windows platform details, experimental webdriver flag, and 10-second app launch wait timeout. Connects to Appium server at http://127.0.0.1:4723/ using webdriver.Remote() with AppiumOptions loaded from desired_caps_chrome. Maximizes the Chrome window using driver_chrome.maximize_window(). Yields the driver instance to all tests in the session. After all tests complete, calls driver_chrome.quit() to close the browser and clean up the WebDriver session. This fixture is used by SMB Portal web tests that need Chrome browser automation via Appium.",
+          "locators_used": [],
+          "calls_to": [
+            "webdriver.Remote()",
+            "AppiumOptions().load_capabilities()",
+            "driver_chrome.maximize_window()",
+            "driver_chrome.quit()"
+          ],
+          "usage_example": "def test_smb_portal_login(appium_driver_chrome):\n    driver = appium_driver_chrome\n    driver.get('https://smb-portal-url.com')",
+          "belongs_to_class": null,
+          "lines_of_code": 8
+        }
+      ],
+      "inner_classes": [],
+      "variables_and_constants": [
+        {
+          "constant_name": "desired_caps_chrome",
+          "constant_value": "{'app': 'Chrome', 'platformName': 'Windows', 'AutomationName': 'Windows', 'platformVersion': '10', 'deviceName': 'WindowsPC', 'ms:experimental-webdriver': True, 'ms:waitForAppLaunch': '10'}",
+          "constant_type": "dict",
+          "scope": "module_level",
+          "defined_in_class": null
+        }
+      ],
+      "analysis_notes": "This conftest.py is specific to the SMBPortal test suite and provides a Chrome browser fixture via Appium WinAppDriver. Unlike the main framework conftest.py which provides appium_driver for HP Smart Windows app, this fixture (appium_driver_chrome) launches Chrome browser for web-based SMB Portal testing. The fixture is session-scoped meaning one Chrome instance is shared across all SMBPortal tests. Tests using this fixture receive a Selenium-compatible WebDriver instance that can navigate to web URLs and interact with web elements using Selenium locators (By.ID, By.XPATH, etc.). The desired_caps_chrome uses 'app': 'Chrome' which tells WinAppDriver to launch the Chrome application."
+    },
+    {
+      "file_path": "EndToEnd/EIT_NPI/UI_AUTOMATION/SMBPortal/test_check.py",
+      "file_name": "test_check.py",
+      "file_extension": ".py",
+      "file_size_bytes": 440,
+      "language": "Python",
+      "file_category": "test_script",
+      "file_purpose": "Commented-out test file containing sample Appium WebDriver initialization code for HP Printer Control Windows app. All code is commented and non-functional. Appears to be a reference or template file showing how to set up Appium desired capabilities for the HP Printer Control app with a 30-second launch wait timeout.",
+      "imports": [],
+      "classes": [],
+      "locators": [],
+      "functions": [],
+      "inner_classes": [],
+      "variables_and_constants": [],
+      "analysis_notes": "This entire file is commented out with # symbols. It contains no executable code. The commented code shows a desired_caps dictionary for launching the HP Printer Control Windows Store app (AD2F1837.HPPrinterControl_v10z8vjag6ke6!AD2F1837.HPPrinterControl) via Appium with a 30-second app launch wait. This may have been used as a reference or starting template but is not active in the current framework. No imports are active, no classes are defined, no test functions exist. This file can be ignored for reusable component extraction as it contributes nothing to the active codebase."
+    },
+    {
+      "file_path": "Pages/__init__.py",
+      "file_name": "__init__.py",
+      "file_extension": ".py",
+      "file_size_bytes": 0,
+      "language": "Python",
+      "file_category": "other",
+      "file_purpose": "Empty Python package initialization file that marks the Pages directory as a Python package, allowing page object classes like SmartDriver, UssDriver, Scan, Shortcuts, and HPSmartBasicActions to be imported from the Pages module. Contains no code or logic.",
+      "imports": [],
+      "classes": [],
+      "locators": [],
+      "functions": [],
+      "inner_classes": [],
+      "variables_and_constants": [],
+      "analysis_notes": "This is an empty __init__.py file with zero bytes. It serves only as a package marker for Python's import system, enabling imports like 'from Pages.smartdriver import SmartDriver' and 'from Pages.basic_actions import HPSmartBasicActions'. No automation logic, no fixtures, no locators. This is a standard Python package structure file with no executable content."
+    },
+    {
+      "file_path": "Pages/account_hp_smart_dashboard.py",
+      "file_name": "account_hp_smart_dashboard.py",
+      "file_extension": ".py",
+      "file_size_bytes": 52478,
+      "language": "Python",
+      "file_category": "page_object",
+      "file_purpose": "Page object class for HP Smart web dashboard and SMB Portal automation using Selenium WebDriver. Contains HPSmartDashBoard class with Selenium By tuple locators for all HP Smart web portal elements (sign-in, account menu, solutions menu, printers dashboard, smart security, print anywhere, help center, profile management) and comprehensive methods for navigating menus, managing users, configuring security settings, toggling print anywhere and smart security features, verifying printer status, and interacting with Shadow DOM elements in the HP account management portal.",
+      "imports": [
+        {
+          "import_statement": "import logging",
+          "module": "logging",
+          "imported_names": [
+            "logging"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "import time",
+          "module": "time",
+          "imported_names": [
+            "time"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "import random",
+          "module": "random",
+          "imported_names": [
+            "random"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "import string",
+          "module": "string",
+          "imported_names": [
+            "string"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "from pynput.keyboard import Key, Controller",
+          "module": "pynput.keyboard",
+          "imported_names": [
+            "Key",
+            "Controller"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "from selenium.webdriver.support import expected_conditions as EC",
+          "module": "selenium.webdriver.support",
+          "imported_names": [
+            "expected_conditions"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "from selenium.webdriver.support.ui import WebDriverWait as wd",
+          "module": "selenium.webdriver.support.ui",
+          "imported_names": [
+            "WebDriverWait"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "from selenium.webdriver.common.by import By",
+          "module": "selenium.webdriver.common.by",
+          "imported_names": [
+            "By"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "from tests.conftest import chrome_browser, appium_driver",
+          "module": "tests.conftest",
+          "imported_names": [
+            "chrome_browser",
+            "appium_driver"
+          ],
+          "is_external": false,
+          "is_internal": true
+        },
+        {
+          "import_statement": "import subprocess",
+          "module": "subprocess",
+          "imported_names": [
+            "subprocess"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "from Pages.basic_actions import HPSmartBasicActions, HPSmartWebPageActions",
+          "module": "Pages.basic_actions",
+          "imported_names": [
+            "HPSmartBasicActions",
+            "HPSmartWebPageActions"
+          ],
+          "is_external": false,
+          "is_internal": true
+        },
+        {
+          "import_statement": "from Pages.common_utils import CommonUtilitiesBrowser",
+          "module": "Pages.common_utils",
+          "imported_names": [
+            "CommonUtilitiesBrowser"
+          ],
+          "is_external": false,
+          "is_internal": true
+        },
+        {
+          "import_statement": "from selenium.webdriver.common.action_chains import ActionChains",
+          "module": "selenium.webdriver.common.action_chains",
+          "imported_names": [
+            "ActionChains"
+          ],
+          "is_external": true,
+          "is_internal": false
+        }
+      ],
+      "classes": [
+        {
+          "class_name": "HPSmartDashBoard",
+          "parent_classes": [],
+          "decorators": [],
+          "docstring": null,
+          "class_purpose": "Page object class for HP Smart web dashboard and SMB Portal automation using Selenium WebDriver. Provides all Selenium By tuple locators for HP Smart web portal UI elements including sign-in controls, account dashboard sections, solutions menu (Print Anywhere, Smart Security), printers status page, help center, and profile management. Contains comprehensive methods for user management (invite users, delete users, verify user status), menu navigation (account, solutions, help center with sub-menus), security feature toggling (Smart Security monitoring on/off), print anywhere configuration (enable/disable print on the go and private pickup), printer status verification (internet connection, security monitoring, ready to print, supply levels), and Shadow DOM interaction for HP account profile editing. Does not inherit from any base class and is instantiated with a chrome_browser fixture (Selenium WebDriver instance).",
+          "how_to_import": "from Pages.account_hp_smart_dashboard import HPSmartDashBoard",
+          "how_to_instantiate": "dashboard = HPSmartDashBoard(chrome_browser)",
+          "total_methods": 52,
+          "total_locators": 78
+        }
+      ],
+      "locators": [
+        {
+          "locator_name": "accept_all",
+          "locator_value": "(By.ID, 'onetrust-accept-btn-handler')",
+          "locator_type": "id",
+          "locator_strategy": "By.ID",
+          "access_pattern": "self.driver.find_element(*self.accept_all)",
+          "ui_element_description": "Accept All button in the OneTrust cookie consent banner that appears on HP Smart web portal pages, used to accept all cookies and dismiss the banner.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "manage_options",
+          "locator_value": "(By.ID, 'onetrust-pc-btn-handler')",
+          "locator_type": "id",
+          "locator_strategy": "By.ID",
+          "access_pattern": "self.driver.find_element(*self.manage_options)",
+          "ui_element_description": "Manage Options button in the OneTrust cookie consent banner for customizing cookie preferences.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "sign_in_link",
+          "locator_value": "(By.ID, 'sign-in-link')",
+          "locator_type": "id",
+          "locator_strategy": "By.ID",
+          "access_pattern": "self.driver.find_element(*self.sign_in_link)",
+          "ui_element_description": "Sign In link on the HP Smart web portal landing page that navigates to the login screen.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "toast_message_xpath",
+          "locator_value": "(By.XPATH, \"//span[@class='css-1qhvhb1']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.toast_message_xpath)",
+          "ui_element_description": "Toast notification message span element that displays success or error messages after user actions in the HP Smart web portal.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "username",
+          "locator_value": "(By.ID, 'username')",
+          "locator_type": "id",
+          "locator_strategy": "By.ID",
+          "access_pattern": "self.driver.find_element(*self.username)",
+          "ui_element_description": "Username input field on the HP Smart web portal sign-in page for entering the user's email address or HP account username.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "use_password",
+          "locator_value": "(By.ID, 'user-name-form-submit')",
+          "locator_type": "id",
+          "locator_strategy": "By.ID",
+          "access_pattern": "self.driver.find_element(*self.use_password)",
+          "ui_element_description": "Submit button on the username entry screen that proceeds to the password entry screen after username is entered.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "password",
+          "locator_value": "(By.ID, 'password')",
+          "locator_type": "id",
+          "locator_strategy": "By.ID",
+          "access_pattern": "self.driver.find_element(*self.password)",
+          "ui_element_description": "Password input field on the HP Smart web portal sign-in page for entering the user's account password.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "sign_in",
+          "locator_value": "(By.ID, 'sign-in')",
+          "locator_type": "id",
+          "locator_strategy": "By.ID",
+          "access_pattern": "self.driver.find_element(*self.sign_in)",
+          "ui_element_description": "Sign In button on the password entry screen that submits the login credentials and authenticates the user.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "dashboard_printers",
+          "locator_value": "(By.XPATH, \"//span[text()='Printers']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.dashboard_printers)",
+          "ui_element_description": "Printers menu item in the HP Smart web dashboard left navigation menu that navigates to the printers status and management page.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_dashboard",
+          "locator_value": "(By.XPATH, \"//span[text()='Account Dashboard']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_dashboard)",
+          "ui_element_description": "Account Dashboard menu item in the HP Smart web portal navigation that displays the main account overview page with printers and account summary.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account",
+          "locator_value": "(By.XPATH, \"//span[normalize-space()='Account']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account)",
+          "ui_element_description": "Account menu item in the HP Smart web dashboard left navigation menu that expands to show account-related sub-menus (Subscriptions, Orders, Profile, Users, Notifications).",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "ac_dash_printer",
+          "locator_value": "(By.XPATH, '//h5[@data-testid=\"header-title-printers-card\"]')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.ac_dash_printer)",
+          "ui_element_description": "Printers card header on the Account Dashboard page that displays the printers section title.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_users",
+          "locator_value": "(By.XPATH, \"//span[text()='Users']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_users)",
+          "ui_element_description": "Users sub-menu item under the Account menu that navigates to the user management page for inviting and managing account users.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "invite",
+          "locator_value": "(By.XPATH, \"//button[@class='css-roza95']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.invite)",
+          "ui_element_description": "Invite button on the Users management page that opens the invite user dialog for adding new users to the account.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "enter_email",
+          "locator_value": "(By.ID, 'user-email')",
+          "locator_type": "id",
+          "locator_strategy": "By.ID",
+          "access_pattern": "self.driver.find_element(*self.enter_email)",
+          "ui_element_description": "Email input field in the invite user dialog where the email address of the user to be invited is entered.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "click_plus",
+          "locator_value": "(By.XPATH, \"//button[@aria-label='add user to invite list']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.click_plus)",
+          "ui_element_description": "Plus button in the invite user dialog that adds the entered email address to the invite list.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "confirm",
+          "locator_value": "(By.XPATH, \"//button[@aria-label='confirm']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.confirm)",
+          "ui_element_description": "Confirm button in the invite user dialog that sends the invitation emails to all users in the invite list.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "dashboard_solutions",
+          "locator_value": "(By.XPATH, \"//span[text()='Solutions']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.dashboard_solutions)",
+          "ui_element_description": "Solutions menu item in the HP Smart web dashboard left navigation menu that expands to show solutions sub-menus (Print Anywhere, Smart Security).",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "dashboard_print_anywhere",
+          "locator_value": "(By.XPATH, \"//span[text()='Print Anywhere']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.dashboard_print_anywhere)",
+          "ui_element_description": "Print Anywhere sub-menu item under Solutions menu that navigates to the Print Anywhere configuration page.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "solution_menu",
+          "locator_value": "(By.XPATH, '//li[@data-testid=\"jarvis-react-consumer-layout__side-menu-item-Solutions\"]/a')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.solution_menu)",
+          "ui_element_description": "Solutions menu link in the side navigation menu identified by data-testid attribute.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "solution_print_any_where",
+          "locator_value": "(By.XPATH, '//li[@data-testid=\"jarvis-react-consumer-layout__side-menu-item-Print Anywhere\"]/a/span')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.solution_print_any_where)",
+          "ui_element_description": "Print Anywhere sub-menu span element under Solutions menu identified by data-testid attribute.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "solution_smart_security",
+          "locator_value": "(By.XPATH, '//li[@data-testid=\"jarvis-react-consumer-layout__side-menu-item-Smart Security\"]/a')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.solution_smart_security)",
+          "ui_element_description": "Smart Security sub-menu link under Solutions menu identified by data-testid attribute.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "print_anywhere_load",
+          "locator_value": "(By.XPATH, '//*[@data-testid=\"potg-print-anywhere-title-wrapper\"]')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.print_anywhere_load)",
+          "ui_element_description": "Print Anywhere page title wrapper element used to verify that the Print Anywhere page has loaded successfully.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "smart_security_load",
+          "locator_value": "(By.XPATH, '//*[@class=\"ss-printer-list\" ]')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.smart_security_load)",
+          "ui_element_description": "Smart Security printer list element used to verify that the Smart Security page has loaded successfully.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_menu",
+          "locator_value": "(By.XPATH, '//li[@data-testid=\"jarvis-react-consumer-layout__side-menu-item-Account\"]/a')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_menu)",
+          "ui_element_description": "Account menu link in the side navigation menu identified by data-testid attribute.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_menu_load",
+          "locator_value": "(By.XPATH, '//li[@data-testid=\"jarvis-react-consumer-layout__side-menu-item-Subscriptions\"]/a')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_menu_load)",
+          "ui_element_description": "Subscriptions sub-menu link used to verify that the Account menu has expanded and loaded its sub-menu items.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_subscriptions",
+          "locator_value": "(By.XPATH, '//li[@data-testid=\"jarvis-react-consumer-layout__side-menu-item-Subscriptions\"]/a')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_subscriptions)",
+          "ui_element_description": "Subscriptions sub-menu link under Account menu that navigates to the subscriptions management page.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_orders",
+          "locator_value": "(By.XPATH, '//li[@data-testid=\"jarvis-react-consumer-layout__side-menu-item-Orders\"]/a')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_orders)",
+          "ui_element_description": "Orders sub-menu link under Account menu that navigates to the orders history page.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_hp_one_statements",
+          "locator_value": "(By.XPATH, '//li[@data-testid=\"jarvis-react-consumer-layout__side-menu-item-Statements\"]/a')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_hp_one_statements)",
+          "ui_element_description": "Statements sub-menu link under Account menu that navigates to the HP One statements page.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_hp_one_shipping_billing",
+          "locator_value": "(By.XPATH, '//li[@data-testid=\"jarvis-react-consumer-layout__side-menu-item-Shipping & Billing\"]/a')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_hp_one_shipping_billing)",
+          "ui_element_description": "Shipping & Billing sub-menu link under Account menu that navigates to the shipping and billing information page.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_hp_one_shipping_billing_load",
+          "locator_value": "(By.XPATH, \"//*[contains(text(),'The shipping information below is on file for your HP account') or contains(text(),'Review or edit your Shipping address')]\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_hp_one_shipping_billing_load)",
+          "ui_element_description": "Shipping and billing page content element used to verify that the Shipping & Billing page has loaded successfully.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_profile",
+          "locator_value": "(By.XPATH, '//li[@data-testid=\"jarvis-react-consumer-layout__side-menu-item-Profile\"]/a')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_profile)",
+          "ui_element_description": "Profile sub-menu link under Account menu that navigates to the user profile management page.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_user",
+          "locator_value": "(By.XPATH, '//li[@data-testid=\"jarvis-react-consumer-layout__side-menu-item-Users\"]/a')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_user)",
+          "ui_element_description": "Users sub-menu link under Account menu that navigates to the user management page.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_notifications",
+          "locator_value": "(By.XPATH, '//li[@data-testid=\"jarvis-react-consumer-layout__side-menu-item-Notifications\"]/a')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_notifications)",
+          "ui_element_description": "Notifications sub-menu link under Account menu that navigates to the notification preferences page.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_subscriptions_load",
+          "locator_value": "(By.XPATH, '//div[text()=\"Subscriptions\" and @role=\"heading\"]')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_subscriptions_load)",
+          "ui_element_description": "Subscriptions page heading element used to verify that the Subscriptions page has loaded successfully.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_orders_load",
+          "locator_value": "(By.XPATH, '//h1[text()=\"Orders\"] | //span[text()=\"Orders\"]')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_orders_load)",
+          "ui_element_description": "Orders page heading element used to verify that the Orders page has loaded successfully.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_hp_one_statements_load",
+          "locator_value": "(By.XPATH, \"//h1[text()='Statements']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_hp_one_statements_load)",
+          "ui_element_description": "Statements page heading element used to verify that the Statements page has loaded successfully.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_profile_load",
+          "locator_value": "(By.XPATH, \"//p[text()='First name']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_profile_load)",
+          "ui_element_description": "Profile page first name label element used to verify that the Profile page has loaded successfully.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_user_load",
+          "locator_value": "(By.XPATH, \"//h3[text()='Users']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_user_load)",
+          "ui_element_description": "Users page heading element used to verify that the Users page has loaded successfully.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "account_notifications_load",
+          "locator_value": "(By.XPATH, \"//h4[text()='Notifications']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.account_notifications_load)",
+          "ui_element_description": "Notifications page heading element used to verify that the Notifications page has loaded successfully.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "help_center_menu",
+          "locator_value": "(By.XPATH, '//li[@data-testid=\"jarvis-react-consumer-layout__side-menu-item-Help Center\"]/a')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.help_center_menu)",
+          "ui_element_description": "Help Center menu link in the side navigation menu identified by data-testid attribute.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "help_center_menu_load",
+          "locator_value": "(By.XPATH, \"//*[text()='About Help Center']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.help_center_menu_load)",
+          "ui_element_description": "About Help Center text element used to verify that the Help Center page has loaded successfully.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "toggle_button",
+          "locator_value": "(By.XPATH, '//button[@aria-label=\"Toggle Menu\"]')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.toggle_button)",
+          "ui_element_description": "Toggle Menu button that expands or collapses the side navigation menu on smaller screens or when the menu is collapsed.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "smart_security_screen",
+          "locator_value": "(By.XPATH, \"//h6[@data-testid='ss-subhead' and text()='Check the security status of your printers.']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.smart_security_screen)",
+          "ui_element_description": "Smart Security page subheading element that displays 'Check the security status of your printers.' used to verify the Smart Security page has loaded.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "smart_security_toggle",
+          "locator_value": "(By.ID, 'toggle')",
+          "locator_type": "id",
+          "locator_strategy": "By.ID",
+          "access_pattern": "self.driver.find_element(*self.smart_security_toggle)",
+          "ui_element_description": "Smart Security toggle switch control that enables or disables security monitoring for printers. The aria-checked attribute indicates the current state (true=enabled, false=disabled).",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "remove_smart_security_toggle",
+          "locator_value": "(By.XPATH, \"//*[@data-testid='ss-monitorModal-removeSecurity-button']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.remove_smart_security_toggle)",
+          "ui_element_description": "Remove Security button in the Smart Security confirmation modal that confirms disabling security monitoring.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "add_smart_security_toggle",
+          "locator_value": "(By.XPATH, \"//*[@data-testid='ss-monitorModal-security-button']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.add_smart_security_toggle)",
+          "ui_element_description": "Add Security button in the Smart Security confirmation modal that confirms enabling security monitoring.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "smart_security_enable_msg",
+          "locator_value": "(By.XPATH, \"//div[text()='Security monitoring turned on. This may take a few minutes to update.']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.smart_security_enable_msg)",
+          "ui_element_description": "Success message that appears after enabling Smart Security monitoring, informing the user that the update may take a few minutes.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "print_anywhere_toggle",
+          "locator_value": "(By.XPATH, \"//span[contains(@id, 'toggle_printOnTheGo_printer_')]\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.print_anywhere_toggle)",
+          "ui_element_description": "Print Anywhere (Print on the Go) toggle switch control that enables or disables the print anywhere feature for the printer. The aria-checked attribute indicates the current state.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "private_pickup_toggle",
+          "locator_value": "(By.XPATH, \"//span[contains(@id, 'toggle_privatePickUp_printer_')]\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.private_pickup_toggle)",
+          "ui_element_description": "Private Pickup toggle switch control that enables or disables the private pickup feature for print anywhere jobs. The aria-checked attribute indicates the current state.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "accept_cookies",
+          "locator_value": "(By.ID, 'onetrust-accept-btn-handler')",
+          "locator_type": "id",
+          "locator_strategy": "By.ID",
+          "access_pattern": "self.driver.find_element(*self.accept_cookies)",
+          "ui_element_description": "Accept Cookies button in the OneTrust cookie consent banner (duplicate of accept_all locator).",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "printer_info_screen",
+          "locator_value": "(By.XPATH, \"//div[@data-testid='printers-title-pp']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.printer_info_screen)",
+          "ui_element_description": "Printers page title element used to verify that the Printers information screen has loaded successfully.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "printer_name",
+          "locator_value": "(By.XPATH, \"//p[@data-testid='printer-name-pp']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.printer_name)",
+          "ui_element_description": "Printer name text element on the Printers page that displays the name of the printer.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "internet_status",
+          "locator_value": "(By.XPATH, \"//span[@data-testid='internet-connection-status-pp']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.internet_status)",
+          "ui_element_description": "Internet connection status text element on the Printers page that displays whether the printer is connected to the internet (e.g., 'Connected to Internet').",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "security_status",
+          "locator_value": "(By.XPATH, \"//span[@data-testid='security-monitoring-status-pp']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.security_status)",
+          "ui_element_description": "Security monitoring status text element on the Printers page that displays whether security monitoring is enabled (e.g., 'Security monitored').",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "ready_status",
+          "locator_value": "(By.XPATH, \"//span[@data-testid='printing-state-status-pp']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.ready_status)",
+          "ui_element_description": "Printing state status text element on the Printers page that displays the printer's readiness state (e.g., 'Ready to print').",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "reload",
+          "locator_value": "(By.XPATH, \"//button[@data-testid='printers-refresh-btn-pp']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.reload)",
+          "ui_element_description": "Refresh button on the Printers page that reloads the printer status information.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "supply_level",
+          "locator_value": "(By.XPATH, \"//div[@data-testid='estimated-levels-label']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.supply_level)",
+          "ui_element_description": "Supply levels label element on the Printers page that indicates the ink or toner supply information section.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "supply_level_status",
+          "locator_value": "(By.XPATH, \"//span[@data-testid='ii-enrollment-status-printers-pp']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.supply_level_status)",
+          "ui_element_description": "Supply level enrollment status text element on the Printers page that displays the Instant Ink subscription status (e.g., 'Subscribed').",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "manage_my_account",
+          "locator_value": "(By.XPATH, \"//a[normalize-space()='Manage my account']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.manage_my_account)",
+          "ui_element_description": "Manage my account link on the Profile page that opens the HP account management portal in a new tab for editing personal information.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "personal_information",
+          "locator_value": "(By.XPATH, \"//h1[normalize-space()='Personal information']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.personal_information)",
+          "ui_element_description": "Personal information heading on the HP account management page used to verify the page has loaded.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "first_name",
+          "locator_value": "(By.CSS_SELECTOR, \"input[aria-label='First name *']\")",
+          "locator_type": "css",
+          "locator_strategy": "By.CSS_SELECTOR",
+          "access_pattern": "self.driver.find_element(*self.first_name)",
+          "ui_element_description": "First name input field on the HP account management page (note: this locator may not work due to Shadow DOM - use profile_fields method instead).",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "apply_changes_locator",
+          "locator_value": "(By.XPATH, \"//button[text()='Apply Changes']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.apply_changes_locator)",
+          "ui_element_description": "Apply Changes button on the HP account management page that saves the edited profile information.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "update_settings",
+          "locator_value": "(By.XPATH, \"//a[normalize-space()='Update security settings']\")",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.update_settings)",
+          "ui_element_description": "Update security settings link on the Profile page that opens the HP account security settings page in a new tab.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "my_account_change_email",
+          "locator_value": "(By.CSS_SELECTOR, 'myaccount-change-email')",
+          "locator_type": "css",
+          "locator_strategy": "By.CSS_SELECTOR",
+          "access_pattern": "self.driver.find_element(*self.my_account_change_email)",
+          "ui_element_description": "Shadow DOM host element for the change email component on the HP account security settings page.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "my_account_change_email_compact_view",
+          "locator_value": "(By.CSS_SELECTOR, \"compact-view[type='email']\")",
+          "locator_type": "css",
+          "locator_strategy": "By.CSS_SELECTOR",
+          "access_pattern": "shadow_root.find_element(*self.my_account_change_email_compact_view)",
+          "ui_element_description": "Compact view element inside the change email Shadow DOM for accessing the email edit controls.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "my_account_edit_email",
+          "locator_value": "(By.CSS_SELECTOR, 'myaccount-email-edit')",
+          "locator_type": "css",
+          "locator_strategy": "By.CSS_SELECTOR",
+          "access_pattern": "shadow_root.find_element(*self.my_account_edit_email)",
+          "ui_element_description": "Email edit component inside the change email Shadow DOM.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "my_account_cancel_button",
+          "locator_value": "(By.CSS_SELECTOR, 'veneer-wcp-button.btn-cancel')",
+          "locator_type": "css",
+          "locator_strategy": "By.CSS_SELECTOR",
+          "access_pattern": "shadow_root.find_element(*self.my_account_cancel_button)",
+          "ui_element_description": "Cancel button inside Shadow DOM components for canceling email or phone edits.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "my_account_button_edit",
+          "locator_value": "(By.CSS_SELECTOR, 'button.edit-button')",
+          "locator_type": "css",
+          "locator_strategy": "By.CSS_SELECTOR",
+          "access_pattern": "shadow_root.find_element(*self.my_account_button_edit)",
+          "ui_element_description": "Edit button inside Shadow DOM for initiating email edit mode.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "my_account_phone_widget",
+          "locator_value": "(By.CSS_SELECTOR, 'myaccount-phone-widget')",
+          "locator_type": "css",
+          "locator_strategy": "By.CSS_SELECTOR",
+          "access_pattern": "self.driver.find_element(*self.my_account_phone_widget)",
+          "ui_element_description": "Shadow DOM host element for the phone widget component on the HP account security settings page.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "my_account_add_button",
+          "locator_value": "(By.CSS_SELECTOR, 'button#es-add-btn')",
+          "locator_type": "css",
+          "locator_strategy": "By.CSS_SELECTOR",
+          "access_pattern": "shadow_root.find_element(*self.my_account_add_button)",
+          "ui_element_description": "Add button inside the phone widget Shadow DOM for adding a phone number.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "my_account_phone_edit",
+          "locator_value": "(By.CSS_SELECTOR, 'myaccount-phone-edit')",
+          "locator_type": "css",
+          "locator_strategy": "By.CSS_SELECTOR",
+          "access_pattern": "shadow_root.find_element(*self.my_account_phone_edit)",
+          "ui_element_description": "Phone edit component inside the phone widget Shadow DOM.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "my_account_phone_cancel",
+          "locator_value": "(By.CSS_SELECTOR, 'veneer-wcp-button.btn-cancel')",
+          "locator_type": "css",
+          "locator_strategy": "By.CSS_SELECTOR",
+          "access_pattern": "shadow_root.find_element(*self.my_account_phone_cancel)",
+          "ui_element_description": "Cancel button inside the phone edit Shadow DOM for canceling phone number addition.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "my_account_user_name",
+          "locator_value": "(By.CSS_SELECTOR, 'myaccount-username')",
+          "locator_type": "css",
+          "locator_strategy": "By.CSS_SELECTOR",
+          "access_pattern": "self.driver.find_element(*self.my_account_user_name)",
+          "ui_element_description": "Shadow DOM host element for the username component on the HP account security settings page.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "my_account_user_name_add_button",
+          "locator_value": "(By.CSS_SELECTOR, '.add-button')",
+          "locator_type": "css",
+          "locator_strategy": "By.CSS_SELECTOR",
+          "access_pattern": "shadow_root.find_element(*self.my_account_user_name_add_button)",
+          "ui_element_description": "Add button inside the username Shadow DOM for adding a username.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "my_account_user_name_cancel",
+          "locator_value": "(By.CSS_SELECTOR, 'veneer-wcp-button#cancelButton')",
+          "locator_type": "css",
+          "locator_strategy": "By.CSS_SELECTOR",
+          "access_pattern": "shadow_root.find_element(*self.my_account_user_name_cancel)",
+          "ui_element_description": "Cancel button inside the username Shadow DOM for canceling username addition.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "my_account_toggle",
+          "locator_value": "(By.CSS_SELECTOR, 'myaccount-mfa')",
+          "locator_type": "css",
+          "locator_strategy": "By.CSS_SELECTOR",
+          "access_pattern": "self.driver.find_element(*self.my_account_toggle)",
+          "ui_element_description": "Shadow DOM host element for the MFA (Multi-Factor Authentication) toggle component on the HP account security settings page.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "my_account_toggle_click",
+          "locator_value": "(By.CSS_SELECTOR, 'veneer-wcp-toggle#MFAToggle')",
+          "locator_type": "css",
+          "locator_strategy": "By.CSS_SELECTOR",
+          "access_pattern": "shadow_root.find_element(*self.my_account_toggle_click)",
+          "ui_element_description": "MFA toggle switch inside the MFA Shadow DOM for enabling or disabling multi-factor authentication.",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        },
+        {
+          "locator_name": "apply_changes_locator_xpath",
+          "locator_value": "(By.XPATH, '//div[@class=\"action-buttons\"]/veneer-wcp-button[@id=\"APPLY\"]')",
+          "locator_type": "xpath",
+          "locator_strategy": "By.XPATH",
+          "access_pattern": "self.driver.find_element(*self.apply_changes_locator_xpath)",
+          "ui_element_description": "Apply Changes button on the HP account management page identified by XPath (alternative to apply_changes_locator).",
+          "defined_in_class": "HPSmartDashBoard",
+          "defined_in_method": "class_level"
+        }
+      ],
+      "functions": [
+        {
+          "method_name": "__init__",
+          "method_signature": "def __init__(self, chrome_browser):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "chrome_browser",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Selenium WebDriver instance from the chrome_browser pytest fixture for HP Smart web portal automation"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": true,
+          "docstring": null,
+          "method_type": "constructor",
+          "what_it_does": "Initializes the HPSmartDashBoard page object by storing the provided chrome_browser WebDriver instance as self.driver. This driver is used by all methods in the class to interact with HP Smart web portal elements using Selenium. All locators are defined as class-level By tuple constants and are not initialized in __init__. This class does not inherit from any base class and is instantiated directly with the chrome_browser fixture.",
+          "locators_used": [],
+          "calls_to": [],
+          "usage_example": "def test_dashboard(chrome_browser):\n    dashboard = HPSmartDashBoard(chrome_browser)\n    dashboard.signin_to_portal_using_mail_id('user@example.com', 'password')",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 2
+        },
+        {
+          "method_name": "signin_to_portal_using_mail_id",
+          "method_signature": "def signin_to_portal_using_mail_id(self, user_name, pass_word, avatar_initials=None):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "user_name",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "HP account email address or username for login"
+            },
+            {
+              "name": "pass_word",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "HP account password"
+            },
+            {
+              "name": "avatar_initials",
+              "type": null,
+              "default_value": "None",
+              "is_required": false,
+              "description": "Optional avatar initials to verify after successful login (not currently used in method body)"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": "This keyword will help you to log in to application\n    1. mail_id : Mail ID of the user's\n    2. password : Password to type\n    3. avatar_initials : Avatar Initial to verify its availability",
+          "method_type": "action",
+          "what_it_does": "Signs in to the HP Smart web portal using the provided username and password credentials. Creates a CommonUtilitiesBrowser instance with self.driver and calls its enter_username() method with user_name parameter to fill the username field and proceed through the username screen. Then calls enter_password() method with pass_word parameter to fill the password field and complete the sign-in process. The avatar_initials parameter is defined but not currently used in the method body. The commented-out click_accept_all() call suggests cookie acceptance may have been handled elsewhere or removed.",
+          "locators_used": [],
+          "calls_to": [
+            "CommonUtilitiesBrowser()",
+            "common_methods.enter_username()",
+            "common_methods.enter_password()"
+          ],
+          "usage_example": "dashboard = HPSmartDashBoard(chrome_browser)\ndashboard.signin_to_portal_using_mail_id('user@hp.com', 'SecurePass123')",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 5
+        },
+        {
+          "method_name": "accept_cookie",
+          "method_signature": "def accept_cookie(self):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Accepts cookies on the HP Smart web portal by clicking the OneTrust cookie consent banner's Accept button. Uses WebDriverWait with medium_time_out (30 seconds) to wait for the accept_cookies locator (By.ID 'onetrust-accept-btn-handler') to be present. If the element is found, clicks it using ele.click() and logs 'Accepted Cookies' with logging.info(). If the element is not found within the timeout, the method silently passes without error. This method is called at the beginning of many test workflows to dismiss the cookie banner.",
+          "locators_used": [
+            "accept_cookies"
+          ],
+          "calls_to": [
+            "wd()",
+            "EC.presence_of_element_located()",
+            "ele.click()",
+            "logging.info()"
+          ],
+          "usage_example": "dashboard.accept_cookie()",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 7
+        },
+        {
+          "method_name": "click_on_account_dashboard",
+          "method_signature": "def click_on_account_dashboard(self, timeout=100):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "timeout",
+              "type": null,
+              "default_value": "100",
+              "is_required": false,
+              "description": "Maximum wait time in seconds for elements to become clickable or present. Defaults to 100 seconds."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Clicks on the Account Dashboard menu item in the HP Smart web portal navigation and waits for the Account Dashboard page to load. Uses WebDriverWait with the provided timeout to wait for account_dashboard locator to be clickable, then clicks it. Logs success with logging.info(). Then waits for both the account locator and ac_dash_printer locator to be present on the page to confirm the Account Dashboard has fully loaded. If any exception occurs during the click or wait operations, logs the error with logging.error() and re-raises the exception.",
+          "locators_used": [
+            "account_dashboard",
+            "account",
+            "ac_dash_printer"
+          ],
+          "calls_to": [
+            "wd()",
+            "EC.element_to_be_clickable()",
+            "EC.presence_of_element_located()",
+            "logging.info()",
+            "logging.error()"
+          ],
+          "usage_example": "dashboard.click_on_account_dashboard(timeout=120)",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 10
+        },
+        {
+          "method_name": "click_on_account",
+          "method_signature": "def click_on_account(self, timeout=80):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "timeout",
+              "type": null,
+              "default_value": "80",
+              "is_required": false,
+              "description": "Maximum wait time in seconds. Defaults to 80 seconds."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Clicks on the Account menu item in the HP Smart web portal side navigation to expand the account sub-menu. Uses WebDriverWait with the provided timeout to wait for the account locator to be clickable, then clicks it. Logs 'Account clicked successfully' with logging.info(). If any exception occurs, logs the error message with logging.error() and re-raises the exception. This method is typically called before clicking on account sub-menu items like Users, Profile, Subscriptions, etc.",
+          "locators_used": [
+            "account"
+          ],
+          "calls_to": [
+            "wd()",
+            "EC.element_to_be_clickable()",
+            "logging.info()",
+            "logging.error()"
+          ],
+          "usage_example": "dashboard.click_on_account()",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 8
+        },
+        {
+          "method_name": "click_on_invite",
+          "method_signature": "def click_on_invite(self, timeout=30):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "timeout",
+              "type": null,
+              "default_value": "30",
+              "is_required": false,
+              "description": "Maximum wait time in seconds. Defaults to 30 seconds."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Clicks the Invite button on the Users management page to open the invite user dialog. Uses WebDriverWait with the provided timeout to wait for the invite locator to be clickable, then clicks it. Logs 'Invite clicked successfully' with logging.info(). If any exception occurs, logs 'Failed to click on account users' (note: error message says 'account users' but should say 'invite button') with logging.error() and re-raises the exception.",
+          "locators_used": [
+            "invite"
+          ],
+          "calls_to": [
+            "wd()",
+            "EC.element_to_be_clickable()",
+            "logging.info()",
+            "logging.error()"
+          ],
+          "usage_example": "dashboard.click_on_invite()",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 8
+        },
+        {
+          "method_name": "email_to_invite",
+          "method_signature": "def email_to_invite(self, email, timeout=30):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "email",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Email address of the user to invite to the HP Smart account"
+            },
+            {
+              "name": "timeout",
+              "type": null,
+              "default_value": "30",
+              "is_required": false,
+              "description": "Maximum wait time in seconds. Defaults to 30 seconds."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Enters an email address into the invite user dialog's email input field. Uses WebDriverWait with the provided timeout to wait for the enter_email locator to be present, then sends the email string to the input field using send_keys(). Logs 'Email entered successfully' with logging.info(). If any exception occurs, logs the error with logging.error(), saves a screenshot to 'screenshots/email_error.png' using self.driver.save_screenshot(), and re-raises the exception.",
+          "locators_used": [
+            "enter_email"
+          ],
+          "calls_to": [
+            "wd()",
+            "EC.presence_of_element_located()",
+            "send_keys()",
+            "logging.info()",
+            "logging.error()",
+            "self.driver.save_screenshot()"
+          ],
+          "usage_example": "dashboard.email_to_invite('newuser@example.com')",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 9
+        },
+        {
+          "method_name": "click_on_plus",
+          "method_signature": "def click_on_plus(self, timeout=30):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "timeout",
+              "type": null,
+              "default_value": "30",
+              "is_required": false,
+              "description": "Maximum wait time in seconds. Defaults to 30 seconds."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Clicks the plus button in the invite user dialog to add the entered email address to the invite list. Uses WebDriverWait with the provided timeout to wait for the click_plus locator to be clickable, then clicks it. Logs 'Plus button clicked successfully' with logging.info(). If any exception occurs, logs 'Failed to click on plus button' with logging.error() and re-raises the exception.",
+          "locators_used": [
+            "click_plus"
+          ],
+          "calls_to": [
+            "wd()",
+            "EC.element_to_be_clickable()",
+            "logging.info()",
+            "logging.error()"
+          ],
+          "usage_example": "dashboard.click_on_plus()",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 8
+        },
+        {
+          "method_name": "click_on_confirm",
+          "method_signature": "def click_on_confirm(self, timeout=30):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "timeout",
+              "type": null,
+              "default_value": "30",
+              "is_required": false,
+              "description": "Maximum wait time in seconds. Defaults to 30 seconds."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Clicks the Confirm button in the invite user dialog to send invitation emails to all users in the invite list. Uses WebDriverWait with the provided timeout to wait for the confirm locator to be clickable, then clicks it. Logs 'Confirm button clicked successfully' with logging.info(). If any exception occurs, logs 'Failed to click on confirm button' with logging.error() and re-raises the exception.",
+          "locators_used": [
+            "confirm"
+          ],
+          "calls_to": [
+            "wd()",
+            "EC.element_to_be_clickable()",
+            "logging.info()",
+            "logging.error()"
+          ],
+          "usage_example": "dashboard.click_on_confirm()",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 8
+        },
+        {
+          "method_name": "check_user_status_based_on_index",
+          "method_signature": "def check_user_status_based_on_index(self, user_index, status_field_index, expected_status, timeout=30):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "user_index",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Row index (1-based) of the user in the users table to check"
+            },
+            {
+              "name": "status_field_index",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Column index (1-based) of the status field in the users table"
+            },
+            {
+              "name": "expected_status",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Expected status text to verify (e.g., 'Active', 'Pending')"
+            },
+            {
+              "name": "timeout",
+              "type": null,
+              "default_value": "30",
+              "is_required": false,
+              "description": "Maximum wait time in seconds. Defaults to 30 seconds."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "verification",
+          "what_it_does": "Verifies that a specific user in the users table has the expected status. Constructs a dynamic XPath using the user_action_xpath template string by formatting it with user_index and status_field_index parameters. Uses WebDriverWait to wait for the element at the constructed XPath to be present. Retrieves the element's text using .text.strip() and stores it as actual_status. Logs the found status with logging.info(). Asserts that actual_status equals expected_status using assert statement with a descriptive error message. Logs successful verification. If any exception occurs, logs the error with logging.error() and re-raises the exception.",
+          "locators_used": [],
+          "calls_to": [
+            "self.user_action_xpath.format()",
+            "wd()",
+            "EC.presence_of_element_located()",
+            "logging.info()",
+            "logging.error()"
+          ],
+          "usage_example": "dashboard.check_user_status_based_on_index(user_index=1, status_field_index=5, expected_status='Active')",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 15
+        },
+        {
+          "method_name": "delete_user_based_on_index",
+          "method_signature": "def delete_user_based_on_index(self, user_index, delete_field_index, timeout=30):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "user_index",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Row index (1-based) of the user in the users table to delete"
+            },
+            {
+              "name": "delete_field_index",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Column index (1-based) of the delete button field in the users table"
+            },
+            {
+              "name": "timeout",
+              "type": null,
+              "default_value": "30",
+              "is_required": false,
+              "description": "Maximum wait time in seconds. Defaults to 30 seconds."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Deletes a user from the users table by clicking the delete button at the specified row and column index, confirming the deletion, and verifying the success toast message. Constructs a dynamic XPath using user_action_xpath template formatted with user_index and delete_field_index. Waits for the delete button element to be present, scrolls it into view using execute_script('arguments[0].scrollIntoView(true);'), waits 1 second for scroll animation, then clicks it using ActionChains.move_to_element().click().perform() to avoid element interception. Logs the delete button click. Then waits for the remove confirmation button (remove_user_xpath) to be clickable and clicks it. Logs successful deletion. Finally waits for the delete toast message (delete_toast_message_xpath) to appear, asserts its text equals 'User successfully removed.', and logs the verification. If any exception occurs, logs the error and re-raises.",
+          "locators_used": [],
+          "calls_to": [
+            "self.user_action_xpath.format()",
+            "wd()",
+            "EC.presence_of_element_located()",
+            "self.driver.execute_script()",
+            "time.sleep()",
+            "ActionChains()",
+            "EC.element_to_be_clickable()",
+            "logging.info()",
+            "logging.error()"
+          ],
+          "usage_example": "dashboard.delete_user_based_on_index(user_index=2, delete_field_index=6)",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 25
+        },
+        {
+          "method_name": "manage_users_in_hp_smart_portal",
+          "method_signature": "def manage_users_in_hp_smart_portal(self, user_name, pass_word, emails):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "user_name",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "HP account username for login"
+            },
+            {
+              "name": "pass_word",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "HP account password for login"
+            },
+            {
+              "name": "emails",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "List of email addresses to invite as users"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Complete end-to-end workflow for managing users in the HP Smart portal: signs in, navigates to Users page, invites multiple users, verifies user statuses, and deletes a user. Creates CommonUtilitiesBrowser, HPSmartBasicActions, and HPSmartWebPageActions instances. Calls enter_username() and enter_password() to sign in. Calls click_on_account_dashboard() to navigate to account dashboard. Uses web_page_actions.click_on_element_by_text() to click 'Account' and 'Users' menu items. Iterates through the emails list: for each email, calls click_on_invite(), email_to_invite(), click_on_plus(), click_on_confirm(), waits 5 seconds, and verifies the success toast message using verify_toast_message(). After all invites, calls check_user_status_based_on_index() to verify user at row 1 column 5 is 'Active' and user at row 3 column 5 is 'Pending'. Finally calls delete_user_based_on_index() to delete the user at row 2 column 6.",
+          "locators_used": [
+            "toast_message_xpath"
+          ],
+          "calls_to": [
+            "CommonUtilitiesBrowser()",
+            "HPSmartBasicActions()",
+            "HPSmartWebPageActions()",
+            "common_methods.enter_username()",
+            "common_methods.enter_password()",
+            "self.click_on_account_dashboard()",
+            "web_page_actions.click_on_element_by_text()",
+            "self.click_on_invite()",
+            "self.email_to_invite()",
+            "self.click_on_plus()",
+            "self.click_on_confirm()",
+            "time.sleep()",
+            "web_page_actions.verify_toast_message()",
+            "self.check_user_status_based_on_index()",
+            "self.delete_user_based_on_index()"
+          ],
+          "usage_example": "dashboard.manage_users_in_hp_smart_portal('admin@hp.com', 'password', ['user1@example.com', 'user2@example.com'])",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 18
+        },
+        {
+          "method_name": "click_menu_button",
+          "method_signature": "def click_menu_button(self, menu_btn):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "menu_btn",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "By tuple locator for the menu button to click (e.g., self.solution_menu, self.account_menu, self.help_center_menu)"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Clicks a main menu button in the HP Smart web portal side navigation, handling both expanded and collapsed menu states. Creates an HPSmartBasicActions instance with self.driver. First checks if the menu_btn is already displayed using element_displayed() with 3-second timeout and raise_error=False. If displayed, clicks it directly using click_me(). If not displayed, checks if the toggle_button (hamburger menu) is displayed. If toggle is displayed, clicks it first to expand the menu, then clicks menu_btn. If neither is displayed, waits for menu_btn using wait_for_object() and then clicks it. This method handles responsive menu behavior where the menu may be collapsed on smaller screens.",
+          "locators_used": [
+            "toggle_button"
+          ],
+          "calls_to": [
+            "HPSmartBasicActions()",
+            "basic_actions.element_displayed()",
+            "basic_actions.click_me()",
+            "basic_actions.wait_for_object()"
+          ],
+          "usage_example": "dashboard.click_menu_button(dashboard.solution_menu)",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 10
+        },
+        {
+          "method_name": "click_sub_menu_button",
+          "method_signature": "def click_sub_menu_button(self, parent_menu, submenu):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "parent_menu",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "By tuple locator for the parent menu item (e.g., self.solution_menu, self.account_menu)"
+            },
+            {
+              "name": "submenu",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "By tuple locator for the sub-menu item to click (e.g., self.solution_print_any_where, self.account_subscriptions)"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Clicks a sub-menu item under a parent menu in the HP Smart web portal navigation, handling menu expansion and collapsed states. Creates an HPSmartBasicActions instance. First checks if submenu is already displayed using element_displayed() with 5-second timeout and raise_error=False. If displayed, does nothing (submenu already visible). If not displayed, checks if parent_menu is displayed. If parent is displayed, clicks it to expand the sub-menu. If parent is not displayed, checks if toggle_button is displayed and clicks it to expand the side menu, then clicks parent_menu. After ensuring the sub-menu is visible, waits 5 seconds (noted as necessary due to app slowness) using time.sleep(5). Finally clicks the submenu using click_me() and logs success. If any exception occurs, logs the exception and attempts to click using click_me_using_action_chains() as a fallback.",
+          "locators_used": [
+            "toggle_button"
+          ],
+          "calls_to": [
+            "HPSmartBasicActions()",
+            "basic_actions.element_displayed()",
+            "basic_actions.click_me()",
+            "time.sleep()",
+            "logging.info()",
+            "basic_actions.click_me_using_action_chains()"
+          ],
+          "usage_example": "dashboard.click_sub_menu_button(dashboard.solution_menu, dashboard.solution_print_any_where)",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 15
+        },
+        {
+          "method_name": "click_solutions_menu",
+          "method_signature": "def click_solutions_menu(self, timeout=100):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "timeout",
+              "type": null,
+              "default_value": "100",
+              "is_required": false,
+              "description": "Maximum wait time in seconds. Defaults to 100 seconds."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": "Clicks on the Solutions menu in the HP Smart Dashboard.",
+          "method_type": "action",
+          "what_it_does": "Clicks the Solutions menu item in the HP Smart web dashboard side navigation and waits for the Solutions sub-menu to expand. Calls self.click_menu_button() with self.solution_menu locator to handle the menu click with responsive behavior. Creates an HPSmartBasicActions instance and calls wait_for_object() with solution_print_any_where locator and the provided timeout to verify that the Solutions sub-menu has expanded and the Print Anywhere sub-menu item is visible.",
+          "locators_used": [
+            "solution_menu",
+            "solution_print_any_where"
+          ],
+          "calls_to": [
+            "self.click_menu_button()",
+            "HPSmartBasicActions()",
+            "basic_action.wait_for_object()"
+          ],
+          "usage_example": "dashboard.click_solutions_menu()",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 5
+        },
+        {
+          "method_name": "click_print_any_where_menu",
+          "method_signature": "def click_print_any_where_menu(self, timeout=100):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "timeout",
+              "type": null,
+              "default_value": "100",
+              "is_required": false,
+              "description": "Maximum wait time in seconds. Defaults to 100 seconds."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Clicks the Print Anywhere sub-menu item under the Solutions menu and waits for the Print Anywhere page to load. Calls self.click_sub_menu_button() with solution_menu as parent and solution_print_any_where as submenu to handle the navigation with menu expansion logic. Creates an HPSmartBasicActions instance and calls wait_for_object() with print_anywhere_load locator and the provided timeout to verify that the Print Anywhere page has fully loaded.",
+          "locators_used": [
+            "solution_menu",
+            "solution_print_any_where",
+            "print_anywhere_load"
+          ],
+          "calls_to": [
+            "self.click_sub_menu_button()",
+            "HPSmartBasicActions()",
+            "basic_action.wait_for_object()"
+          ],
+          "usage_example": "dashboard.click_print_any_where_menu()",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 4
+        },
+        {
+          "method_name": "click_smart_security_menu",
+          "method_signature": "def click_smart_security_menu(self, timeout=100):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "timeout",
+              "type": null,
+              "default_value": "100",
+              "is_required": false,
+              "description": "Maximum wait time in seconds. Defaults to 100 seconds."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": "Clicks on the smart security menu in the HP Smart Dashboard.",
+          "method_type": "action",
+          "what_it_does": "Clicks the Smart Security sub-menu item under the Solutions menu and waits for the Smart Security page to load. Calls self.click_sub_menu_button() with solution_menu as parent and solution_smart_security as submenu to handle the navigation with menu expansion logic. Creates an HPSmartBasicActions instance and calls wait_for_object() with smart_security_load locator and the provided timeout to verify that the Smart Security page has fully loaded.",
+          "locators_used": [
+            "solution_menu",
+            "solution_smart_security",
+            "smart_security_load"
+          ],
+          "calls_to": [
+            "self.click_sub_menu_button()",
+            "HPSmartBasicActions()",
+            "basic_action.wait_for_object()"
+          ],
+          "usage_example": "dashboard.click_smart_security_menu()",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 4
+        },
+        {
+          "method_name": "navigate_to_smart_security",
+          "method_signature": "def navigate_to_smart_security(self):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "navigation",
+          "what_it_does": "Navigates to the Smart Security page in the HP Smart web portal by accepting cookies, clicking Solutions menu, and clicking Smart Security sub-menu, then verifying the page loaded. Calls self.accept_cookie() to dismiss the cookie banner. Creates an HPSmartWebPageActions instance. Calls web_page_actions.click_on_element_by_text('Solutions') to click the Solutions menu and logs success. Calls web_page_actions.click_on_element_by_text('Smart Security') to click the Smart Security sub-menu. If any exception occurs during menu clicks, logs the error. Uses WebDriverWait with basic_wait_time (120 seconds) to wait for smart_security_screen locator to be present. If found, logs 'smart security info screen displayed'. If not found, logs 'smart security screen not displayed' and asserts False to fail the test.",
+          "locators_used": [
+            "smart_security_screen"
+          ],
+          "calls_to": [
+            "self.accept_cookie()",
+            "HPSmartWebPageActions()",
+            "web_page_actions.click_on_element_by_text()",
+            "logging.info()",
+            "logging.error()",
+            "wd()",
+            "EC.presence_of_element_located()"
+          ],
+          "usage_example": "dashboard.navigate_to_smart_security()",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 14
+        },
+        {
+          "method_name": "get_security_monitor_toggle_status",
+          "method_signature": "def get_security_monitor_toggle_status(self):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "getter",
+          "what_it_does": "Retrieves the current state of the Smart Security monitoring toggle switch on the Smart Security page. Uses WebDriverWait with medium_time_out (30 seconds) to wait for the smart_security_toggle locator to be present. Gets the 'aria-checked' attribute value from the toggle element using get_attribute('aria-checked') which returns 'true' if enabled or 'false' if disabled. Logs the toggle state with logging.info() and returns the state string ('true' or 'false').",
+          "locators_used": [
+            "smart_security_toggle"
+          ],
+          "calls_to": [
+            "wd()",
+            "EC.presence_of_element_located()",
+            "toggle.get_attribute()",
+            "logging.info()"
+          ],
+          "usage_example": "current_state = dashboard.get_security_monitor_toggle_status()\nif current_state == 'true':\n    print('Security monitoring is enabled')",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 5
+        },
+        {
+          "method_name": "enable_disable_smart_security_toggle_status",
+          "method_signature": "def enable_disable_smart_security_toggle_status(self, default_toggle_status='true'):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "default_toggle_status",
+              "type": null,
+              "default_value": "'true'",
+              "is_required": false,
+              "description": "Expected current state of the toggle ('true' for enabled, 'false' for disabled). Defaults to 'true'."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Toggles the Smart Security monitoring feature on or off based on the current state and expected default state. Waits for smart_security_toggle to be present and gets its 'aria-checked' attribute as toggle_state. Logs the current state. If toggle_state matches default_toggle_status: if state is 'true' (enabled), logs that it will disable, clicks the toggle, waits for remove_smart_security_toggle button to be clickable, clicks it to confirm disabling, and logs success. If state is 'false' (disabled), logs that it will enable, clicks the toggle, waits for add_smart_security_toggle button to be clickable, clicks it to confirm enabling, logs success, waits for smart_security_enable_msg to appear and logs the message, then waits up to basic_wait_time (120 seconds) for the security status to update to 'Security monitored' using the security_status_xpath formatted with 'Security monitored'. If the status verification fails, logs error and asserts False. If toggle_state does not match default_toggle_status, logs error with expected vs found values and asserts False with message 'Changing Smart Security toggle state was failed'.",
+          "locators_used": [
+            "smart_security_toggle",
+            "remove_smart_security_toggle",
+            "add_smart_security_toggle",
+            "smart_security_enable_msg"
+          ],
+          "calls_to": [
+            "wd()",
+            "EC.presence_of_element_located()",
+            "toggle.get_attribute()",
+            "logging.info()",
+            "toggle.click()",
+            "EC.element_to_be_clickable()",
+            "logging.error()",
+            "self.security_status_xpath.format()"
+          ],
+          "usage_example": "dashboard.enable_disable_smart_security_toggle_status(default_toggle_status='true')",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 35
+        },
+        {
+          "method_name": "verify_smart_security_status",
+          "method_signature": "def verify_smart_security_status(self, status_for=\"security enabled\", exp_status=\"Security monitored\"):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "status_for",
+              "type": null,
+              "default_value": "\"security enabled\"",
+              "is_required": false,
+              "description": "Type of status to verify. Valid values: 'security enabled' or 'security disabled'. Defaults to 'security enabled'."
+            },
+            {
+              "name": "exp_status",
+              "type": null,
+              "default_value": "\"Security monitored\"",
+              "is_required": false,
+              "description": "Expected status text to verify. Defaults to 'Security monitored'."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "verification",
+          "what_it_does": "Verifies that the Smart Security status on the Smart Security page matches the expected status text. If status_for is 'security enabled', constructs an XPath using security_status_xpath template formatted with exp_status parameter. Waits for the element at that XPath to be present using WebDriverWait with medium_time_out. Retrieves the element's text and stores as security_monitor_status. Logs the found status. Asserts that security_monitor_status equals exp_status with a descriptive error message. If status_for is 'security disabled', performs the same verification logic. If status_for is neither 'security enabled' nor 'security disabled', logs error 'Didn't find the expected smart security status' and asserts False.",
+          "locators_used": [],
+          "calls_to": [
+            "self.security_status_xpath.format()",
+            "wd()",
+            "EC.presence_of_element_located()",
+            "ele.text",
+            "logging.info()",
+            "logging.error()"
+          ],
+          "usage_example": "dashboard.verify_smart_security_status(status_for='security enabled', exp_status='Security monitored')",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 20
+        },
+        {
+          "method_name": "get_pa_toggle_status",
+          "method_signature": "def get_pa_toggle_status(self):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "getter",
+          "what_it_does": "Retrieves the current state of the Print Anywhere (Print on the Go) toggle switch on the Print Anywhere page. Uses WebDriverWait with medium_time_out (30 seconds) to wait for the print_anywhere_toggle locator to be present. Gets the 'aria-checked' attribute value from the toggle element using get_attribute('aria-checked') which returns 'true' if enabled or 'false' if disabled. Logs the toggle state with logging.info() and returns the state string ('true' or 'false').",
+          "locators_used": [
+            "print_anywhere_toggle"
+          ],
+          "calls_to": [
+            "wd()",
+            "EC.presence_of_element_located()",
+            "pa_toggle.get_attribute()",
+            "logging.info()"
+          ],
+          "usage_example": "pa_state = dashboard.get_pa_toggle_status()",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 5
+        },
+        {
+          "method_name": "get_pp_toggle_status",
+          "method_signature": "def get_pp_toggle_status(self):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "getter",
+          "what_it_does": "Retrieves the current state of the Private Pickup toggle switch on the Print Anywhere page. Uses WebDriverWait with medium_time_out (30 seconds) to wait for the private_pickup_toggle locator to be present. Gets the 'aria-checked' attribute value from the toggle element using get_attribute('aria-checked') which returns 'true' if enabled or 'false' if disabled. Logs the toggle state with logging.info() and returns the state string ('true' or 'false').",
+          "locators_used": [
+            "private_pickup_toggle"
+          ],
+          "calls_to": [
+            "wd()",
+            "EC.presence_of_element_located()",
+            "pp_toggle.get_attribute()",
+            "logging.info()"
+          ],
+          "usage_example": "pp_state = dashboard.get_pp_toggle_status()",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 5
+        },
+        {
+          "method_name": "enable_disable_print_anywhere_toggle_status",
+          "method_signature": "def enable_disable_print_anywhere_toggle_status(self, default_pa_toggle='true', default_pp_toggle='false'):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "default_pa_toggle",
+              "type": null,
+              "default_value": "'true'",
+              "is_required": false,
+              "description": "Expected current state of Print Anywhere toggle ('true' or 'false'). Defaults to 'true'."
+            },
+            {
+              "name": "default_pp_toggle",
+              "type": null,
+              "default_value": "'false'",
+              "is_required": false,
+              "description": "Expected current state of Private Pickup toggle ('true' or 'false'). Defaults to 'false'."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Toggles Print Anywhere and Private Pickup features based on current and expected states, testing the interdependency where disabling Print Anywhere automatically disables Private Pickup. Waits for print_anywhere_toggle and private_pickup_toggle to be present and gets their 'aria-checked' attributes as pa_toggle_state and pp_toggle_state. Logs both states. If both states match the expected defaults: if PA is 'true' and PP is 'false', logs that it will enable PP, clicks pp_toggle, and waits 2 seconds. If PA is 'false' and PP is 'true', logs that it will enable PA, clicks pa_toggle, waits 2 seconds, logs that it will disable PP, clicks pp_toggle, and waits 2 seconds. If PA is 'true' and PP is 'true', logs that it will disable PA, clicks pa_toggle, waits 2 seconds, gets the 'aria-disabled' attribute of pp_toggle as pp_state, logs the current PP state, and asserts that pp_state equals 'true' with error message 'Disabling print anywhere toggle should automatically disable the private pickup. but it was not happened'. If states do not match expected defaults, logs error with expected vs found values and asserts False with message 'Changing print anywhere toggle state was failed'.",
+          "locators_used": [
+            "print_anywhere_toggle",
+            "private_pickup_toggle"
+          ],
+          "calls_to": [
+            "wd()",
+            "EC.presence_of_element_located()",
+            "pa_toggle.get_attribute()",
+            "pp_toggle.get_attribute()",
+            "logging.info()",
+            "pp_toggle.click()",
+            "pa_toggle.click()",
+            "time.sleep()",
+            "logging.error()"
+          ],
+          "usage_example": "dashboard.enable_disable_print_anywhere_toggle_status(default_pa_toggle='true', default_pp_toggle='false')",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 30
+        },
+        {
+          "method_name": "navigate_to_dashboard_printers",
+          "method_signature": "def navigate_to_dashboard_printers(self):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "navigation",
+          "what_it_does": "Navigates to the Printers page in the HP Smart web portal by accepting cookies, clicking the Printers menu item, and verifying the page loaded. Calls self.accept_cookie() to dismiss the cookie banner. Creates an HPSmartWebPageActions instance. Calls web_page_actions.click_on_element_by_text('Printers') to click the Printers menu item and logs success. If any exception occurs during the click, logs the error and asserts False. Uses WebDriverWait with basic_wait_time (120 seconds) to wait for printer_name locator to be present. If found, logs 'Printers info screen displayed'. If not found, logs 'Printers info screen not displayed' and asserts False.",
+          "locators_used": [
+            "printer_name"
+          ],
+          "calls_to": [
+            "self.accept_cookie()",
+            "HPSmartWebPageActions()",
+            "web_page_actions.click_on_element_by_text()",
+            "logging.info()",
+            "logging.error()",
+            "wd()",
+            "EC.presence_of_element_located()"
+          ],
+          "usage_example": "dashboard.navigate_to_dashboard_printers()",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 12
+        },
+        {
+          "method_name": "verify_printer_name_and_supply_levels",
+          "method_signature": "def verify_printer_name_and_supply_levels(self, printer_name):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "printer_name",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Expected printer name to verify on the Printers page"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": "Verifies the printer name and supply levels on the dashboard.",
+          "method_type": "verification",
+          "what_it_does": "Verifies that the printer name displayed on the Printers page matches the expected name and that the supply level status shows 'Subscribed'. Waits for printer_name locator to be present using WebDriverWait with basic_wait_time (120 seconds). Finds the element and retrieves its text as name. Logs the printer name. Asserts that name equals the provided printer_name parameter with error message 'Printer name is not displayed as expected'. Then waits for supply_level locator to be present and finds the element as supply. If supply element exists, waits for supply_level_status locator to be present, finds the element, logs its text, and asserts that the text equals 'Subscribed' with error message 'Supply level status is not subscribed'. If supply element does not exist, logs error 'Supply Level Info Not Available'. If any exception occurs, logs the error and re-raises.",
+          "locators_used": [
+            "printer_name",
+            "supply_level",
+            "supply_level_status"
+          ],
+          "calls_to": [
+            "wd()",
+            "EC.presence_of_element_located()",
+            "self.driver.find_element()",
+            "ele.text",
+            "logging.info()",
+            "logging.error()"
+          ],
+          "usage_example": "dashboard.verify_printer_name_and_supply_levels('HP OfficeJet Pro 9015')",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 18
+        },
+        {
+          "method_name": "verify_printer_status",
+          "method_signature": "def verify_printer_status(self, status_check_for=\"internet_connected\"):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "status_check_for",
+              "type": null,
+              "default_value": "\"internet_connected\"",
+              "is_required": false,
+              "description": "Type of printer status to verify. Valid values: 'internet_connected', 'security_monitored', 'ready_to_print'. Defaults to 'internet_connected'."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "verification",
+          "what_it_does": "Verifies a specific printer status on the Printers page based on the status_check_for parameter. If status_check_for is 'internet_connected', logs 'Checking printer internet status', waits for internet_status locator to be present using WebDriverWait with basic_wait_time (120 seconds), finds the element, retrieves its text as int_status, logs the status, and asserts that int_status equals 'Connected to Internet' with error message 'Printer internet status is not connected'. If status_check_for is 'security_monitored', logs 'Checking printer security status', waits for security_status locator, retrieves text as sec_status, logs it, and asserts it equals 'Security monitored' with error message 'Printer security status is not monitored'. If status_check_for is 'ready_to_print', logs 'Checking printer ready status', waits for ready_status locator, retrieves text as ready_state, logs it, and asserts it equals 'Ready to print' with error message 'Printer ready status is not ready to print'. If status_check_for is none of the above, logs error message with the invalid status_check_for value and asserts False.",
+          "locators_used": [
+            "internet_status",
+            "security_status",
+            "ready_status"
+          ],
+          "calls_to": [
+            "logging.info()",
+            "wd()",
+            "EC.presence_of_element_located()",
+            "self.driver.find_element()",
+            "ele.text"
+          ],
+          "usage_example": "dashboard.verify_printer_status(status_check_for='internet_connected')\ndashboard.verify_printer_status(status_check_for='security_monitored')\ndashboard.verify_printer_status(status_check_for='ready_to_print')",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 25
+        },
+        {
+          "method_name": "reload_printers_page",
+          "method_signature": "def reload_printers_page(self):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Reloads the Printers page by clicking the refresh button to update printer status information. Creates an HPSmartBasicActions instance with self.driver. Calls wait_for_object() with reload locator to wait for the refresh button to be present. If the button is found, calls click_me() to click it and logs 'Reload option clicked' with logging.info(). If the button is not found, logs 'Reload option is not displayed' and asserts False to fail the test.",
+          "locators_used": [
+            "reload"
+          ],
+          "calls_to": [
+            "HPSmartBasicActions()",
+            "basic_action.wait_for_object()",
+            "basic_action.click_me()",
+            "logging.info()"
+          ],
+          "usage_example": "dashboard.reload_printers_page()",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 8
+        },
+        {
+          "method_name": "Sign_out_from_protal_using_signout",
+          "method_signature": "def Sign_out_from_protal_using_signout(self):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": "Signs out from the portal using the sign-out button.",
+          "method_type": "action",
+          "what_it_does": "Signs out from the HP Smart web portal by accepting cookies if present, clicking the profile avatar, and clicking the sign-out button. Uses WebDriverWait with medium_time_out (30 seconds) to wait for accept_cookies locator to be present. If found, clicks it and logs 'Accepted Cookies'. If not found, passes silently. Then uses WebDriverWait with basic_wait_time (120 seconds) to wait for profile_avatar locator to be clickable and clicks it to open the profile menu. Waits for sign_out locator to be clickable and clicks it to sign out. Logs 'Sign out clicked successfully'. If any exception occurs during the sign-out process, logs the error with logging.error() and re-raises the exception.",
+          "locators_used": [
+            "accept_cookies",
+            "profile_avatar",
+            "sign_out"
+          ],
+          "calls_to": [
+            "wd()",
+            "EC.presence_of_element_located()",
+            "ele.click()",
+            "logging.info()",
+            "EC.element_to_be_clickable()",
+            "logging.error()"
+          ],
+          "usage_example": "dashboard.Sign_out_from_protal_using_signout()",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 13
+        },
+        {
+          "method_name": "navigate_to_new_tab",
+          "method_signature": "def navigate_to_new_tab(self, locator, timeout=30):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "locator",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "By tuple locator for the element that opens a new browser tab when clicked"
+            },
+            {
+              "name": "timeout",
+              "type": null,
+              "default_value": "30",
+              "is_required": false,
+              "description": "Maximum wait time in seconds. Defaults to 30 seconds."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": "Navigates to a new browser tab by clicking on a specified element.",
+          "method_type": "navigation",
+          "what_it_does": "Clicks an element that opens a new browser tab and switches the WebDriver focus to the new tab. Waits 5 seconds using time.sleep(5). Checks if self.original_window attribute exists and is not empty; if not, stores the current window handle as self.original_window. Uses WebDriverWait with the provided timeout to wait for the locator to be clickable and clicks it. Logs the click success. Waits for the number of window handles to increase to more than 1 using a lambda function. Finds the new tab handle by filtering window handles that are not equal to self.original_window and takes the first one. Switches to the new tab using self.driver.switch_to.window(new_tab). Logs 'Switched to the new browser tab'. Waits 5 seconds. If any exception occurs, logs the error and re-raises.",
+          "locators_used": [],
+          "calls_to": [
+            "time.sleep()",
+            "self.driver.current_window_handle",
+            "wd()",
+            "EC.element_to_be_clickable()",
+            "logging.info()",
+            "self.driver.window_handles",
+            "self.driver.switch_to.window()",
+            "logging.error()"
+          ],
+          "usage_example": "dashboard.navigate_to_new_tab(dashboard.manage_my_account)",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 18
+        },
+        {
+          "method_name": "profile_fields",
+          "method_signature": "def profile_fields(self, field_name, field_label, input_value, apply_changes_locator=None, timeout=30):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "field_name",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Field name identifier for the Shadow DOM host element (e.g., 'first_name', 'middle_name', 'display_name', 'last_name')"
+            },
+            {
+              "name": "field_label",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Aria-label of the input field inside the Shadow DOM (e.g., 'First name *', 'Middle name', 'Display name', 'Last name *')"
+            },
+            {
+              "name": "input_value",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Value to enter into the input field"
+            },
+            {
+              "name": "apply_changes_locator",
+              "type": null,
+              "default_value": "None",
+              "is_required": false,
+              "description": "Optional By tuple locator for the Apply Changes button. If provided, the method will click it and close the tab after entering the value."
+            },
+            {
+              "name": "timeout",
+              "type": null,
+              "default_value": "30",
+              "is_required": false,
+              "description": "Maximum wait time in seconds. Defaults to 30 seconds."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": "Fills out a profile field in a Shadow DOM and applies changes if required.",
+          "method_type": "action",
+          "what_it_does": "Fills out a profile field in the HP account management page that is nested inside Shadow DOM elements. Waits 10 seconds using time.sleep(10). Waits for personal_information locator to be present to confirm the page loaded. Logs 'Personal information page is displayed successfully'. Finds the Shadow DOM host element using shadow_host_selector template formatted with field_name parameter (e.g., 'myaccount-profile-field[field-name=\"first_name\"]'). Expands the shadow root using self.expand_shadow_element(host1). Finds the nested 'veneer-wcp-textbox' element inside the shadow root. Expands its shadow root using self.expand_shadow_element(host2). Finds the input field inside the second shadow root using shadow_input_selector template formatted with field_label parameter (e.g., '#container input[aria-label=\"First name *\"]'). Clears the input field using input_field.clear() and enters the input_value using input_field.send_keys(). Logs success. If apply_changes_locator is provided, waits for it to be clickable, clicks it, logs 'Apply Changes button clicked successfully', waits 2 seconds, closes the current tab using self.driver.close(), logs 'New tab closed successfully', switches back to self.original_window, and logs 'Switched back to the original browser tab'. If any exception occurs, logs the error and re-raises.",
+          "locators_used": [
+            "personal_information"
+          ],
+          "calls_to": [
+            "time.sleep()",
+            "wd()",
+            "EC.presence_of_element_located()",
+            "logging.info()",
+            "self.driver.find_element()",
+            "self.expand_shadow_element()",
+            "input_field.clear()",
+            "input_field.send_keys()",
+            "EC.element_to_be_clickable()",
+            "self.driver.close()",
+            "self.driver.switch_to.window()",
+            "logging.error()"
+          ],
+          "usage_example": "dashboard.profile_fields(field_name='first_name', field_label='First name *', input_value='John', apply_changes_locator=dashboard.apply_changes_locator_xpath)",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 30
+        },
+        {
+          "method_name": "expand_shadow_element",
+          "method_signature": "def expand_shadow_element(self, element):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "element",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "WebElement that is a Shadow DOM host"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": "Expands a shadow DOM element and returns its shadow root.",
+          "method_type": "utility",
+          "what_it_does": "Expands a Shadow DOM host element and returns its shadow root for accessing elements inside the Shadow DOM. Uses self.driver.execute_script() to run JavaScript code 'return arguments[0].shadowRoot' with the provided element as the argument. Returns the shadow root object which can then be used to find elements inside the Shadow DOM using standard Selenium find_element methods.",
+          "locators_used": [],
+          "calls_to": [
+            "self.driver.execute_script()"
+          ],
+          "usage_example": "host = self.driver.find_element(By.CSS_SELECTOR, 'myaccount-profile-field')\nshadow_root = dashboard.expand_shadow_element(host)\ninput_field = shadow_root.find_element(By.CSS_SELECTOR, 'input')",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 2
+        },
+        {
+          "method_name": "manage_admin_account",
+          "method_signature": "def manage_admin_account(self, user_name, pass_word, timeout=30):",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "user_name",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "HP account username for login"
+            },
+            {
+              "name": "pass_word",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "HP account password for login"
+            },
+            {
+              "name": "timeout",
+              "type": null,
+              "default_value": "30",
+              "is_required": false,
+              "description": "Maximum wait time in seconds. Defaults to 30 seconds."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": "Manages the admin account by navigating through various sections and updating fields.",
+          "method_type": "action",
+          "what_it_does": "Complete end-to-end workflow for managing the admin account profile: signs in, navigates to Profile page, opens the HP account management portal in a new tab, updates profile fields (first name, middle name, display name, last name) with random or specified values, applies changes, opens security settings in a new tab, and updates security settings. Generates a random 8-character first name using random.choices(string.ascii_letters, k=8). Creates CommonUtilitiesBrowser and HPSmartWebPageActions instances. Calls click_accept_all(), enter_username(), and enter_password() to sign in. Calls click_on_account_dashboard() with timeout. Uses web_page_actions.click_on_element_by_text() to click 'Account' and 'Profile'. Calls navigate_to_new_tab() with manage_my_account locator and waits 60 seconds. Defines a list of profile field dictionaries with field_name, field_label, input_value, and optional apply_changes_locator. Iterates through the list and calls profile_fields() for each field, passing apply_changes_locator only for the last field (last_name). Calls navigate_to_new_tab() with update_settings locator. Calls update_security_settings() with timeout.",
+          "locators_used": [
+            "manage_my_account",
+            "update_settings",
+            "apply_changes_locator_xpath"
+          ],
+          "calls_to": [
+            "random.choices()",
+            "string.ascii_letters",
+            "CommonUtilitiesBrowser()",
+            "HPSmartWebPageActions()",
+            "common_methods.click_accept_all()",
+            "common_methods.enter_username()",
+            "common_methods.enter_password()",
+            "self.click_on_account_dashboard()",
+            "web_page_actions.click_on_element_by_text()",
+            "self.navigate_to_new_tab()",
+            "time.sleep()",
+            "self.profile_fields()",
+            "self.update_security_settings()"
+          ],
+          "usage_example": "dashboard.manage_admin_account('admin@hp.com', 'password')",
+          "belongs_to_class": "HPSmartDashBoard",
+          "lines_of_code": 30
+        }
+      ],
+      "inner_classes": [],
+      "variables_and_constants": [
+        {
+          "constant_name": "medium_time_out",
+          "constant_value": "30",
+          "constant_type": "int",
+          "scope": "class_level",
+          "defined_in_class": "HPSmartDashBoard"
+        },
+        {
+          "constant_name": "basic_wait_time",
+          "constant_value": "120",
+          "constant_type": "int",
+          "scope": "class_level",
+          "defined_in_class": "HPSmartDashBoard"
+        },
+        {
+          "constant_name": "basic_wait_time_medium",
+          "constant_value": "60",
+          "constant_type": "int",
+          "scope": "class_level",
+          "defined_in_class": "HPSmartDashBoard"
+        },
+        {
+          "constant_name": "delete_toast_message_xpath",
+          "constant_value": "'//span[text()=\"User successfully removed.\"]'",
+          "constant_type": "str",
+          "scope": "class_level",
+          "defined_in_class": "HPSmartDashBoard"
+        },
+        {
+          "constant_name": "user_action_xpath",
+          "constant_value": "\"//tbody[@class='css-douwyu']/tr[{user_index}]/td[{field_index}]\"",
+          "constant_type": "str",
+          "scope": "class_level",
+          "defined_in_class": "HPSmartDashBoard"
+        },
+        {
+          "constant_name": "remove_user_xpath",
+          "constant_value": "'//div[@class=\"css-1ux7tpm\"]/button[2]'",
+          "constant_type": "str",
+          "scope": "class_level",
+          "defined_in_class": "HPSmartDashBoard"
+        },
+        {
+          "constant_name": "security_status_xpath",
+          "constant_value": "\"//p[text()='{}']\"",
+          "constant_type": "str",
+          "scope": "class_level",
+          "defined_in_class": "HPSmartDashBoard"
+        },
+        {
+          "constant_name": "shadow_host_selector",
+          "constant_value": "\"myaccount-profile-field[field-name='{field_name}']\"",
+          "constant_type": "str",
+          "scope": "class_level",
+          "defined_in_class": "HPSmartDashBoard"
+        },
+        {
+          "constant_name": "shadow_input_selector",
+          "constant_value": "\"#container input[aria-label='{field_label}']\"",
+          "constant_type": "str",
+          "scope": "class_level",
+          "defined_in_class": "HPSmartDashBoard"
+        },
+        {
+          "constant_name": "keyboard",
+          "constant_value": "Controller()",
+          "constant_type": "object",
+          "scope": "module_level",
+          "defined_in_class": null
+        }
+      ],
+      "analysis_notes": "HPSmartDashBoard is a large page object class for HP Smart web portal and SMB Portal automation using Selenium WebDriver. Unlike driver module classes (SmartDriver, UssDriver) which use Appium or uiautomation for Windows desktop apps, this class uses pure Selenium with By tuple locators for web element interaction. It does NOT inherit from HPSmartBasicActions or any base class. It is instantiated with the chrome_browser fixture (Selenium WebDriver instance). All locators are Selenium By tuples: By.ID, By.XPATH, By.CSS_SELECTOR, By.LINK_TEXT. The class contains 78 locators covering the entire HP Smart web portal UI including sign-in, account dashboard, solutions menu (Print Anywhere, Smart Security), printers status page, help center, and profile management. Many methods interact with Shadow DOM elements in the HP account management portal using the expand_shadow_element() utility method and JavaScript execution. The class provides comprehensive workflows for user management (invite, delete, verify status), menu navigation with responsive behavior (toggle button handling), security feature toggling (Smart Security, Print Anywhere, Private Pickup), printer status verification (internet, security, ready, supply levels), and profile editing in Shadow DOM. Key patterns: WebDriverWait with EC conditions for all element interactions, extensive logging with logging.info() and logging.error(), assert statements for verification, ActionChains for avoiding element interception, new tab handling with window switching. This class is used by SMB Portal and HP Smart web dashboard tests that require the chrome_browser fixture."
+    },
+    {
+      "method_name": "click_account_menu",
+      "method_signature": "def click_account_menu(self, timeout=120):",
+      "parameters": [
+        {
+          "name": "self",
+          "type": null,
+          "default_value": null,
+          "is_required": true,
+          "description": "Instance reference"
+        },
+        {
+          "name": "timeout",
+          "type": null,
+          "default_value": "120",
+          "is_required": false,
+          "description": "Maximum wait time in seconds. Defaults to 120 seconds."
+        }
+      ],
+      "return_type": null,
+      "decorators": [],
+      "is_static": false,
+      "is_classmethod": false,
+      "is_property": false,
+      "is_async": false,
+      "is_private": false,
+      "is_dunder": false,
+      "docstring": "click the account menu",
+      "method_type": "action",
+      "what_it_does": "Clicks the Account menu item in the HP Smart web portal side navigation and verifies that the account sub-menu has expanded. Creates an HPSmartBasicActions instance. Calls element_displayed() with account_menu locator and timeout to wait for the menu to be visible. Calls self.click_menu_button() with account_menu to handle the click with responsive behavior. Uses WebDriverWait with timeout to wait for account_menu_load locator (Subscriptions sub-menu link) to be present, confirming the account sub-menu has expanded. Asserts that the element is displayed with error message 'account sub menu is not displayed'. Logs 'account sub menu dropdown is displayed successfully'.",
+      "locators_used": [
+        "account_menu",
+        "account_menu_load"
+      ],
+      "calls_to": [
+        "HPSmartBasicActions()",
+        "basic_actions.element_displayed()",
+        "self.click_menu_button()",
+        "wd()",
+        "EC.presence_of_element_located()",
+        "logging.info()"
+      ],
+      "usage_example": "dashboard.click_account_menu()",
+      "belongs_to_class": "HPSmartDashBoard",
+      "lines_of_code": 9
+    }
+  ],
+  "batch_summary": {
+    "total_classes_found": 1,
+    "total_methods_found": 52,
+    "total_locators_found": 78,
+    "total_imports_found": 13,
+    "total_constants_found": 10,
+    "total_inner_classes_found": 0,
+    "driver_modules_found": [],
+    "page_objects_found": [
+      "HPSmartDashBoard"
+    ],
+    "base_classes_found": [],
+    "utility_classes_found": [],
+    "test_files_found": [
+      "test_check.py"
+    ],
+    "key_reusable_methods": [
+      "HPSmartDashBoard.signin_to_portal_using_mail_id — Signs in to HP Smart web portal using username and password via CommonUtilitiesBrowser",
+      "HPSmartDashBoard.accept_cookie — Accepts OneTrust cookie consent banner",
+      "HPSmartDashBoard.click_on_account_dashboard — Navigates to Account Dashboard and waits for page load",
+      "HPSmartDashBoard.click_menu_button — Clicks main menu item with responsive toggle handling",
+      "HPSmartDashBoard.click_sub_menu_button — Clicks sub-menu item with parent menu expansion logic",
+      "HPSmartDashBoard.navigate_to_smart_security — Complete navigation to Smart Security page with verification",
+      "HPSmartDashBoard.get_security_monitor_toggle_status — Returns 'true' or 'false' for Smart Security toggle state",
+      "HPSmartDashBoard.enable_disable_smart_security_toggle_status — Toggles Smart Security on/off with confirmation",
+      "HPSmartDashBoard.verify_smart_security_status — Verifies Smart Security status text matches expected",
+      "HPSmartDashBoard.navigate_to_dashboard_printers — Navigates to Printers page with verification",
+      "HPSmartDashBoard.verify_printer_status — Verifies printer internet/security/ready status",
+      "HPSmartDashBoard.verify_printer_name_and_supply_levels — Verifies printer name and Instant Ink subscription status",
+      "HPSmartDashBoard.manage_users_in_hp_smart_portal — Complete workflow: sign in, invite users, verify status, delete user",
+      "HPSmartDashBoard.check_user_status_based_on_index — Verifies user status in users table by row/column index",
+      "HPSmartDashBoard.delete_user_based_on_index — Deletes user from table with confirmation and toast verification",
+      "HPSmartDashBoard.expand_shadow_element — Returns shadow root for Shadow DOM element access",
+      "HPSmartDashBoard.profile_fields — Fills profile field inside Shadow DOM with optional Apply Changes",
+      "HPSmartDashBoard.navigate_to_new_tab — Clicks element that opens new tab and switches to it",
+      "HPSmartDashBoard.get_pa_toggle_status — Returns Print Anywhere toggle state",
+      "HPSmartDashBoard.get_pp_toggle_status — Returns Private Pickup toggle state",
+      "HPSmartDashBoard.enable_disable_print_anywhere_toggle_status — Toggles Print Anywhere and Private Pickup with interdependency testing",
+      "appium_driver_chrome — pytest session fixture that provides Chrome WebDriver via Appium for SMBPortal tests"
+    ],
+    "key_reusable_locators": [
+      "HPSmartDashBoard.accept_all — (By.ID, 'onetrust-accept-btn-handler') — OneTrust cookie accept button",
+      "HPSmartDashBoard.username — (By.ID, 'username') — Username input field on sign-in page",
+      "HPSmartDashBoard.password — (By.ID, 'password') — Password input field on sign-in page",
+      "HPSmartDashBoard.sign_in — (By.ID, 'sign-in') — Sign In button on password screen",
+      "HPSmartDashBoard.account_dashboard — (By.XPATH, \"//span[text()='Account Dashboard']\") — Account Dashboard menu item",
+      "HPSmartDashBoard.account_menu — (By.XPATH, '//li[@data-testid=\"jarvis-react-consumer-layout__side-menu-item-Account\"]/a') — Account menu link",
+      "HPSmartDashBoard.solution_menu — (By.XPATH, '//li[@data-testid=\"jarvis-react-consumer-layout__side-menu-item-Solutions\"]/a') — Solutions menu link",
+      "HPSmartDashBoard.solution_smart_security — (By.XPATH, '//li[@data-testid=\"jarvis-react-consumer-layout__side-menu-item-Smart Security\"]/a') — Smart Security sub-menu",
+      "HPSmartDashBoard.smart_security_toggle — (By.ID, 'toggle') — Smart Security enable/disable toggle switch",
+      "HPSmartDashBoard.print_anywhere_toggle — (By.XPATH, \"//span[contains(@id, 'toggle_printOnTheGo_printer_')]\") — Print Anywhere toggle",
+      "HPSmartDashBoard.private_pickup_toggle — (By.XPATH, \"//span[contains(@id, 'toggle_privatePickUp_printer_')]\") — Private Pickup toggle",
+      "HPSmartDashBoard.printer_name — (By.XPATH, \"//p[@data-testid='printer-name-pp']\") — Printer name on Printers page",
+      "HPSmartDashBoard.internet_status — (By.XPATH, \"//span[@data-testid='internet-connection-status-pp']\") — Internet connection status",
+      "HPSmartDashBoard.security_status — (By.XPATH, \"//span[@data-testid='security-monitoring-status-pp']\") — Security monitoring status",
+      "HPSmartDashBoard.ready_status — (By.XPATH, \"//span[@data-testid='printing-state-status-pp']\") — Printer ready status",
+      "HPSmartDashBoard.invite — (By.XPATH, \"//button[@class='css-roza95']\") — Invite user button",
+      "HPSmartDashBoard.enter_email — (By.ID, 'user-email') — Email input in invite dialog",
+      "HPSmartDashBoard.confirm — (By.XPATH, \"//button[@aria-label='confirm']\") — Confirm invite button",
+      "HPSmartDashBoard.toggle_button — (By.XPATH, '//button[@aria-label=\"Toggle Menu\"]') — Hamburger menu toggle for responsive navigation"
+    ]
+  }
+}
