@@ -7,7 +7,10 @@
     "total_files": 1763,
     "total_batches": 353,
     "batch_size": 5,
-    "overall_status": "in_progress"
+    "overall_status": "in_progress",
+    "last_updated_at": "2026-03-16T10:28:33.576474Z",
+    "completed_batches": 1,
+    "pending_batches": 352
   },
   "batches": [
     {
@@ -39,10 +42,10 @@
           "size": 3700
         }
       ],
-      "status": "pending",
-      "report_path": null,
+      "status": "completed",
+      "report_path": "codebase_batches/batch_1_report.json",
       "started_at": null,
-      "completed_at": null
+      "completed_at": "2026-03-16T10:28:33.576400Z"
     },
     {
       "batch_id": 2,
