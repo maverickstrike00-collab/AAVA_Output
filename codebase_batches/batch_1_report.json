@@ -1,0 +1,707 @@
+{
+  "batch_metadata": {
+    "batch_id": 1,
+    "total_batches": 353,
+    "remaining_after_this": 352,
+    "analyzed_at": "2025-01-15T10:45:00Z",
+    "analyzer": "Senior Codebase Analyst Agent",
+    "files_in_batch": 5,
+    "files_succeeded": 5,
+    "files_failed": 0,
+    "failed_files": [],
+    "storage_repo": "AAVA_Output",
+    "report_path": "codebase_batches/batch_1_report.json"
+  },
+  "analyzed_files": [
+    "EndToEnd/EIT_NPI/UI_AUTOMATION/HPSmart/common_utils.py",
+    "EndToEnd/EIT_NPI/UI_AUTOMATION/HPSmart/conftest.py",
+    "EndToEnd/EIT_NPI/UI_AUTOMATION/HPSmart/test_hpsmart_winapp.py",
+    "EndToEnd/EIT_NPI/UI_AUTOMATION/HPSmart_Work/conftest.py",
+    "EndToEnd/EIT_NPI/UI_AUTOMATION/HPSmart_Work/smb_test_required.py"
+  ],
+  "file_analyses": [
+    {
+      "file_path": "EndToEnd/EIT_NPI/UI_AUTOMATION/HPSmart/common_utils.py",
+      "file_name": "common_utils.py",
+      "file_extension": ".py",
+      "file_size_bytes": 8040,
+      "language": "Python",
+      "file_category": "utility",
+      "file_purpose": "Utility module containing the CommonUtilities class which provides shared helper methods for HP Smart Windows app automation using Appium WebDriver. Contains methods for element clicking with explicit waits, Chrome browser sign-in automation using pynput keyboard simulation, window switching between Chrome and HP Smart contexts, printer status checking and auto-adding if not present, and print document workflow execution with job status validation.",
+      "imports": [
+        {
+          "import_statement": "import logging",
+          "module": "logging",
+          "imported_names": [
+            "logging"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "from appium.webdriver.common.appiumby import AppiumBy",
+          "module": "appium.webdriver.common.appiumby",
+          "imported_names": [
+            "AppiumBy"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "from pynput.keyboard import Key, Controller",
+          "module": "pynput.keyboard",
+          "imported_names": [
+            "Key",
+            "Controller"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "from selenium.webdriver.support.wait import WebDriverWait",
+          "module": "selenium.webdriver.support.wait",
+          "imported_names": [
+            "WebDriverWait"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "from selenium.webdriver.support import expected_conditions as EC",
+          "module": "selenium.webdriver.support",
+          "imported_names": [
+            "expected_conditions"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "import time",
+          "module": "time",
+          "imported_names": [
+            "time"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "from selenium.webdriver.common.keys import Keys",
+          "module": "selenium.webdriver.common.keys",
+          "imported_names": [
+            "Keys"
+          ],
+          "is_external": true,
+          "is_internal": false
+        }
+      ],
+      "classes": [
+        {
+          "class_name": "CommonUtilities",
+          "parent_classes": [],
+          "decorators": [],
+          "docstring": null,
+          "class_purpose": "Utility class providing reusable helper methods for HP Smart Windows app automation. Wraps Appium WebDriver interactions with explicit waits, provides keyboard-based Chrome sign-in automation using pynput, handles window context switching between Chrome and HP Smart app, checks printer status and adds printers if not present, and executes complete print document workflows with job status validation and notification handling.",
+          "how_to_import": "from EndToEnd.EIT_NPI.UI_AUTOMATION.HPSmart.common_utils import CommonUtilities",
+          "how_to_instantiate": "utils = CommonUtilities(appium_driver)",
+          "total_methods": 7,
+          "total_locators": 0
+        }
+      ],
+      "locators": [],
+      "functions": [
+        {
+          "method_name": "__init__",
+          "method_signature": "def __init__(self, driver)",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "driver",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Appium WebDriver instance for HP Smart Windows app automation"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": true,
+          "docstring": null,
+          "method_type": "constructor",
+          "what_it_does": "Initializes the CommonUtilities class by storing the provided Appium WebDriver instance as self.driver. This driver is used by all subsequent methods for element location, clicking, waiting, and window switching operations. The driver must be an active Appium session connected to the HP Smart Windows app via WinAppDriver.",
+          "locators_used": [],
+          "calls_to": [],
+          "usage_example": "utils = CommonUtilities(appium_driver)",
+          "belongs_to_class": "CommonUtilities",
+          "lines_of_code": 2
+        },
+        {
+          "method_name": "click_element",
+          "method_signature": "def click_element(self, type_of_locator, element, time=30)",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "type_of_locator",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Appium locator type (e.g., AppiumBy.NAME, AppiumBy.XPATH, AppiumBy.ACCESSIBILITY_ID)"
+            },
+            {
+              "name": "element",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Locator value string to identify the element"
+            },
+            {
+              "name": "time",
+              "type": null,
+              "default_value": "30",
+              "is_required": false,
+              "description": "Timeout in seconds to wait for element to be clickable. Defaults to 30 seconds."
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Waits for an element to become clickable using Selenium WebDriverWait with the specified timeout, then clicks it. Uses EC.element_to_be_clickable expected condition with a tuple of (type_of_locator, element) to locate the element. If the element is not clickable within the timeout period, raises a TimeoutException. This is the primary element interaction method used throughout the utility class for clicking buttons, links, and other interactive elements in the HP Smart app.",
+          "locators_used": [],
+          "calls_to": [
+            "WebDriverWait()",
+            "EC.element_to_be_clickable()",
+            ".click()"
+          ],
+          "usage_example": "utils.click_element(AppiumBy.NAME, 'Print Documents', time=30)",
+          "belongs_to_class": "CommonUtilities",
+          "lines_of_code": 4
+        },
+        {
+          "method_name": "click_accept_all",
+          "method_signature": "def click_accept_all(self, type_of_locator, element)",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "type_of_locator",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Appium locator type (e.g., AppiumBy.NAME)"
+            },
+            {
+              "name": "element",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Locator value string to identify the Accept All button"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Waits up to 150 seconds for the Accept All button to be present in the HP Smart app welcome/privacy screen, then clicks it. Uses WebDriverWait with EC.presence_of_element_located to wait for the element identified by the provided locator tuple (type_of_locator, element). Once found, immediately clicks the element. This method is specifically designed for handling the HP Smart app's initial privacy consent dialog that appears on first launch.",
+          "locators_used": [],
+          "calls_to": [
+            "WebDriverWait()",
+            "EC.presence_of_element_located()",
+            ".click()"
+          ],
+          "usage_example": "utils.click_accept_all(AppiumBy.NAME, 'Accept All')",
+          "belongs_to_class": "CommonUtilities",
+          "lines_of_code": 3
+        },
+        {
+          "method_name": "signin_chrome",
+          "method_signature": "def signin_chrome(self, username, password)",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            },
+            {
+              "name": "username",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "HP account email address for sign-in"
+            },
+            {
+              "name": "password",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "HP account password for sign-in"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Automates the HP account sign-in process in a Chrome browser window using pynput keyboard simulation. Waits 30 seconds for the sign-in page to load, then uses keyboard.pressed(Key.ctrl) context manager to select all text with Ctrl+A, clears it with backspace, types the username string, presses Enter, waits 15 seconds, types the password string, presses Enter again, waits 15 seconds, and attempts to navigate using left arrow and Enter keys to handle any additional prompts. Uses time.sleep() for fixed waits between keyboard actions. This method does NOT use Appium locators — it relies entirely on keyboard input simulation via pynput.keyboard.Controller.",
+          "locators_used": [],
+          "calls_to": [
+            "time.sleep()",
+            "keyboard.pressed()",
+            "keyboard.press()",
+            "keyboard.release()",
+            "keyboard.type()",
+            "keyboard.tap()"
+          ],
+          "usage_example": "utils.signin_chrome(username='lotus1511@yopmail.com', password='srvt@123')",
+          "belongs_to_class": "CommonUtilities",
+          "lines_of_code": 25
+        },
+        {
+          "method_name": "switch_to_hpsmart",
+          "method_signature": "def switch_to_hpsmart(self)",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "navigation",
+          "what_it_does": "Switches the Appium driver context back to the HP Smart Windows app window. Retrieves the HP Smart session ID using self.driver.session_id and calls self.driver.switch_to.window(hpsmart) to switch the driver focus to that window. This is used after interacting with Chrome browser windows during sign-in flows to return control to the HP Smart app for subsequent automation steps.",
+          "locators_used": [],
+          "calls_to": [
+            "self.driver.session_id",
+            "self.driver.switch_to.window()"
+          ],
+          "usage_example": "utils.switch_to_hpsmart()",
+          "belongs_to_class": "CommonUtilities",
+          "lines_of_code": 3
+        },
+        {
+          "method_name": "check_printer_added",
+          "method_signature": "def check_printer_added(self)",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "verification",
+          "what_it_does": "Checks whether a printer has been successfully added to the HP Smart app by waiting up to 30 seconds for the NextDeviceButton element to be present. Uses WebDriverWait with EC.presence_of_element_located to locate the button by its AutomationId using AppiumBy.XPATH locator \"//Button[@AutomationId='NextDeviceButton']\". If the button is not found within 30 seconds, catches the exception and prints 'Printer not added' with the exception details. This method does not return a boolean — it only logs the result.",
+          "locators_used": [],
+          "calls_to": [
+            "WebDriverWait()",
+            "EC.presence_of_element_located()",
+            "print()"
+          ],
+          "usage_example": "utils.check_printer_added()",
+          "belongs_to_class": "CommonUtilities",
+          "lines_of_code": 7
+        },
+        {
+          "method_name": "printer_status_check_add_if_not_added",
+          "method_signature": "def printer_status_check_add_if_not_added(self)",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Checks if a printer is already added to HP Smart by waiting 30 seconds for a 'Ready' status element using AppiumBy.NAME. If the Ready element is not found (printer not added), catches the exception and attempts to add the printer by clicking the 'Add Printer' button with a 150-second timeout using self.click_element(). After clicking Add Printer, waits for the 'Searching for printers...' message, then waits up to 50 seconds for the 'You've been invited to use this printer' message, clicks the 'Online' status element, and finally waits up to 50 seconds for the 'Ready' status to confirm the printer was successfully added. All waits use WebDriverWait with EC.presence_of_element_located. Logs errors at each step if elements are not found.",
+          "locators_used": [],
+          "calls_to": [
+            "WebDriverWait()",
+            "EC.presence_of_element_located()",
+            "self.click_element()",
+            "print()"
+          ],
+          "usage_example": "utils.printer_status_check_add_if_not_added()",
+          "belongs_to_class": "CommonUtilities",
+          "lines_of_code": 18
+        },
+        {
+          "method_name": "print_documents",
+          "method_signature": "def print_documents(self)",
+          "parameters": [
+            {
+              "name": "self",
+              "type": null,
+              "default_value": null,
+              "is_required": true,
+              "description": "Instance reference"
+            }
+          ],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "action",
+          "what_it_does": "Executes a complete print document workflow in the HP Smart app. Clicks the 'Print Documents' button using self.click_element(), waits 5 seconds, switches to the first window handle using self.driver.switch_to.window(self.driver.window_handles[0]), clicks the 'Sample' document, clicks the 'Print' button, switches back to the first window, waits for 'Sample.pdf' element to appear, clicks 'Print' twice more to confirm the print job. Then waits for the 'Sending File' status, 'Cancel' button, 'File Sent!' confirmation, 'OK' button, clicks 'Job Status', switches windows, waits for 'Print Job Processing...' status, waits for 'Job Printed' status and clicks it, clicks 'Clear Notification', waits 5 seconds, and switches to the second window handle. If any step fails, raises an exception with 'Print Job failed!' message. Uses multiple WebDriverWait calls with EC.presence_of_element_located and AppiumBy.NAME locators throughout.",
+          "locators_used": [],
+          "calls_to": [
+            "self.click_element()",
+            "time.sleep()",
+            "self.driver.switch_to.window()",
+            "WebDriverWait()",
+            "EC.presence_of_element_located()",
+            ".click()",
+            "print()"
+          ],
+          "usage_example": "utils.print_documents()",
+          "belongs_to_class": "CommonUtilities",
+          "lines_of_code": 40
+        }
+      ],
+      "inner_classes": [],
+      "variables_and_constants": [
+        {
+          "constant_name": "logger",
+          "constant_value": "logging.getLogger(__name__)",
+          "constant_type": "Logger",
+          "scope": "module_level",
+          "defined_in_class": null
+        },
+        {
+          "constant_name": "keyboard",
+          "constant_value": "Controller()",
+          "constant_type": "Controller",
+          "scope": "module_level",
+          "defined_in_class": null
+        },
+        {
+          "constant_name": "data_variables",
+          "constant_value": "{'printer_ip': '15.77.45.130', 'printer_pin': '05169744', 'email_address': 'resultjson@yopmail.com', 'email_password': 'Test@123', 'hpsmart_version': ''}",
+          "constant_type": "dict",
+          "scope": "module_level",
+          "defined_in_class": null
+        }
+      ],
+      "analysis_notes": "CommonUtilities is a utility class that uses Appium WebDriver for HP Smart Windows app automation. It requires an active appium_driver fixture to be passed during instantiation. The class provides a mix of Appium-based element interactions (click_element, click_accept_all, check_printer_added, printer_status_check_add_if_not_added, print_documents) and keyboard-based automation (signin_chrome using pynput). The signin_chrome method is unique in that it does NOT use Appium locators at all — it relies entirely on keyboard simulation with fixed time.sleep() waits, making it fragile but useful for Chrome browser sign-in flows where Appium cannot directly interact with browser controls. The print_documents method is a complex composite action that orchestrates an entire print workflow with multiple window switches and status validations. Module-level constants include a pynput keyboard Controller instance and a data_variables dict containing test credentials and printer configuration."
+    },
+    {
+      "file_path": "EndToEnd/EIT_NPI/UI_AUTOMATION/HPSmart/conftest.py",
+      "file_name": "conftest.py",
+      "file_extension": ".py",
+      "file_size_bytes": 2984,
+      "language": "Python",
+      "file_category": "config",
+      "file_purpose": "pytest configuration file defining fixtures and hooks for HP Smart Windows app test automation. Contains the appium_driver session-scoped fixture that initializes an Appium WebDriver connection to the HP Smart Windows app via WinAppDriver, maximizes the window, yields the driver to tests, and quits the driver after the session. Also includes a minAllApps helper function to minimize all Windows applications before test execution and commented-out code for Chrome driver fixture and pytest JSON report hooks.",
+      "imports": [
+        {
+          "import_statement": "import subprocess",
+          "module": "subprocess",
+          "imported_names": [
+            "subprocess"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "import time",
+          "module": "time",
+          "imported_names": [
+            "time"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "import pytest",
+          "module": "pytest",
+          "imported_names": [
+            "pytest"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "from appium.webdriver.common.appiumby import AppiumBy",
+          "module": "appium.webdriver.common.appiumby",
+          "imported_names": [
+            "AppiumBy"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "from appium import webdriver",
+          "module": "appium",
+          "imported_names": [
+            "webdriver"
+          ],
+          "is_external": true,
+          "is_internal": false
+        },
+        {
+          "import_statement": "from appium.options.common import AppiumOptions",
+          "module": "appium.options.common",
+          "imported_names": [
+            "AppiumOptions"
+          ],
+          "is_external": true,
+          "is_internal": false
+        }
+      ],
+      "classes": [],
+      "locators": [],
+      "functions": [
+        {
+          "method_name": "minAllApps",
+          "method_signature": "def minAllApps()",
+          "parameters": [],
+          "return_type": null,
+          "decorators": [],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "utility",
+          "what_it_does": "Minimizes all open Windows applications by executing a PowerShell command via subprocess. Constructs a PowerShell command string that creates a Shell.Application COM object and calls its MinimizeAll() method. Executes the command using subprocess.run() with the powershell executable, -Command flag, and the command string. Captures output using capture_output=True and text=True parameters. This function is intended to be called before test execution to ensure a clean desktop state, but is currently commented out in the appium_driver fixture.",
+          "locators_used": [],
+          "calls_to": [
+            "subprocess.run()"
+          ],
+          "usage_example": "minAllApps()",
+          "belongs_to_class": null,
+          "lines_of_code": 3
+        },
+        {
+          "method_name": "appium_driver",
+          "method_signature": "@pytest.fixture(scope=\"session\")\ndef appium_driver()",
+          "parameters": [],
+          "return_type": null,
+          "decorators": [
+            "@pytest.fixture(scope=\"session\")"
+          ],
+          "is_static": false,
+          "is_classmethod": false,
+          "is_property": false,
+          "is_async": false,
+          "is_private": false,
+          "is_dunder": false,
+          "docstring": null,
+          "method_type": "setup",
+          "what_it_does": "pytest session-scoped fixture that initializes and provides an Appium WebDriver instance for HP Smart Windows app automation. Uses the desired_caps_hp_smart dictionary containing app ID 'AD2F1837.HPPrinterControl_v10z8vjag6ke6!AD2F1837.HPPrinterControl', platformName 'Windows', platformVersion '10', deviceName 'WindowsPC', and WinAppDriver experimental flags. Creates an Appium WebDriver connection to http://127.0.0.1:4723/ using webdriver.Remote() with AppiumOptions().load_capabilities(desired_caps). Maximizes the HP Smart app window using driver.maximize_window(). Yields the driver instance to all tests in the session. After all tests complete, calls driver.quit() to close the Appium session and HP Smart app. This fixture is the primary entry point for all HP Smart app automation tests and must be used with @pytest.mark.usefixtures('appium_driver') or by requesting it as a test parameter.",
+          "locators_used": [],
+          "calls_to": [
+            "webdriver.Remote()",
+            "AppiumOptions().load_capabilities()",
+            "driver.maximize_window()",
+            "driver.quit()"
+          ],
+          "usage_example": "@pytest.mark.usefixtures('appium_driver')\ndef test_hp_smart_sign_in(request):\n    driver = request.getfixturevalue('appium_driver')",
+          "belongs_to_class": null,
+          "lines_of_code": 10
+        }
+      ],
+      "inner_classes": [],
+      "variables_and_constants": [
+        {
+          "constant_name": "status",
+          "constant_value": "''",
+          "constant_type": "str",
+          "scope": "module_level",
+          "defined_in_class": null
+        },
+        {
+          "constant_name": "function",
+          "constant_value": "''",
+          "constant_type": "str",
+          "scope": "module_level",
+          "defined_in_class": null
+        },
+        {
+          "constant_name": "stack",
+          "constant_value": "''",
+          "constant_type": "str",
+          "scope": "module_level",
+          "defined_in_class": null
+        },
+        {
+          "constant_name": "persona",
+          "constant_value": "''",
+          "constant_type": "str",
+          "scope": "module_level",
+          "defined_in_class": null
+        },
+        {
+          "constant_name": "desired_caps_hp_smart",
+          "constant_value": "{'app': 'AD2F1837.HPPrinterControl_v10z8vjag6ke6!AD2F1837.HPPrinterControl', 'platformName': 'Windows', 'platformVersion': '10', 'deviceName': 'WindowsPC', 'ms:experimental-webdriver': True, 'ms:waitForAppLaunch': '10'}",
+          "constant_type": "dict",
+          "scope": "module_level",
+          "defined_in_class": null
+        },
+        {
+          "constant_name": "driver",
+          "constant_value": "webdriver.Remote('http://127.0.0.1:4723/', options=AppiumOptions().load_capabilities(desired_caps))",
+          "constant_type": "WebDriver",
+          "scope": "module_level",
+          "defined_in_class": null
+        }
+      ],
+      "analysis_notes": "This conftest.py file is the pytest configuration hub for HP Smart Windows app tests. The appium_driver fixture is session-scoped, meaning one HP Smart app instance is launched and shared across all tests in the test session. The desired_caps_hp_smart dictionary contains the Windows Store app ID for HP Smart, which WinAppDriver uses to launch the app. The fixture assumes WinAppDriver is running on localhost:4723. Tests must request this fixture either via @pytest.mark.usefixtures('appium_driver') decorator or by including appium_driver as a test function parameter. The file contains commented-out code for a Chrome driver fixture (appium_driver_chrome) and pytest JSON report hooks (pytest_json_modifyreport, pytest_configure) that were likely used in earlier versions but are not currently active. The minAllApps function is defined but not called in the active fixture."
+    },
+    {
+      "file_path": "EndToEnd/EIT_NPI/UI_AUTOMATION/HPSmart/test_hpsmart_winapp.py",
+      "file_name": "test_hpsmart_winapp.py",
+      "file_extension": ".py",
+      "file_size_bytes": 1685,
+      "language": "Python",
+      "file_category": "test_script",
+      "file_purpose": "Test script file for HP Smart Windows app automation. Currently contains only commented-out test code. The commented test function test_hp_smart_sign_in demonstrates the intended test structure: using the appium_driver fixture, setting implicit wait, and calling CommonUtilities methods for clicking Accept All button, signing in via Chrome, checking printer status, and executing print document workflows. This file serves as a template or placeholder for future HP Smart app test cases.",
+      "imports": [],
+      "classes": [],
+      "locators": [],
+      "functions": [],
+      "inner_classes": [],
+      "variables_and_constants": [],
+      "analysis_notes": "This file is entirely commented out and contains no active code. The commented test function test_hp_smart_sign_in shows the intended test pattern: decorated with @pytest.mark.checking and @pytest.mark.usefixtures('appium_driver'), retrieves the appium_driver fixture using request.getfixturevalue('appium_driver'), sets driver.implicitly_wait(10), and would call CommonUtilities methods like click_accept_all(), click_element(), signin_chrome(), printer_status_check_add_if_not_added(), and print_documents(). The commented code also shows multiple approaches to clicking the Accept All button (direct find_element, WebDriverWait, keyboard Tab+Enter simulation, and CommonUtilities wrapper). Since all code is commented, this file contributes no reusable components to the framework but documents the intended test workflow structure."
+    },
+    {
+      "file_path": "EndToEnd/EIT_NPI/UI_AUTOMATION/HPSmart_Work/conftest.py",
+      "file_name": "conftest.py",
+      "file_extension": ".py",
+      "file_size_bytes": 822,
+      "language": "Python",
+      "file_category": "config",
+      "file_purpose": "pytest configuration file for HP Smart web portal (SMB portal) test automation using Selenium Chrome WebDriver. Currently entirely commented out. The commented code defines a chrome_browser module-scoped fixture that would initialize a Chrome WebDriver using webdriver_manager to auto-download ChromeDriver, set Chrome options to start maximized, navigate to the SMB stage portal URL https://smb.stage.portalshell.int.hp.com/, yield the driver to tests, and quit the driver after tests complete.",
+      "imports": [],
+      "classes": [],
+      "locators": [],
+      "functions": [],
+      "inner_classes": [],
+      "variables_and_constants": [],
+      "analysis_notes": "This file is entirely commented out and contains no active code. The commented chrome_browser fixture shows the intended pattern for Selenium-based web automation of the HP Smart SMB portal. It would use webdriver_manager's ChromeDriverManager to automatically download and manage the ChromeDriver binary, initialize a Chrome WebDriver with maximized window options, navigate to the SMB stage environment URL, and provide the driver to tests via yield. The fixture scope is 'module', meaning one Chrome browser instance would be shared across all tests in a test module. Since all code is commented, this file contributes no active fixtures or reusable components to the framework but documents the intended web automation setup."
+    },
+    {
+      "file_path": "EndToEnd/EIT_NPI/UI_AUTOMATION/HPSmart_Work/smb_test_required.py",
+      "file_name": "smb_test_required.py",
+      "file_extension": ".py",
+      "file_size_bytes": 3700,
+      "language": "Python",
+      "file_category": "test_script",
+      "file_purpose": "Test script file for HP Smart SMB (Small and Medium Business) web portal automation using Selenium Chrome WebDriver. Currently entirely commented out. The commented code demonstrates the intended test structure: defining a chrome_browser fixture inline (duplicating conftest.py fixture), implementing a test_smb test function that automates the SMB portal login flow by locating username and password fields using Selenium By locators, submitting credentials, accepting cookies, and navigating to the Printers section.",
+      "imports": [],
+      "classes": [],
+      "locators": [],
+      "functions": [],
+      "inner_classes": [],
+      "variables_and_constants": [],
+      "analysis_notes": "This file is entirely commented out and contains no active code. The commented test_smb function shows the intended Selenium-based web automation workflow for the HP Smart SMB portal: wait for username field using By.ID 'username', enter email 'lotus1511@yopmail.com', click submit button with By.ID 'user-name-form-submit', wait for password field with By.ID 'password', enter password 'srvt@123', click sign-in button with By.ID 'sign-in', wait up to 60 seconds for and click the cookie consent button with By.ID 'onetrust-accept-btn-handler', wait up to 60 seconds for and click the Printers navigation link using By.XPATH \"//span[text()='Printers']\", then sleep for 10 seconds. The file also contains a duplicate chrome_browser fixture definition that would conflict with the conftest.py fixture if uncommented. Since all code is commented, this file contributes no reusable components but documents the intended SMB portal test workflow and the Selenium locator strategy (By.ID, By.XPATH) used for web element identification."
+    }
+  ],
+  "batch_summary": {
+    "total_classes_found": 1,
+    "total_methods_found": 9,
+    "total_locators_found": 0,
+    "total_imports_found": 13,
+    "total_constants_found": 6,
+    "total_inner_classes_found": 0,
+    "driver_modules_found": [],
+    "page_objects_found": [],
+    "base_classes_found": [],
+    "utility_classes_found": [
+      "CommonUtilities"
+    ],
+    "test_files_found": [
+      "test_hpsmart_winapp.py",
+      "smb_test_required.py"
+    ],
+    "key_reusable_methods": [
+      "CommonUtilities.click_element — Waits for element to be clickable with WebDriverWait then clicks using Appium locators",
+      "CommonUtilities.click_accept_all — Waits up to 150 seconds for Accept All button and clicks it",
+      "CommonUtilities.signin_chrome — Automates Chrome sign-in using pynput keyboard simulation with username and password",
+      "CommonUtilities.switch_to_hpsmart — Switches Appium driver context back to HP Smart app window",
+      "CommonUtilities.check_printer_added — Verifies printer was added by checking for NextDeviceButton element",
+      "CommonUtilities.printer_status_check_add_if_not_added — Checks for Ready status and auto-adds printer if not present",
+      "CommonUtilities.print_documents — Executes complete print workflow with job status validation",
+      "appium_driver fixture — Session-scoped pytest fixture providing Appium WebDriver for HP Smart app",
+      "minAllApps — Minimizes all Windows apps using PowerShell command via subprocess"
+    ],
+    "key_reusable_locators": []
+  }
+}
