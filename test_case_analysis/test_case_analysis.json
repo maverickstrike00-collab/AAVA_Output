@@ -1,0 +1,4128 @@
+{
+  "meta": {
+    "analysis_version": "1.0",
+    "analyzed_at": "2025-01-15T10:30:00Z",
+    "source_file": "TEST-CASE/NPI_ID_C66377566.xlsx",
+    "source_repository": "AAVA_Output",
+    "source_branch": "main",
+    "analyzer": "Senior Test Case Analyst Agent",
+    "total_test_cases": 1,
+    "total_test_steps": 13,
+    "total_unique_ui_elements": 34,
+    "total_assertions": 18,
+    "total_pages_identified": 5,
+    "total_preconditions": 5,
+    "total_test_data_fields": 9,
+    "total_locators_needed": 34,
+    "total_action_methods_needed": 28,
+    "total_assertion_methods_needed": 18,
+    "total_page_objects_needed": 5,
+    "analysis_completeness": "full"
+  },
+  "excel_structure": {
+    "total_sheets": 1,
+    "sheet_names": [
+      "Sheet1"
+    ],
+    "columns_found": [
+      "#",
+      "Step",
+      "Expected Result",
+      "Script",
+      "Missed",
+      "Accuracy",
+      "Local Execution Analysis",
+      "Local Execution HiL\n(includes execution time after changes) in mins",
+      "Pipeline Execution Analysis",
+      "Pipeline Execution HiL\n(includes execution time after changes)"
+    ],
+    "total_rows": 15,
+    "notes": "Excel structure is non-standard. Preconditions are stored in column '#' row 3. Test steps are in 'Step' column starting from row 3. Expected results are in 'Expected Result' column. Some expected results are merged with steps (null values indicate continuation). Columns 'Script', 'Missed', 'Accuracy' and execution analysis columns appear to be for tracking purposes and are mostly empty."
+  },
+  "test_cases": [
+    {
+      "test_case_metadata": {
+        "test_case_id": "NPI_ID_C66377566",
+        "title": "Verify user can add contacts in Mobile Fax and use saved contacts to send fax",
+        "description": "This test case verifies the complete flow of adding multiple contacts to the Mobile Fax contacts list and then using those saved contacts to compose and send a fax through the HPX mobile application.",
+        "module": "Mobile Fax",
+        "sub_module": "Contacts Management",
+        "priority": "P1",
+        "severity": "High",
+        "test_type": "Functional",
+        "tags": [
+          "mobile_fax",
+          "contacts",
+          "fax_sending",
+          "hpx_app",
+          "mobile"
+        ],
+        "author": null,
+        "environment": "Mobile device with HPX app installed",
+        "browser_device": "Mobile device (iOS/Android)",
+        "status": null,
+        "custom_fields": {
+          "script_column": "Script tracking column present",
+          "missed_column": "Missed tracking column present",
+          "accuracy_column": "Accuracy tracking column present",
+          "execution_tracking": "Local and Pipeline execution tracking columns present"
+        }
+      },
+      "preconditions": [
+        {
+          "precondition_number": 1,
+          "raw_text": "The latest version of the HPX app is installed on the device.",
+          "interpreted_meaning": "The HPX mobile application must be installed on the test device and must be the most recent version available. This ensures all latest features and bug fixes are present for testing.",
+          "precondition_type": "environment",
+          "is_inferred": false,
+          "implied_components": [
+            {
+              "component_type": "utility",
+              "component_name_suggestion": "verify_app_version",
+              "reason": "Need to verify the installed app version matches the expected latest version"
+            },
+            {
+              "component_type": "test_data",
+              "component_name_suggestion": "expected_app_version",
+              "reason": "Need to know what the latest version number is to verify against"
+            }
+          ]
+        },
+        {
+          "precondition_number": 2,
+          "raw_text": "The device is successfully onboarded without errors.",
+          "interpreted_meaning": "The mobile device must have completed the onboarding process for the HPX app successfully. This includes device registration, initial setup, and any required configurations.",
+          "precondition_type": "state",
+          "is_inferred": false,
+          "implied_components": [
+            {
+              "component_type": "utility",
+              "component_name_suggestion": "verify_device_onboarded",
+              "reason": "Need to verify device onboarding status"
+            },
+            {
+              "component_type": "api_helper",
+              "component_name_suggestion": "check_device_registration_status",
+              "reason": "May need to check device registration via API"
+            }
+          ]
+        },
+        {
+          "precondition_number": 3,
+          "raw_text": "The device is in Ready state and the HPX app is stable and working.",
+          "interpreted_meaning": "The device must be in a Ready operational state with the HPX app running stably without crashes or errors. The app must be responsive and functional.",
+          "precondition_type": "state",
+          "is_inferred": false,
+          "implied_components": [
+            {
+              "component_type": "utility",
+              "component_name_suggestion": "verify_app_ready_state",
+              "reason": "Need to verify the app is in ready state before test execution"
+            },
+            {
+              "component_type": "assertion",
+              "component_name_suggestion": "verify_app_not_crashed",
+              "reason": "Need to verify app stability"
+            }
+          ]
+        },
+        {
+          "precondition_number": 4,
+          "raw_text": "Required client systems are available for execution.",
+          "interpreted_meaning": "All backend systems, servers, and client systems that the HPX app depends on must be available and accessible. This includes fax servers, authentication servers, and any other required infrastructure.",
+          "precondition_type": "environment",
+          "is_inferred": false,
+          "implied_components": [
+            {
+              "component_type": "utility",
+              "component_name_suggestion": "verify_backend_systems_available",
+              "reason": "Need to verify backend system availability"
+            },
+            {
+              "component_type": "api_helper",
+              "component_name_suggestion": "health_check_client_systems",
+              "reason": "Need to perform health checks on required systems"
+            }
+          ]
+        },
+        {
+          "precondition_number": 5,
+          "raw_text": "User has valid HPX account credentials.",
+          "interpreted_meaning": "A valid user account must exist in the HPX system with proper credentials (username/email and password) that can be used for authentication during the test.",
+          "precondition_type": "authentication",
+          "is_inferred": false,
+          "implied_components": [
+            {
+              "component_type": "test_data",
+              "component_name_suggestion": "valid_hpx_credentials",
+              "reason": "Need valid username and password for login"
+            },
+            {
+              "component_type": "page_object",
+              "component_name_suggestion": "LoginPage",
+              "reason": "Need login page object to perform authentication"
+            },
+            {
+              "component_type": "action_method",
+              "component_name_suggestion": "perform_login",
+              "reason": "Need method to perform login action"
+            },
+            {
+              "component_type": "assertion",
+              "component_name_suggestion": "verify_login_successful",
+              "reason": "Need to verify successful authentication"
+            }
+          ]
+        }
+      ],
+      "test_steps": [
+        {
+          "step_number": 1,
+          "raw_action": "Launch the HPX mobile application.",
+          "raw_expected_result": "HPX app launches successfully.\n\nUser is logged in and HPX Home screen is displayed.",
+          "raw_test_data": null,
+          "interpreted_action": "This step requires launching the HPX mobile application on the device. The app should start successfully without crashes or errors. After launch, the app should either automatically log in the user (if credentials are saved) or the user should already be in a logged-in state. The final state should be the HPX Home screen being displayed and ready for interaction.",
+          "action_type": "multi_action_composite",
+          "sub_actions": [
+            {
+              "sub_action_number": 1,
+              "action": "Launch HPX app from device home screen or app drawer",
+              "action_type": "click",
+              "element_involved": "hpx_app_icon",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 2,
+              "action": "Wait for app to launch and initialize",
+              "action_type": "wait",
+              "element_involved": "app_splash_screen_or_home_screen",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 3,
+              "action": "Verify user is logged in",
+              "action_type": "verification",
+              "element_involved": "home_screen_indicator",
+              "data_needed": null
+            }
+          ],
+          "ui_elements_involved": [
+            {
+              "element_type": "icon",
+              "element_name": "hpx_app_icon",
+              "element_identifier_hint": "HPX application icon on device home screen or app drawer",
+              "interaction_type": "click",
+              "page_context": "DeviceHomeScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_clickable"
+            },
+            {
+              "element_type": "section",
+              "element_name": "hpx_home_screen",
+              "element_identifier_hint": "Main home screen of HPX app after successful launch and login",
+              "interaction_type": "wait_for_visible",
+              "page_context": "HPXHomeScreen",
+              "is_inferred": false,
+              "required_state": "visible"
+            },
+            {
+              "element_type": "label",
+              "element_name": "home_screen_title",
+              "element_identifier_hint": "Title or header indicating HPX Home screen",
+              "interaction_type": "read_text",
+              "page_context": "HPXHomeScreen",
+              "is_inferred": true,
+              "required_state": "visible"
+            }
+          ],
+          "navigation_involved": {
+            "is_navigation_step": true,
+            "from_page": "DeviceHomeScreen",
+            "to_page": "HPXHomeScreen",
+            "navigation_method": "app_launch",
+            "url_hint": null,
+            "expected_page_indicator": "HPX Home screen is displayed with user logged in"
+          },
+          "test_data_needed": [
+            {
+              "data_field_name": "hpx_app_package_name",
+              "data_type": "string",
+              "sample_value": "com.hp.hpx.mobile",
+              "is_provided_in_test_case": false,
+              "constraints": "Must be the correct package name for HPX app",
+              "data_source": "environment_config",
+              "is_sensitive": false,
+              "used_for": "App launch identification"
+            }
+          ],
+          "assertions": [
+            {
+              "assertion_number": 1,
+              "assertion_type": "element_visible",
+              "target_element": "hpx_home_screen",
+              "expected_value": "visible",
+              "assertion_description": "Verify that HPX app launches successfully and the home screen is displayed",
+              "is_hard_assertion": true,
+              "is_inferred": false,
+              "suggested_method_name": "verify_hpx_home_screen_displayed"
+            },
+            {
+              "assertion_number": 2,
+              "assertion_type": "text_contains",
+              "target_element": "home_screen_title",
+              "expected_value": "Home or HPX Home or similar indicator",
+              "assertion_description": "Verify that the home screen title or header confirms this is the HPX Home screen",
+              "is_hard_assertion": true,
+              "is_inferred": true,
+              "suggested_method_name": "verify_home_screen_title"
+            },
+            {
+              "assertion_number": 3,
+              "assertion_type": "element_visible",
+              "target_element": "mobile_fax_option",
+              "expected_value": "visible",
+              "assertion_description": "Verify that user is logged in by confirming home screen content is accessible including Mobile Fax option",
+              "is_hard_assertion": true,
+              "is_inferred": true,
+              "suggested_method_name": "verify_user_logged_in"
+            }
+          ],
+          "wait_conditions": [
+            {
+              "wait_type": "explicit_wait_visible",
+              "wait_target": "hpx_home_screen",
+              "suggested_timeout_seconds": 30,
+              "wait_description": "Wait for HPX app to fully launch and home screen to be visible",
+              "when": "after_action"
+            },
+            {
+              "wait_type": "page_load_wait",
+              "wait_target": "HPXHomeScreen",
+              "suggested_timeout_seconds": 20,
+              "wait_description": "Wait for home screen to fully load with all elements",
+              "when": "after_action"
+            }
+          ],
+          "error_scenarios": [
+            {
+              "error_description": "HPX app fails to launch or crashes on startup",
+              "error_indicator": "App crash dialog, error message, or app not opening",
+              "error_type": "app_crash",
+              "recovery_action": "fail_with_screenshot",
+              "impact": "Blocks entire test execution"
+            },
+            {
+              "error_description": "App launches but user is not logged in and login screen is shown",
+              "error_indicator": "Login screen displayed instead of home screen",
+              "error_type": "authentication_failure",
+              "recovery_action": "perform_login_then_continue",
+              "impact": "Requires additional login step"
+            },
+            {
+              "error_description": "App launches but hangs on splash screen",
+              "error_indicator": "Splash screen visible beyond timeout period",
+              "error_type": "app_hang",
+              "recovery_action": "restart_app_then_retry",
+              "impact": "Delays test execution"
+            }
+          ],
+          "dependencies": {
+            "depends_on_step": null,
+            "dependency_type": null,
+            "dependency_detail": "This is the first step - no dependencies on previous steps"
+          },
+          "api_calls_implied": [
+            {
+              "api_endpoint_hint": "/api/auth/session or /api/user/profile",
+              "http_method": "GET",
+              "purpose": "Verify user session is active after app launch",
+              "is_explicit": false,
+              "is_inferred": true
+            }
+          ],
+          "step_complexity": "medium",
+          "automation_notes_for_step": "App launch on mobile requires Appium or similar mobile automation framework. Need to handle app initialization time which may vary. Must verify logged-in state which may require checking for specific UI elements that only appear when authenticated."
+        },
+        {
+          "step_number": 2,
+          "raw_action": "Login using valid onboarded credentials (if not already logged in).",
+          "raw_expected_result": null,
+          "raw_test_data": null,
+          "interpreted_action": "This is a conditional step. If the user is not already logged in after app launch (from step 1), then perform login using valid credentials. This involves entering username/email and password on the login screen and submitting the login form. If already logged in, this step is skipped.",
+          "action_type": "multi_action_composite",
+          "sub_actions": [
+            {
+              "sub_action_number": 1,
+              "action": "Check if login screen is displayed or if already on home screen",
+              "action_type": "verification",
+              "element_involved": "login_screen_or_home_screen",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 2,
+              "action": "If login screen present, enter username/email",
+              "action_type": "type_text",
+              "element_involved": "username_input",
+              "data_needed": "username"
+            },
+            {
+              "sub_action_number": 3,
+              "action": "Enter password",
+              "action_type": "type_text",
+              "element_involved": "password_input",
+              "data_needed": "password"
+            },
+            {
+              "sub_action_number": 4,
+              "action": "Tap login button",
+              "action_type": "click",
+              "element_involved": "login_button",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 5,
+              "action": "Wait for home screen to appear",
+              "action_type": "wait",
+              "element_involved": "hpx_home_screen",
+              "data_needed": null
+            }
+          ],
+          "ui_elements_involved": [
+            {
+              "element_type": "text_input",
+              "element_name": "username_input",
+              "element_identifier_hint": "Username or email input field on login screen",
+              "interaction_type": "type",
+              "page_context": "LoginScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_enabled"
+            },
+            {
+              "element_type": "password_input",
+              "element_name": "password_input",
+              "element_identifier_hint": "Password input field on login screen",
+              "interaction_type": "type",
+              "page_context": "LoginScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_enabled"
+            },
+            {
+              "element_type": "button",
+              "element_name": "login_button",
+              "element_identifier_hint": "Login or Sign In button on login screen",
+              "interaction_type": "click",
+              "page_context": "LoginScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_clickable"
+            }
+          ],
+          "navigation_involved": {
+            "is_navigation_step": true,
+            "from_page": "LoginScreen",
+            "to_page": "HPXHomeScreen",
+            "navigation_method": "button_click",
+            "url_hint": null,
+            "expected_page_indicator": "HPX Home screen displayed after successful login"
+          },
+          "test_data_needed": [
+            {
+              "data_field_name": "username",
+              "data_type": "string",
+              "sample_value": "testuser@hp.com",
+              "is_provided_in_test_case": false,
+              "constraints": "Must be a valid onboarded user account",
+              "data_source": "test_data_file",
+              "is_sensitive": false,
+              "used_for": "Login authentication"
+            },
+            {
+              "data_field_name": "password",
+              "data_type": "string",
+              "sample_value": "Test@12345",
+              "is_provided_in_test_case": false,
+              "constraints": "Must match the password for the username provided",
+              "data_source": "test_data_file",
+              "is_sensitive": true,
+              "used_for": "Login authentication"
+            }
+          ],
+          "assertions": [
+            {
+              "assertion_number": 1,
+              "assertion_type": "element_visible",
+              "target_element": "hpx_home_screen",
+              "expected_value": "visible",
+              "assertion_description": "Verify that after login (if performed), the HPX Home screen is displayed",
+              "is_hard_assertion": true,
+              "is_inferred": true,
+              "suggested_method_name": "verify_login_successful_home_displayed"
+            }
+          ],
+          "wait_conditions": [
+            {
+              "wait_type": "explicit_wait_visible",
+              "wait_target": "hpx_home_screen",
+              "suggested_timeout_seconds": 20,
+              "wait_description": "Wait for home screen to appear after login",
+              "when": "after_action"
+            }
+          ],
+          "error_scenarios": [
+            {
+              "error_description": "Invalid credentials provided",
+              "error_indicator": "Error message displayed on login screen",
+              "error_type": "authentication_failure",
+              "recovery_action": "fail_with_screenshot",
+              "impact": "Cannot proceed with test"
+            },
+            {
+              "error_description": "Login button not responding",
+              "error_indicator": "No navigation after clicking login button",
+              "error_type": "ui_interaction_failure",
+              "recovery_action": "retry_click_then_fail",
+              "impact": "Cannot proceed with test"
+            }
+          ],
+          "dependencies": {
+            "depends_on_step": 1,
+            "dependency_type": "state_from_previous",
+            "dependency_detail": "This step depends on step 1 determining whether user is already logged in or not"
+          },
+          "api_calls_implied": [
+            {
+              "api_endpoint_hint": "/api/auth/login",
+              "http_method": "POST",
+              "purpose": "Authenticate user credentials and create session",
+              "is_explicit": false,
+              "is_inferred": true
+            }
+          ],
+          "step_complexity": "medium",
+          "automation_notes_for_step": "This is a conditional step. Automation must first check if login is needed. Implement conditional logic to skip if already logged in. Credentials should be securely stored and retrieved from test data configuration."
+        },
+        {
+          "step_number": 3,
+          "raw_action": "On the HPX Home screen, locate the Mobile Fax option.",
+          "raw_expected_result": "Mobile Fax screen opens successfully.",
+          "raw_test_data": null,
+          "interpreted_action": "On the HPX Home screen, the user needs to locate the Mobile Fax option among the available features or menu items. This involves scrolling if necessary to find the Mobile Fax option and visually identifying it. The expected result indicates that after locating and tapping it (in step 4), the Mobile Fax screen should open.",
+          "action_type": "scroll",
+          "sub_actions": [
+            {
+              "sub_action_number": 1,
+              "action": "Scroll on home screen if needed to find Mobile Fax option",
+              "action_type": "scroll",
+              "element_involved": "hpx_home_screen",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 2,
+              "action": "Locate Mobile Fax option visually",
+              "action_type": "verification",
+              "element_involved": "mobile_fax_option",
+              "data_needed": null
+            }
+          ],
+          "ui_elements_involved": [
+            {
+              "element_type": "button",
+              "element_name": "mobile_fax_option",
+              "element_identifier_hint": "Mobile Fax button or tile on HPX Home screen, likely has text 'Mobile Fax' and possibly an icon",
+              "interaction_type": "scroll_to",
+              "page_context": "HPXHomeScreen",
+              "is_inferred": false,
+              "required_state": "visible"
+            }
+          ],
+          "navigation_involved": {
+            "is_navigation_step": false,
+            "from_page": "HPXHomeScreen",
+            "to_page": "HPXHomeScreen",
+            "navigation_method": "none",
+            "url_hint": null,
+            "expected_page_indicator": "Still on HPX Home screen, Mobile Fax option is now visible"
+          },
+          "test_data_needed": [],
+          "assertions": [
+            {
+              "assertion_number": 1,
+              "assertion_type": "element_visible",
+              "target_element": "mobile_fax_option",
+              "expected_value": "visible",
+              "assertion_description": "Verify that Mobile Fax option is visible on the HPX Home screen",
+              "is_hard_assertion": true,
+              "is_inferred": true,
+              "suggested_method_name": "verify_mobile_fax_option_visible"
+            }
+          ],
+          "wait_conditions": [
+            {
+              "wait_type": "explicit_wait_visible",
+              "wait_target": "mobile_fax_option",
+              "suggested_timeout_seconds": 10,
+              "wait_description": "Wait for Mobile Fax option to be visible after scrolling if needed",
+              "when": "after_action"
+            }
+          ],
+          "error_scenarios": [
+            {
+              "error_description": "Mobile Fax option not found on home screen",
+              "error_indicator": "Element not found after scrolling through entire home screen",
+              "error_type": "element_not_found",
+              "recovery_action": "fail_with_screenshot",
+              "impact": "Cannot proceed with test - feature may not be available"
+            }
+          ],
+          "dependencies": {
+            "depends_on_step": 1,
+            "dependency_type": "state_from_previous",
+            "dependency_detail": "Depends on being on HPX Home screen from step 1"
+          },
+          "api_calls_implied": [],
+          "step_complexity": "low",
+          "automation_notes_for_step": "May require scrolling logic to find the Mobile Fax option if it's not immediately visible. Use scroll until element visible pattern."
+        },
+        {
+          "step_number": 4,
+          "raw_action": "Tap on Mobile Fax.",
+          "raw_expected_result": null,
+          "raw_test_data": null,
+          "interpreted_action": "Tap on the Mobile Fax option that was located in step 3. This action should navigate the user from the HPX Home screen to the Mobile Fax screen. The expected result from step 3 indicates that the Mobile Fax screen should open successfully.",
+          "action_type": "click",
+          "sub_actions": [
+            {
+              "sub_action_number": 1,
+              "action": "Tap on Mobile Fax option",
+              "action_type": "click",
+              "element_involved": "mobile_fax_option",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 2,
+              "action": "Wait for Mobile Fax screen to load",
+              "action_type": "wait",
+              "element_involved": "mobile_fax_screen",
+              "data_needed": null
+            }
+          ],
+          "ui_elements_involved": [
+            {
+              "element_type": "button",
+              "element_name": "mobile_fax_option",
+              "element_identifier_hint": "Mobile Fax button or tile on HPX Home screen",
+              "interaction_type": "click",
+              "page_context": "HPXHomeScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_clickable"
+            },
+            {
+              "element_type": "section",
+              "element_name": "mobile_fax_screen",
+              "element_identifier_hint": "Mobile Fax main screen that appears after tapping Mobile Fax option",
+              "interaction_type": "wait_for_visible",
+              "page_context": "MobileFaxScreen",
+              "is_inferred": false,
+              "required_state": "visible"
+            }
+          ],
+          "navigation_involved": {
+            "is_navigation_step": true,
+            "from_page": "HPXHomeScreen",
+            "to_page": "MobileFaxScreen",
+            "navigation_method": "button_click",
+            "url_hint": null,
+            "expected_page_indicator": "Mobile Fax screen is displayed"
+          },
+          "test_data_needed": [],
+          "assertions": [
+            {
+              "assertion_number": 1,
+              "assertion_type": "page_loaded",
+              "target_element": "mobile_fax_screen",
+              "expected_value": "Mobile Fax screen is displayed",
+              "assertion_description": "Verify that Mobile Fax screen opens successfully after tapping Mobile Fax option",
+              "is_hard_assertion": true,
+              "is_inferred": false,
+              "suggested_method_name": "verify_mobile_fax_screen_opened"
+            }
+          ],
+          "wait_conditions": [
+            {
+              "wait_type": "explicit_wait_visible",
+              "wait_target": "mobile_fax_screen",
+              "suggested_timeout_seconds": 15,
+              "wait_description": "Wait for Mobile Fax screen to load and be visible",
+              "when": "after_action"
+            }
+          ],
+          "error_scenarios": [
+            {
+              "error_description": "Mobile Fax screen does not open",
+              "error_indicator": "Still on home screen or error message displayed",
+              "error_type": "navigation_failure",
+              "recovery_action": "retry_once_then_fail",
+              "impact": "Cannot proceed with test"
+            }
+          ],
+          "dependencies": {
+            "depends_on_step": 3,
+            "dependency_type": "element_created_by_previous",
+            "dependency_detail": "Depends on Mobile Fax option being located and visible from step 3"
+          },
+          "api_calls_implied": [
+            {
+              "api_endpoint_hint": "/api/fax/initialize or /api/fax/list",
+              "http_method": "GET",
+              "purpose": "Load Mobile Fax screen data and initialize fax functionality",
+              "is_explicit": false,
+              "is_inferred": true
+            }
+          ],
+          "step_complexity": "low",
+          "automation_notes_for_step": "Standard navigation step. Ensure proper wait for screen transition."
+        },
+        {
+          "step_number": 5,
+          "raw_action": "Tap on the three-dot menu (...) on the Mobile Fax screen.",
+          "raw_expected_result": "Fax Settings screen opens.\n\nContacts section is visible.",
+          "raw_test_data": null,
+          "interpreted_action": "On the Mobile Fax screen, locate and tap the three-dot menu icon (typically an overflow menu or options menu). This should open a menu or navigate to the Fax Settings screen where the Contacts section should be visible.",
+          "action_type": "click",
+          "sub_actions": [
+            {
+              "sub_action_number": 1,
+              "action": "Locate three-dot menu icon on Mobile Fax screen",
+              "action_type": "verification",
+              "element_involved": "three_dot_menu_icon",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 2,
+              "action": "Tap on three-dot menu icon",
+              "action_type": "click",
+              "element_involved": "three_dot_menu_icon",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 3,
+              "action": "Wait for menu or Fax Settings screen to appear",
+              "action_type": "wait",
+              "element_involved": "fax_settings_menu_or_screen",
+              "data_needed": null
+            }
+          ],
+          "ui_elements_involved": [
+            {
+              "element_type": "icon",
+              "element_name": "three_dot_menu_icon",
+              "element_identifier_hint": "Three-dot menu icon (...) or overflow menu icon on Mobile Fax screen, typically in top-right corner",
+              "interaction_type": "click",
+              "page_context": "MobileFaxScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_clickable"
+            },
+            {
+              "element_type": "menu",
+              "element_name": "fax_options_menu",
+              "element_identifier_hint": "Menu that appears after tapping three-dot icon, may contain Fax Settings option",
+              "interaction_type": "wait_for_visible",
+              "page_context": "MobileFaxScreen",
+              "is_inferred": true,
+              "required_state": "visible"
+            }
+          ],
+          "navigation_involved": {
+            "is_navigation_step": false,
+            "from_page": "MobileFaxScreen",
+            "to_page": "MobileFaxScreen",
+            "navigation_method": "menu_open",
+            "url_hint": null,
+            "expected_page_indicator": "Menu appears or Fax Settings option is visible"
+          },
+          "test_data_needed": [],
+          "assertions": [
+            {
+              "assertion_number": 1,
+              "assertion_type": "element_visible",
+              "target_element": "fax_options_menu",
+              "expected_value": "visible",
+              "assertion_description": "Verify that after tapping three-dot menu, a menu or options list appears",
+              "is_hard_assertion": true,
+              "is_inferred": true,
+              "suggested_method_name": "verify_fax_options_menu_displayed"
+            }
+          ],
+          "wait_conditions": [
+            {
+              "wait_type": "explicit_wait_visible",
+              "wait_target": "fax_options_menu",
+              "suggested_timeout_seconds": 5,
+              "wait_description": "Wait for menu to appear after tapping three-dot icon",
+              "when": "after_action"
+            }
+          ],
+          "error_scenarios": [
+            {
+              "error_description": "Three-dot menu icon not found",
+              "error_indicator": "Element not found on Mobile Fax screen",
+              "error_type": "element_not_found",
+              "recovery_action": "fail_with_screenshot",
+              "impact": "Cannot access settings"
+            },
+            {
+              "error_description": "Menu does not appear after tapping",
+              "error_indicator": "No menu visible after tap action",
+              "error_type": "ui_interaction_failure",
+              "recovery_action": "retry_once_then_fail",
+              "impact": "Cannot access settings"
+            }
+          ],
+          "dependencies": {
+            "depends_on_step": 4,
+            "dependency_type": "state_from_previous",
+            "dependency_detail": "Depends on being on Mobile Fax screen from step 4"
+          },
+          "api_calls_implied": [],
+          "step_complexity": "low",
+          "automation_notes_for_step": "Three-dot menu is a common mobile UI pattern. May need to handle both popup menu and direct navigation to settings screen depending on app implementation."
+        },
+        {
+          "step_number": 6,
+          "raw_action": "Select Fax Settings.",
+          "raw_expected_result": null,
+          "raw_test_data": null,
+          "interpreted_action": "From the menu that appeared in step 5, select or tap on the 'Fax Settings' option. This should navigate to the Fax Settings screen where various fax configuration options including Contacts should be available.",
+          "action_type": "click",
+          "sub_actions": [
+            {
+              "sub_action_number": 1,
+              "action": "Locate Fax Settings option in menu",
+              "action_type": "verification",
+              "element_involved": "fax_settings_menu_item",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 2,
+              "action": "Tap on Fax Settings option",
+              "action_type": "click",
+              "element_involved": "fax_settings_menu_item",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 3,
+              "action": "Wait for Fax Settings screen to load",
+              "action_type": "wait",
+              "element_involved": "fax_settings_screen",
+              "data_needed": null
+            }
+          ],
+          "ui_elements_involved": [
+            {
+              "element_type": "menu_item",
+              "element_name": "fax_settings_menu_item",
+              "element_identifier_hint": "Fax Settings menu item in the options menu, likely has text 'Fax Settings' or 'Settings'",
+              "interaction_type": "click",
+              "page_context": "MobileFaxScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_clickable"
+            },
+            {
+              "element_type": "section",
+              "element_name": "fax_settings_screen",
+              "element_identifier_hint": "Fax Settings screen that opens after selecting Fax Settings option",
+              "interaction_type": "wait_for_visible",
+              "page_context": "FaxSettingsScreen",
+              "is_inferred": false,
+              "required_state": "visible"
+            }
+          ],
+          "navigation_involved": {
+            "is_navigation_step": true,
+            "from_page": "MobileFaxScreen",
+            "to_page": "FaxSettingsScreen",
+            "navigation_method": "menu_navigation",
+            "url_hint": null,
+            "expected_page_indicator": "Fax Settings screen is displayed with Contacts section visible"
+          },
+          "test_data_needed": [],
+          "assertions": [
+            {
+              "assertion_number": 1,
+              "assertion_type": "page_loaded",
+              "target_element": "fax_settings_screen",
+              "expected_value": "Fax Settings screen is displayed",
+              "assertion_description": "Verify that Fax Settings screen opens successfully after selecting Fax Settings from menu",
+              "is_hard_assertion": true,
+              "is_inferred": false,
+              "suggested_method_name": "verify_fax_settings_screen_opened"
+            },
+            {
+              "assertion_number": 2,
+              "assertion_type": "element_visible",
+              "target_element": "contacts_section",
+              "expected_value": "visible",
+              "assertion_description": "Verify that Contacts section is visible on the Fax Settings screen",
+              "is_hard_assertion": true,
+              "is_inferred": false,
+              "suggested_method_name": "verify_contacts_section_visible"
+            }
+          ],
+          "wait_conditions": [
+            {
+              "wait_type": "explicit_wait_visible",
+              "wait_target": "fax_settings_screen",
+              "suggested_timeout_seconds": 10,
+              "wait_description": "Wait for Fax Settings screen to load",
+              "when": "after_action"
+            }
+          ],
+          "error_scenarios": [
+            {
+              "error_description": "Fax Settings option not found in menu",
+              "error_indicator": "Menu item not found",
+              "error_type": "element_not_found",
+              "recovery_action": "fail_with_screenshot",
+              "impact": "Cannot access settings"
+            },
+            {
+              "error_description": "Fax Settings screen does not open",
+              "error_indicator": "Still on Mobile Fax screen after tapping",
+              "error_type": "navigation_failure",
+              "recovery_action": "retry_once_then_fail",
+              "impact": "Cannot proceed with test"
+            }
+          ],
+          "dependencies": {
+            "depends_on_step": 5,
+            "dependency_type": "element_created_by_previous",
+            "dependency_detail": "Depends on menu being opened in step 5"
+          },
+          "api_calls_implied": [
+            {
+              "api_endpoint_hint": "/api/fax/settings",
+              "http_method": "GET",
+              "purpose": "Load fax settings configuration",
+              "is_explicit": false,
+              "is_inferred": true
+            }
+          ],
+          "step_complexity": "low",
+          "automation_notes_for_step": "Standard menu selection and navigation. Ensure Contacts section visibility is verified as per expected result."
+        },
+        {
+          "step_number": 7,
+          "raw_action": "Navigate to Contacts under Sending section",
+          "raw_expected_result": null,
+          "raw_test_data": null,
+          "interpreted_action": "On the Fax Settings screen, locate the Sending section and within it find the Contacts option. Navigate to or tap on the Contacts option to access the contacts management area.",
+          "action_type": "click",
+          "sub_actions": [
+            {
+              "sub_action_number": 1,
+              "action": "Locate Sending section on Fax Settings screen",
+              "action_type": "scroll",
+              "element_involved": "sending_section",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 2,
+              "action": "Locate Contacts option under Sending section",
+              "action_type": "verification",
+              "element_involved": "contacts_option",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 3,
+              "action": "Tap on Contacts option",
+              "action_type": "click",
+              "element_involved": "contacts_option",
+              "data_needed": null
+            }
+          ],
+          "ui_elements_involved": [
+            {
+              "element_type": "section",
+              "element_name": "sending_section",
+              "element_identifier_hint": "Sending section on Fax Settings screen, likely a header or group label",
+              "interaction_type": "scroll_to",
+              "page_context": "FaxSettingsScreen",
+              "is_inferred": false,
+              "required_state": "visible"
+            },
+            {
+              "element_type": "menu_item",
+              "element_name": "contacts_option",
+              "element_identifier_hint": "Contacts option under Sending section, likely has text 'Contacts'",
+              "interaction_type": "click",
+              "page_context": "FaxSettingsScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_clickable"
+            },
+            {
+              "element_type": "section",
+              "element_name": "contacts_screen",
+              "element_identifier_hint": "Contacts management screen that opens after tapping Contacts option",
+              "interaction_type": "wait_for_visible",
+              "page_context": "ContactsScreen",
+              "is_inferred": true,
+              "required_state": "visible"
+            }
+          ],
+          "navigation_involved": {
+            "is_navigation_step": true,
+            "from_page": "FaxSettingsScreen",
+            "to_page": "ContactsScreen",
+            "navigation_method": "menu_navigation",
+            "url_hint": null,
+            "expected_page_indicator": "Contacts screen is displayed"
+          },
+          "test_data_needed": [],
+          "assertions": [
+            {
+              "assertion_number": 1,
+              "assertion_type": "element_visible",
+              "target_element": "contacts_screen",
+              "expected_value": "visible",
+              "assertion_description": "Verify that Contacts screen opens after navigating to Contacts under Sending section",
+              "is_hard_assertion": true,
+              "is_inferred": true,
+              "suggested_method_name": "verify_contacts_screen_opened"
+            }
+          ],
+          "wait_conditions": [
+            {
+              "wait_type": "explicit_wait_visible",
+              "wait_target": "contacts_screen",
+              "suggested_timeout_seconds": 10,
+              "wait_description": "Wait for Contacts screen to load",
+              "when": "after_action"
+            }
+          ],
+          "error_scenarios": [
+            {
+              "error_description": "Contacts option not found under Sending section",
+              "error_indicator": "Element not found",
+              "error_type": "element_not_found",
+              "recovery_action": "fail_with_screenshot",
+              "impact": "Cannot access contacts management"
+            }
+          ],
+          "dependencies": {
+            "depends_on_step": 6,
+            "dependency_type": "state_from_previous",
+            "dependency_detail": "Depends on being on Fax Settings screen from step 6"
+          },
+          "api_calls_implied": [
+            {
+              "api_endpoint_hint": "/api/fax/contacts",
+              "http_method": "GET",
+              "purpose": "Load existing contacts list",
+              "is_explicit": false,
+              "is_inferred": true
+            }
+          ],
+          "step_complexity": "low",
+          "automation_notes_for_step": "May require scrolling to find Sending section and Contacts option within settings."
+        },
+        {
+          "step_number": 8,
+          "raw_action": "Tap Add Contact.",
+          "raw_expected_result": "Contacts are successfully saved in the contacts list.",
+          "raw_test_data": null,
+          "interpreted_action": "On the Contacts screen, locate and tap the 'Add Contact' button. This should open a form or screen where contact details can be entered. The expected result indicates that after completing the contact entry process (in subsequent steps), the contacts should be successfully saved.",
+          "action_type": "click",
+          "sub_actions": [
+            {
+              "sub_action_number": 1,
+              "action": "Locate Add Contact button",
+              "action_type": "verification",
+              "element_involved": "add_contact_button",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 2,
+              "action": "Tap on Add Contact button",
+              "action_type": "click",
+              "element_involved": "add_contact_button",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 3,
+              "action": "Wait for Add Contact form to appear",
+              "action_type": "wait",
+              "element_involved": "add_contact_form",
+              "data_needed": null
+            }
+          ],
+          "ui_elements_involved": [
+            {
+              "element_type": "button",
+              "element_name": "add_contact_button",
+              "element_identifier_hint": "Add Contact button on Contacts screen, likely has text 'Add Contact' or '+' icon",
+              "interaction_type": "click",
+              "page_context": "ContactsScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_clickable"
+            },
+            {
+              "element_type": "form",
+              "element_name": "add_contact_form",
+              "element_identifier_hint": "Form or screen for entering new contact details",
+              "interaction_type": "wait_for_visible",
+              "page_context": "AddContactScreen",
+              "is_inferred": true,
+              "required_state": "visible"
+            }
+          ],
+          "navigation_involved": {
+            "is_navigation_step": true,
+            "from_page": "ContactsScreen",
+            "to_page": "AddContactScreen",
+            "navigation_method": "button_click",
+            "url_hint": null,
+            "expected_page_indicator": "Add Contact form is displayed"
+          },
+          "test_data_needed": [],
+          "assertions": [
+            {
+              "assertion_number": 1,
+              "assertion_type": "element_visible",
+              "target_element": "add_contact_form",
+              "expected_value": "visible",
+              "assertion_description": "Verify that Add Contact form opens after tapping Add Contact button",
+              "is_hard_assertion": true,
+              "is_inferred": true,
+              "suggested_method_name": "verify_add_contact_form_displayed"
+            }
+          ],
+          "wait_conditions": [
+            {
+              "wait_type": "explicit_wait_visible",
+              "wait_target": "add_contact_form",
+              "suggested_timeout_seconds": 10,
+              "wait_description": "Wait for Add Contact form to appear",
+              "when": "after_action"
+            }
+          ],
+          "error_scenarios": [
+            {
+              "error_description": "Add Contact button not found",
+              "error_indicator": "Element not found on Contacts screen",
+              "error_type": "element_not_found",
+              "recovery_action": "fail_with_screenshot",
+              "impact": "Cannot add contacts"
+            },
+            {
+              "error_description": "Add Contact form does not open",
+              "error_indicator": "Still on Contacts screen after tapping",
+              "error_type": "navigation_failure",
+              "recovery_action": "retry_once_then_fail",
+              "impact": "Cannot proceed with adding contact"
+            }
+          ],
+          "dependencies": {
+            "depends_on_step": 7,
+            "dependency_type": "state_from_previous",
+            "dependency_detail": "Depends on being on Contacts screen from step 7"
+          },
+          "api_calls_implied": [],
+          "step_complexity": "low",
+          "automation_notes_for_step": "Standard button click to open form. Expected result mentions contacts being saved which happens in step 9."
+        },
+        {
+          "step_number": 9,
+          "raw_action": "Enter required contact details:\nName\nFax Number\nCountry Code (if applicable)\nTap Save.",
+          "raw_expected_result": null,
+          "raw_test_data": null,
+          "interpreted_action": "On the Add Contact form, enter the required contact information including Name, Fax Number, and Country Code if applicable. After entering all required details, tap the Save button to save the contact. This should add the contact to the contacts list.",
+          "action_type": "multi_action_composite",
+          "sub_actions": [
+            {
+              "sub_action_number": 1,
+              "action": "Enter contact name",
+              "action_type": "type_text",
+              "element_involved": "contact_name_input",
+              "data_needed": "contact_name"
+            },
+            {
+              "sub_action_number": 2,
+              "action": "Enter fax number",
+              "action_type": "type_text",
+              "element_involved": "fax_number_input",
+              "data_needed": "fax_number"
+            },
+            {
+              "sub_action_number": 3,
+              "action": "Enter country code if applicable",
+              "action_type": "type_text",
+              "element_involved": "country_code_input",
+              "data_needed": "country_code"
+            },
+            {
+              "sub_action_number": 4,
+              "action": "Tap Save button",
+              "action_type": "click",
+              "element_involved": "save_contact_button",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 5,
+              "action": "Wait for contact to be saved and return to contacts list",
+              "action_type": "wait",
+              "element_involved": "contacts_screen",
+              "data_needed": null
+            }
+          ],
+          "ui_elements_involved": [
+            {
+              "element_type": "text_input",
+              "element_name": "contact_name_input",
+              "element_identifier_hint": "Name input field on Add Contact form, likely labeled 'Name' or 'Contact Name'",
+              "interaction_type": "type",
+              "page_context": "AddContactScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_enabled"
+            },
+            {
+              "element_type": "text_input",
+              "element_name": "fax_number_input",
+              "element_identifier_hint": "Fax Number input field on Add Contact form, likely labeled 'Fax Number' or 'Number'",
+              "interaction_type": "type",
+              "page_context": "AddContactScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_enabled"
+            },
+            {
+              "element_type": "text_input",
+              "element_name": "country_code_input",
+              "element_identifier_hint": "Country Code input field on Add Contact form, may be dropdown or text input, likely labeled 'Country Code'",
+              "interaction_type": "type",
+              "page_context": "AddContactScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_enabled"
+            },
+            {
+              "element_type": "button",
+              "element_name": "save_contact_button",
+              "element_identifier_hint": "Save button on Add Contact form, likely has text 'Save' or checkmark icon",
+              "interaction_type": "click",
+              "page_context": "AddContactScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_clickable"
+            }
+          ],
+          "navigation_involved": {
+            "is_navigation_step": true,
+            "from_page": "AddContactScreen",
+            "to_page": "ContactsScreen",
+            "navigation_method": "button_click",
+            "url_hint": null,
+            "expected_page_indicator": "Returns to Contacts screen with new contact added to list"
+          },
+          "test_data_needed": [
+            {
+              "data_field_name": "contact_name",
+              "data_type": "string",
+              "sample_value": "John Doe",
+              "is_provided_in_test_case": false,
+              "constraints": "Must be a valid name string",
+              "data_source": "test_data_file",
+              "is_sensitive": false,
+              "used_for": "Contact identification"
+            },
+            {
+              "data_field_name": "fax_number",
+              "data_type": "string",
+              "sample_value": "+1234567890",
+              "is_provided_in_test_case": false,
+              "constraints": "Must be a valid fax number format",
+              "data_source": "test_data_file",
+              "is_sensitive": false,
+              "used_for": "Fax destination number"
+            },
+            {
+              "data_field_name": "country_code",
+              "data_type": "string",
+              "sample_value": "+1",
+              "is_provided_in_test_case": false,
+              "constraints": "Must be a valid country code if applicable",
+              "data_source": "test_data_file",
+              "is_sensitive": false,
+              "used_for": "International fax number formatting"
+            }
+          ],
+          "assertions": [
+            {
+              "assertion_number": 1,
+              "assertion_type": "element_visible",
+              "target_element": "contacts_screen",
+              "expected_value": "visible",
+              "assertion_description": "Verify that after saving contact, user returns to Contacts screen",
+              "is_hard_assertion": true,
+              "is_inferred": true,
+              "suggested_method_name": "verify_returned_to_contacts_screen"
+            },
+            {
+              "assertion_number": 2,
+              "assertion_type": "element_visible",
+              "target_element": "saved_contact_in_list",
+              "expected_value": "visible",
+              "assertion_description": "Verify that the newly saved contact appears in the contacts list",
+              "is_hard_assertion": true,
+              "is_inferred": false,
+              "suggested_method_name": "verify_contact_saved_in_list"
+            }
+          ],
+          "wait_conditions": [
+            {
+              "wait_type": "explicit_wait_visible",
+              "wait_target": "contacts_screen",
+              "suggested_timeout_seconds": 10,
+              "wait_description": "Wait for return to Contacts screen after saving",
+              "when": "after_action"
+            }
+          ],
+          "error_scenarios": [
+            {
+              "error_description": "Required field validation error",
+              "error_indicator": "Error message displayed indicating missing or invalid field",
+              "error_type": "validation_error",
+              "recovery_action": "fail_with_screenshot",
+              "impact": "Contact not saved"
+            },
+            {
+              "error_description": "Save button not responding",
+              "error_indicator": "No navigation after clicking Save",
+              "error_type": "ui_interaction_failure",
+              "recovery_action": "retry_once_then_fail",
+              "impact": "Contact not saved"
+            }
+          ],
+          "dependencies": {
+            "depends_on_step": 8,
+            "dependency_type": "state_from_previous",
+            "dependency_detail": "Depends on Add Contact form being open from step 8"
+          },
+          "api_calls_implied": [
+            {
+              "api_endpoint_hint": "/api/fax/contacts",
+              "http_method": "POST",
+              "purpose": "Save new contact to backend",
+              "is_explicit": false,
+              "is_inferred": true
+            }
+          ],
+          "step_complexity": "medium",
+          "automation_notes_for_step": "Multiple form fields to fill. Need test data for contact details. Country code field may be optional based on 'if applicable' note."
+        },
+        {
+          "step_number": 10,
+          "raw_action": "Repeat the same process to add 2–3 contacts.",
+          "raw_expected_result": null,
+          "raw_test_data": null,
+          "interpreted_action": "Repeat steps 8 and 9 to add 2-3 more contacts. This means tapping Add Contact, entering contact details (Name, Fax Number, Country Code), and tapping Save for each additional contact. This ensures multiple contacts are available for testing the contact selection functionality later.",
+          "action_type": "multi_action_composite",
+          "sub_actions": [
+            {
+              "sub_action_number": 1,
+              "action": "Repeat Add Contact flow for contact 2",
+              "action_type": "multi_action_composite",
+              "element_involved": "multiple",
+              "data_needed": "contact_2_details"
+            },
+            {
+              "sub_action_number": 2,
+              "action": "Repeat Add Contact flow for contact 3",
+              "action_type": "multi_action_composite",
+              "element_involved": "multiple",
+              "data_needed": "contact_3_details"
+            }
+          ],
+          "ui_elements_involved": [
+            {
+              "element_type": "button",
+              "element_name": "add_contact_button",
+              "element_identifier_hint": "Add Contact button - reused from step 8",
+              "interaction_type": "click",
+              "page_context": "ContactsScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_clickable"
+            },
+            {
+              "element_type": "text_input",
+              "element_name": "contact_name_input",
+              "element_identifier_hint": "Name input field - reused from step 9",
+              "interaction_type": "type",
+              "page_context": "AddContactScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_enabled"
+            },
+            {
+              "element_type": "text_input",
+              "element_name": "fax_number_input",
+              "element_identifier_hint": "Fax Number input field - reused from step 9",
+              "interaction_type": "type",
+              "page_context": "AddContactScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_enabled"
+            },
+            {
+              "element_type": "text_input",
+              "element_name": "country_code_input",
+              "element_identifier_hint": "Country Code input field - reused from step 9",
+              "interaction_type": "type",
+              "page_context": "AddContactScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_enabled"
+            },
+            {
+              "element_type": "button",
+              "element_name": "save_contact_button",
+              "element_identifier_hint": "Save button - reused from step 9",
+              "interaction_type": "click",
+              "page_context": "AddContactScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_clickable"
+            }
+          ],
+          "navigation_involved": {
+            "is_navigation_step": false,
+            "from_page": "ContactsScreen",
+            "to_page": "ContactsScreen",
+            "navigation_method": "repeated_flow",
+            "url_hint": null,
+            "expected_page_indicator": "Multiple contacts added to contacts list"
+          },
+          "test_data_needed": [
+            {
+              "data_field_name": "contact_2_name",
+              "data_type": "string",
+              "sample_value": "Jane Smith",
+              "is_provided_in_test_case": false,
+              "constraints": "Must be a valid name string, different from contact 1",
+              "data_source": "test_data_file",
+              "is_sensitive": false,
+              "used_for": "Second contact identification"
+            },
+            {
+              "data_field_name": "contact_2_fax_number",
+              "data_type": "string",
+              "sample_value": "+1987654321",
+              "is_provided_in_test_case": false,
+              "constraints": "Must be a valid fax number format, different from contact 1",
+              "data_source": "test_data_file",
+              "is_sensitive": false,
+              "used_for": "Second contact fax destination"
+            },
+            {
+              "data_field_name": "contact_2_country_code",
+              "data_type": "string",
+              "sample_value": "+1",
+              "is_provided_in_test_case": false,
+              "constraints": "Must be a valid country code if applicable",
+              "data_source": "test_data_file",
+              "is_sensitive": false,
+              "used_for": "Second contact international formatting"
+            },
+            {
+              "data_field_name": "contact_3_name",
+              "data_type": "string",
+              "sample_value": "Bob Johnson",
+              "is_provided_in_test_case": false,
+              "constraints": "Must be a valid name string, different from contacts 1 and 2",
+              "data_source": "test_data_file",
+              "is_sensitive": false,
+              "used_for": "Third contact identification"
+            },
+            {
+              "data_field_name": "contact_3_fax_number",
+              "data_type": "string",
+              "sample_value": "+1555123456",
+              "is_provided_in_test_case": false,
+              "constraints": "Must be a valid fax number format, different from contacts 1 and 2",
+              "data_source": "test_data_file",
+              "is_sensitive": false,
+              "used_for": "Third contact fax destination"
+            },
+            {
+              "data_field_name": "contact_3_country_code",
+              "data_type": "string",
+              "sample_value": "+1",
+              "is_provided_in_test_case": false,
+              "constraints": "Must be a valid country code if applicable",
+              "data_source": "test_data_file",
+              "is_sensitive": false,
+              "used_for": "Third contact international formatting"
+            }
+          ],
+          "assertions": [
+            {
+              "assertion_number": 1,
+              "assertion_type": "element_count",
+              "target_element": "contacts_in_list",
+              "expected_value": "3 or more contacts",
+              "assertion_description": "Verify that after adding 2-3 more contacts, the contacts list contains at least 3 contacts total",
+              "is_hard_assertion": true,
+              "is_inferred": true,
+              "suggested_method_name": "verify_multiple_contacts_added"
+            }
+          ],
+          "wait_conditions": [
+            {
+              "wait_type": "explicit_wait_visible",
+              "wait_target": "contacts_screen",
+              "suggested_timeout_seconds": 10,
+              "wait_description": "Wait for return to Contacts screen after each contact save",
+              "when": "after_action"
+            }
+          ],
+          "error_scenarios": [
+            {
+              "error_description": "Unable to add multiple contacts",
+              "error_indicator": "Error during any of the repeated add contact flows",
+              "error_type": "data_creation_failure",
+              "recovery_action": "fail_with_screenshot",
+              "impact": "Insufficient test data for subsequent steps"
+            }
+          ],
+          "dependencies": {
+            "depends_on_step": 9,
+            "dependency_type": "state_from_previous",
+            "dependency_detail": "Depends on first contact being successfully added in step 9"
+          },
+          "api_calls_implied": [
+            {
+              "api_endpoint_hint": "/api/fax/contacts",
+              "http_method": "POST",
+              "purpose": "Save each additional contact to backend",
+              "is_explicit": false,
+              "is_inferred": true
+            }
+          ],
+          "step_complexity": "medium",
+          "automation_notes_for_step": "This is a loop step requiring iteration. Implement as a loop that repeats steps 8-9 for 2-3 times with different test data for each contact. Need array of contact test data."
+        },
+        {
+          "step_number": 11,
+          "raw_action": "Navigate back to the Mobile Fax screen.\nTap on Compose button (top-left of the screen).",
+          "raw_expected_result": "Compose Fax screen opens.",
+          "raw_test_data": null,
+          "interpreted_action": "From the Contacts screen, navigate back to the Mobile Fax screen using the back button or navigation. Once on the Mobile Fax screen, locate and tap the Compose button which is positioned at the top-left of the screen. This should open the Compose Fax screen where a new fax can be created.",
+          "action_type": "multi_action_composite",
+          "sub_actions": [
+            {
+              "sub_action_number": 1,
+              "action": "Navigate back to Mobile Fax screen from Contacts",
+              "action_type": "click",
+              "element_involved": "back_button",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 2,
+              "action": "Wait for Mobile Fax screen to appear",
+              "action_type": "wait",
+              "element_involved": "mobile_fax_screen",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 3,
+              "action": "Locate Compose button at top-left",
+              "action_type": "verification",
+              "element_involved": "compose_button",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 4,
+              "action": "Tap on Compose button",
+              "action_type": "click",
+              "element_involved": "compose_button",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 5,
+              "action": "Wait for Compose Fax screen to open",
+              "action_type": "wait",
+              "element_involved": "compose_fax_screen",
+              "data_needed": null
+            }
+          ],
+          "ui_elements_involved": [
+            {
+              "element_type": "button",
+              "element_name": "back_button",
+              "element_identifier_hint": "Back button or navigation arrow to return to Mobile Fax screen from Contacts/Settings",
+              "interaction_type": "click",
+              "page_context": "ContactsScreen or FaxSettingsScreen",
+              "is_inferred": true,
+              "required_state": "visible_and_clickable"
+            },
+            {
+              "element_type": "button",
+              "element_name": "compose_button",
+              "element_identifier_hint": "Compose button at top-left of Mobile Fax screen, likely has text 'Compose' or '+' icon",
+              "interaction_type": "click",
+              "page_context": "MobileFaxScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_clickable"
+            },
+            {
+              "element_type": "section",
+              "element_name": "compose_fax_screen",
+              "element_identifier_hint": "Compose Fax screen that opens after tapping Compose button",
+              "interaction_type": "wait_for_visible",
+              "page_context": "ComposeFaxScreen",
+              "is_inferred": false,
+              "required_state": "visible"
+            }
+          ],
+          "navigation_involved": {
+            "is_navigation_step": true,
+            "from_page": "ContactsScreen",
+            "to_page": "ComposeFaxScreen",
+            "navigation_method": "button_click",
+            "url_hint": null,
+            "expected_page_indicator": "Compose Fax screen is displayed"
+          },
+          "test_data_needed": [],
+          "assertions": [
+            {
+              "assertion_number": 1,
+              "assertion_type": "page_loaded",
+              "target_element": "mobile_fax_screen",
+              "expected_value": "Mobile Fax screen is displayed",
+              "assertion_description": "Verify that navigation back to Mobile Fax screen is successful",
+              "is_hard_assertion": true,
+              "is_inferred": true,
+              "suggested_method_name": "verify_mobile_fax_screen_displayed"
+            },
+            {
+              "assertion_number": 2,
+              "assertion_type": "page_loaded",
+              "target_element": "compose_fax_screen",
+              "expected_value": "Compose Fax screen is displayed",
+              "assertion_description": "Verify that Compose Fax screen opens successfully after tapping Compose button",
+              "is_hard_assertion": true,
+              "is_inferred": false,
+              "suggested_method_name": "verify_compose_fax_screen_opened"
+            }
+          ],
+          "wait_conditions": [
+            {
+              "wait_type": "explicit_wait_visible",
+              "wait_target": "mobile_fax_screen",
+              "suggested_timeout_seconds": 10,
+              "wait_description": "Wait for Mobile Fax screen to appear after navigating back",
+              "when": "after_action"
+            },
+            {
+              "wait_type": "explicit_wait_visible",
+              "wait_target": "compose_fax_screen",
+              "suggested_timeout_seconds": 10,
+              "wait_description": "Wait for Compose Fax screen to open",
+              "when": "after_action"
+            }
+          ],
+          "error_scenarios": [
+            {
+              "error_description": "Cannot navigate back to Mobile Fax screen",
+              "error_indicator": "Still on Contacts or Settings screen",
+              "error_type": "navigation_failure",
+              "recovery_action": "retry_navigation_then_fail",
+              "impact": "Cannot proceed with fax composition"
+            },
+            {
+              "error_description": "Compose button not found",
+              "error_indicator": "Element not found at top-left of Mobile Fax screen",
+              "error_type": "element_not_found",
+              "recovery_action": "fail_with_screenshot",
+              "impact": "Cannot compose fax"
+            }
+          ],
+          "dependencies": {
+            "depends_on_step": 10,
+            "dependency_type": "state_from_previous",
+            "dependency_detail": "Depends on contacts being added in previous steps"
+          },
+          "api_calls_implied": [],
+          "step_complexity": "medium",
+          "automation_notes_for_step": "Two-part step: navigation back and then compose button click. May need multiple back button presses depending on navigation depth."
+        },
+        {
+          "step_number": 12,
+          "raw_action": "In the TO section, tap the Account/Contact icon.\nView the list of saved contacts.\nSelect one of the saved contacts.",
+          "raw_expected_result": "Selected contact is populated in the TO field",
+          "raw_test_data": null,
+          "interpreted_action": "On the Compose Fax screen, locate the TO section where the recipient is specified. Tap on the Account/Contact icon (likely an icon that opens the contacts picker). This should display a list of the saved contacts that were added in previous steps. From this list, select one of the saved contacts. The selected contact's information should then be populated in the TO field.",
+          "action_type": "multi_action_composite",
+          "sub_actions": [
+            {
+              "sub_action_number": 1,
+              "action": "Locate TO section on Compose Fax screen",
+              "action_type": "verification",
+              "element_involved": "to_section",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 2,
+              "action": "Tap on Account/Contact icon in TO section",
+              "action_type": "click",
+              "element_involved": "contact_picker_icon",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 3,
+              "action": "Wait for contacts list to appear",
+              "action_type": "wait",
+              "element_involved": "contacts_list_picker",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 4,
+              "action": "View the list of saved contacts",
+              "action_type": "verification",
+              "element_involved": "contacts_list_picker",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 5,
+              "action": "Select one of the saved contacts from list",
+              "action_type": "click",
+              "element_involved": "contact_list_item",
+              "data_needed": "selected_contact_name"
+            }
+          ],
+          "ui_elements_involved": [
+            {
+              "element_type": "section",
+              "element_name": "to_section",
+              "element_identifier_hint": "TO section on Compose Fax screen where recipient is specified",
+              "interaction_type": "none_just_verify",
+              "page_context": "ComposeFaxScreen",
+              "is_inferred": false,
+              "required_state": "visible"
+            },
+            {
+              "element_type": "icon",
+              "element_name": "contact_picker_icon",
+              "element_identifier_hint": "Account/Contact icon in TO section, likely a person icon or address book icon",
+              "interaction_type": "click",
+              "page_context": "ComposeFaxScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_clickable"
+            },
+            {
+              "element_type": "section",
+              "element_name": "contacts_list_picker",
+              "element_identifier_hint": "List or picker showing saved contacts",
+              "interaction_type": "wait_for_visible",
+              "page_context": "ComposeFaxScreen or ContactPickerDialog",
+              "is_inferred": false,
+              "required_state": "visible"
+            },
+            {
+              "element_type": "list",
+              "element_name": "saved_contacts_list",
+              "element_identifier_hint": "List of saved contacts displayed in picker",
+              "interaction_type": "read_text",
+              "page_context": "ContactPickerDialog",
+              "is_inferred": false,
+              "required_state": "visible"
+            },
+            {
+              "element_type": "list_item",
+              "element_name": "contact_list_item",
+              "element_identifier_hint": "Individual contact item in the contacts list",
+              "interaction_type": "click",
+              "page_context": "ContactPickerDialog",
+              "is_inferred": false,
+              "required_state": "visible_and_clickable"
+            },
+            {
+              "element_type": "text_input",
+              "element_name": "to_field",
+              "element_identifier_hint": "TO field that displays selected contact information",
+              "interaction_type": "read_text",
+              "page_context": "ComposeFaxScreen",
+              "is_inferred": true,
+              "required_state": "visible"
+            }
+          ],
+          "navigation_involved": {
+            "is_navigation_step": false,
+            "from_page": "ComposeFaxScreen",
+            "to_page": "ComposeFaxScreen",
+            "navigation_method": "dialog_open_close",
+            "url_hint": null,
+            "expected_page_indicator": "Contact picker opens and closes, selected contact appears in TO field"
+          },
+          "test_data_needed": [
+            {
+              "data_field_name": "selected_contact_name",
+              "data_type": "string",
+              "sample_value": "John Doe",
+              "is_provided_in_test_case": false,
+              "constraints": "Must be one of the contacts added in previous steps",
+              "data_source": "from_previous_step",
+              "is_sensitive": false,
+              "used_for": "Selecting specific contact from list"
+            }
+          ],
+          "assertions": [
+            {
+              "assertion_number": 1,
+              "assertion_type": "element_visible",
+              "target_element": "contacts_list_picker",
+              "expected_value": "visible",
+              "assertion_description": "Verify that contacts list appears after tapping contact picker icon",
+              "is_hard_assertion": true,
+              "is_inferred": true,
+              "suggested_method_name": "verify_contacts_list_displayed"
+            },
+            {
+              "assertion_number": 2,
+              "assertion_type": "element_count",
+              "target_element": "saved_contacts_list",
+              "expected_value": "At least 3 contacts",
+              "assertion_description": "Verify that the contacts list shows the saved contacts added in previous steps",
+              "is_hard_assertion": true,
+              "is_inferred": true,
+              "suggested_method_name": "verify_saved_contacts_in_list"
+            },
+            {
+              "assertion_number": 3,
+              "assertion_type": "text_contains",
+              "target_element": "to_field",
+              "expected_value": "Selected contact name or number",
+              "assertion_description": "Verify that selected contact is populated in the TO field",
+              "is_hard_assertion": true,
+              "is_inferred": false,
+              "suggested_method_name": "verify_contact_populated_in_to_field"
+            }
+          ],
+          "wait_conditions": [
+            {
+              "wait_type": "explicit_wait_visible",
+              "wait_target": "contacts_list_picker",
+              "suggested_timeout_seconds": 10,
+              "wait_description": "Wait for contacts list to appear after tapping icon",
+              "when": "after_action"
+            }
+          ],
+          "error_scenarios": [
+            {
+              "error_description": "Contacts list is empty or does not show saved contacts",
+              "error_indicator": "Empty list or contacts added earlier not visible",
+              "error_type": "data_not_found",
+              "recovery_action": "fail_with_screenshot",
+              "impact": "Cannot select saved contacts"
+            },
+            {
+              "error_description": "Contact picker icon not found",
+              "error_indicator": "Element not found in TO section",
+              "error_type": "element_not_found",
+              "recovery_action": "fail_with_screenshot",
+              "impact": "Cannot access contacts"
+            }
+          ],
+          "dependencies": {
+            "depends_on_step": 10,
+            "dependency_type": "data_from_previous",
+            "dependency_detail": "Depends on contacts being added in steps 9-10 to be available in the contacts list"
+          },
+          "api_calls_implied": [
+            {
+              "api_endpoint_hint": "/api/fax/contacts",
+              "http_method": "GET",
+              "purpose": "Retrieve saved contacts list for picker",
+              "is_explicit": false,
+              "is_inferred": true
+            }
+          ],
+          "step_complexity": "medium",
+          "automation_notes_for_step": "Multi-step interaction with contact picker. Need to verify contacts added earlier are present in the list. Selection may be by name or index."
+        },
+        {
+          "step_number": 13,
+          "raw_action": "Steps-7\nSelect another saved contact.\n\nProceed with fax sending.",
+          "raw_expected_result": "User is able to select any saved contact.\n\nFax can be sent successfully using saved contacts.",
+          "raw_test_data": null,
+          "interpreted_action": "This step has two parts. First, select another saved contact (different from the one selected in step 12) to verify that multiple contacts can be selected or that the user can change the selected contact. The 'Steps-7' reference appears to be a typo or note. Second, proceed with the fax sending process which may involve adding content, reviewing, and sending the fax. The expected result confirms that users can select any saved contact and successfully send a fax using those contacts.",
+          "action_type": "multi_action_composite",
+          "sub_actions": [
+            {
+              "sub_action_number": 1,
+              "action": "Select another saved contact from list or change recipient",
+              "action_type": "click",
+              "element_involved": "contact_list_item",
+              "data_needed": "second_selected_contact_name"
+            },
+            {
+              "sub_action_number": 2,
+              "action": "Verify second contact is populated",
+              "action_type": "verification",
+              "element_involved": "to_field",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 3,
+              "action": "Proceed with fax sending (may involve adding content, tapping send button)",
+              "action_type": "click",
+              "element_involved": "send_fax_button",
+              "data_needed": null
+            },
+            {
+              "sub_action_number": 4,
+              "action": "Wait for fax send confirmation",
+              "action_type": "wait",
+              "element_involved": "fax_sent_confirmation",
+              "data_needed": null
+            }
+          ],
+          "ui_elements_involved": [
+            {
+              "element_type": "list_item",
+              "element_name": "contact_list_item",
+              "element_identifier_hint": "Another contact item in the contacts list, different from first selection",
+              "interaction_type": "click",
+              "page_context": "ContactPickerDialog or ComposeFaxScreen",
+              "is_inferred": false,
+              "required_state": "visible_and_clickable"
+            },
+            {
+              "element_type": "text_input",
+              "element_name": "to_field",
+              "element_identifier_hint": "TO field showing selected contact",
+              "interaction_type": "read_text",
+              "page_context": "ComposeFaxScreen",
+              "is_inferred": true,
+              "required_state": "visible"
+            },
+            {
+              "element_type": "button",
+              "element_name": "send_fax_button",
+              "element_identifier_hint": "Send button on Compose Fax screen to send the fax, likely has text 'Send' or send icon",
+              "interaction_type": "click",
+              "page_context": "ComposeFaxScreen",
+              "is_inferred": true,
+              "required_state": "visible_and_clickable"
+            },
+            {
+              "element_type": "toast_notification",
+              "element_name": "fax_sent_confirmation",
+              "element_identifier_hint": "Confirmation message or notification that fax was sent successfully",
+              "interaction_type": "wait_for_visible",
+              "page_context": "ComposeFaxScreen or MobileFaxScreen",
+              "is_inferred": true,
+              "required_state": "visible"
+            }
+          ],
+          "navigation_involved": {
+            "is_navigation_step": false,
+            "from_page": "ComposeFaxScreen",
+            "to_page": "ComposeFaxScreen or MobileFaxScreen",
+            "navigation_method": "button_click",
+            "url_hint": null,
+            "expected_page_indicator": "Fax sent confirmation displayed or return to Mobile Fax screen"
+          },
+          "test_data_needed": [
+            {
+              "data_field_name": "second_selected_contact_name",
+              "data_type": "string",
+              "sample_value": "Jane Smith",
+              "is_provided_in_test_case": false,
+              "constraints": "Must be one of the contacts added in previous steps, different from first selection",
+              "data_source": "from_previous_step",
+              "is_sensitive": false,
+              "used_for": "Selecting different contact to verify flexibility"
+            }
+          ],
+          "assertions": [
+            {
+              "assertion_number": 1,
+              "assertion_type": "text_contains",
+              "target_element": "to_field",
+              "expected_value": "Second selected contact name or number",
+              "assertion_description": "Verify that user is able to select another saved contact and it is populated in TO field",
+              "is_hard_assertion": true,
+              "is_inferred": false,
+              "suggested_method_name": "verify_second_contact_selected"
+            },
+            {
+              "assertion_number": 2,
+              "assertion_type": "success_message_displayed",
+              "target_element": "fax_sent_confirmation",
+              "expected_value": "Fax sent successfully or similar message",
+              "assertion_description": "Verify that fax can be sent successfully using saved contacts",
+              "is_hard_assertion": true,
+              "is_inferred": false,
+              "suggested_method_name": "verify_fax_sent_successfully"
+            }
+          ],
+          "wait_conditions": [
+            {
+              "wait_type": "explicit_wait_visible",
+              "wait_target": "fax_sent_confirmation",
+              "suggested_timeout_seconds": 30,
+              "wait_description": "Wait for fax send confirmation message",
+              "when": "after_action"
+            }
+          ],
+          "error_scenarios": [
+            {
+              "error_description": "Cannot select another contact",
+              "error_indicator": "Second contact not selectable or not populated",
+              "error_type": "ui_interaction_failure",
+              "recovery_action": "fail_with_screenshot",
+              "impact": "Cannot verify multiple contact selection"
+            },
+            {
+              "error_description": "Fax send fails",
+              "error_indicator": "Error message displayed or fax not sent",
+              "error_type": "functional_failure",
+              "recovery_action": "fail_with_screenshot",
+              "impact": "Core functionality failure"
+            }
+          ],
+          "dependencies": {
+            "depends_on_step": 12,
+            "dependency_type": "state_from_previous",
+            "dependency_detail": "Depends on being on Compose Fax screen with contact selection capability from step 12"
+          },
+          "api_calls_implied": [
+            {
+              "api_endpoint_hint": "/api/fax/send",
+              "http_method": "POST",
+              "purpose": "Send fax to selected contact",
+              "is_explicit": false,
+              "is_inferred": true
+            }
+          ],
+          "step_complexity": "high",
+          "automation_notes_for_step": "Final step verifying end-to-end functionality. May need to handle fax content addition if required. Fax sending may take time and require appropriate wait. The 'Steps-7' reference in raw action appears to be a typo or internal reference."
+        }
+      ],
+      "postconditions": [
+        {
+          "postcondition_number": 1,
+          "raw_text": "Contacts should be cleaned up from the system after test execution",
+          "interpreted_meaning": "After the test completes, the contacts that were added during the test should be removed from the system to maintain test data cleanliness and avoid pollution for subsequent test runs.",
+          "cleanup_components_needed": [
+            {
+              "component_type": "action_method",
+              "component_name_suggestion": "delete_contact",
+              "reason": "Need method to delete contacts from the contacts list"
+            },
+            {
+              "component_type": "api_helper",
+              "component_name_suggestion": "delete_contact_via_api",
+              "reason": "May need API call to delete contacts for faster cleanup"
+            }
+          ]
+        }
+      ],
+      "test_data_requirements": [
+        {
+          "data_field": "hpx_app_package_name",
+          "data_type": "string",
+          "used_in_steps": [
+            1
+          ],
+          "sample_value": "com.hp.hpx.mobile",
+          "is_provided": false,
+          "generation_strategy": "environment_config",
+          "constraints": "Must be correct package name for HPX app",
+          "is_sensitive": false,
+          "category": "environment"
+        },
+        {
+          "data_field": "username",
+          "data_type": "string",
+          "used_in_steps": [
+            2
+          ],
+          "sample_value": "testuser@hp.com",
+          "is_provided": false,
+          "generation_strategy": "test_data_file",
+          "constraints": "Must be valid onboarded user",
+          "is_sensitive": false,
+          "category": "authentication"
+        },
+        {
+          "data_field": "password",
+          "data_type": "string",
+          "used_in_steps": [
+            2
+          ],
+          "sample_value": "Test@12345",
+          "is_provided": false,
+          "generation_strategy": "test_data_file",
+          "constraints": "Must match username password",
+          "is_sensitive": true,
+          "category": "authentication"
+        },
+        {
+          "data_field": "contact_1_name",
+          "data_type": "string",
+          "used_in_steps": [
+            9
+          ],
+          "sample_value": "John Doe",
+          "is_provided": false,
+          "generation_strategy": "test_data_file",
+          "constraints": "Valid name string",
+          "is_sensitive": false,
+          "category": "contact_data"
+        },
+        {
+          "data_field": "contact_1_fax_number",
+          "data_type": "string",
+          "used_in_steps": [
+            9
+          ],
+          "sample_value": "+1234567890",
+          "is_provided": false,
+          "generation_strategy": "test_data_file",
+          "constraints": "Valid fax number format",
+          "is_sensitive": false,
+          "category": "contact_data"
+        },
+        {
+          "data_field": "contact_1_country_code",
+          "data_type": "string",
+          "used_in_steps": [
+            9
+          ],
+          "sample_value": "+1",
+          "is_provided": false,
+          "generation_strategy": "test_data_file",
+          "constraints": "Valid country code",
+          "is_sensitive": false,
+          "category": "contact_data"
+        },
+        {
+          "data_field": "contact_2_details",
+          "data_type": "json_object",
+          "used_in_steps": [
+            10
+          ],
+          "sample_value": "{\"name\": \"Jane Smith\", \"fax_number\": \"+1987654321\", \"country_code\": \"+1\"}",
+          "is_provided": false,
+          "generation_strategy": "test_data_file",
+          "constraints": "Complete contact object with name, fax number, country code",
+          "is_sensitive": false,
+          "category": "contact_data"
+        },
+        {
+          "data_field": "contact_3_details",
+          "data_type": "json_object",
+          "used_in_steps": [
+            10
+          ],
+          "sample_value": "{\"name\": \"Bob Johnson\", \"fax_number\": \"+1555123456\", \"country_code\": \"+1\"}",
+          "is_provided": false,
+          "generation_strategy": "test_data_file",
+          "constraints": "Complete contact object with name, fax number, country code",
+          "is_sensitive": false,
+          "category": "contact_data"
+        },
+        {
+          "data_field": "selected_contact_name",
+          "data_type": "string",
+          "used_in_steps": [
+            12
+          ],
+          "sample_value": "John Doe",
+          "is_provided": false,
+          "generation_strategy": "from_previous_step",
+          "constraints": "Must be one of the added contacts",
+          "is_sensitive": false,
+          "category": "contact_selection"
+        }
+      ],
+      "pages_identified": [
+        {
+          "page_name": "DeviceHomeScreen",
+          "page_name_pascal_case": "DeviceHomeScreen",
+          "page_url_hint": null,
+          "appears_in_steps": [
+            1
+          ],
+          "elements_on_this_page": [
+            {
+              "element_name": "hpx_app_icon",
+              "element_type": "icon"
+            }
+          ],
+          "actions_on_this_page": [
+            "launch_hpx_app"
+          ],
+          "navigates_to": [
+            "HPXHomeScreen"
+          ],
+          "navigated_from": [],
+          "is_entry_point": true
+        },
+        {
+          "page_name": "HPXHomeScreen",
+          "page_name_pascal_case": "HPXHomeScreen",
+          "page_url_hint": null,
+          "appears_in_steps": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "elements_on_this_page": [
+            {
+              "element_name": "hpx_home_screen",
+              "element_type": "section"
+            },
+            {
+              "element_name": "home_screen_title",
+              "element_type": "label"
+            },
+            {
+              "element_name": "mobile_fax_option",
+              "element_type": "button"
+            }
+          ],
+          "actions_on_this_page": [
+            "verify_home_screen_displayed",
+            "locate_mobile_fax_option",
+            "tap_mobile_fax"
+          ],
+          "navigates_to": [
+            "MobileFaxScreen"
+          ],
+          "navigated_from": [
+            "DeviceHomeScreen",
+            "LoginScreen"
+          ],
+          "is_entry_point": false
+        },
+        {
+          "page_name": "LoginScreen",
+          "page_name_pascal_case": "LoginScreen",
+          "page_url_hint": null,
+          "appears_in_steps": [
+            2
+          ],
+          "elements_on_this_page": [
+            {
+              "element_name": "username_input",
+              "element_type": "text_input"
+            },
+            {
+              "element_name": "password_input",
+              "element_type": "password_input"
+            },
+            {
+              "element_name": "login_button",
+              "element_type": "button"
+            }
+          ],
+          "actions_on_this_page": [
+            "enter_username",
+            "enter_password",
+            "click_login"
+          ],
+          "navigates_to": [
+            "HPXHomeScreen"
+          ],
+          "navigated_from": [
+            "DeviceHomeScreen"
+          ],
+          "is_entry_point": false
+        },
+        {
+          "page_name": "MobileFaxScreen",
+          "page_name_pascal_case": "MobileFaxScreen",
+          "page_url_hint": null,
+          "appears_in_steps": [
+            4,
+            5,
+            6,
+            11
+          ],
+          "elements_on_this_page": [
+            {
+              "element_name": "mobile_fax_screen",
+              "element_type": "section"
+            },
+            {
+              "element_name": "three_dot_menu_icon",
+              "element_type": "icon"
+            },
+            {
+              "element_name": "fax_options_menu",
+              "element_type": "menu"
+            },
+            {
+              "element_name": "fax_settings_menu_item",
+              "element_type": "menu_item"
+            },
+            {
+              "element_name": "compose_button",
+              "element_type": "button"
+            }
+          ],
+          "actions_on_this_page": [
+            "tap_three_dot_menu",
+            "select_fax_settings",
+            "tap_compose_button"
+          ],
+          "navigates_to": [
+            "FaxSettingsScreen",
+            "ComposeFaxScreen"
+          ],
+          "navigated_from": [
+            "HPXHomeScreen"
+          ],
+          "is_entry_point": false
+        },
+        {
+          "page_name": "FaxSettingsScreen",
+          "page_name_pascal_case": "FaxSettingsScreen",
+          "page_url_hint": null,
+          "appears_in_steps": [
+            6,
+            7
+          ],
+          "elements_on_this_page": [
+            {
+              "element_name": "fax_settings_screen",
+              "element_type": "section"
+            },
+            {
+              "element_name": "contacts_section",
+              "element_type": "section"
+            },
+            {
+              "element_name": "sending_section",
+              "element_type": "section"
+            },
+            {
+              "element_name": "contacts_option",
+              "element_type": "menu_item"
+            }
+          ],
+          "actions_on_this_page": [
+            "navigate_to_contacts"
+          ],
+          "navigates_to": [
+            "ContactsScreen"
+          ],
+          "navigated_from": [
+            "MobileFaxScreen"
+          ],
+          "is_entry_point": false
+        },
+        {
+          "page_name": "ContactsScreen",
+          "page_name_pascal_case": "ContactsScreen",
+          "page_url_hint": null,
+          "appears_in_steps": [
+            7,
+            8,
+            9,
+            10
+          ],
+          "elements_on_this_page": [
+            {
+              "element_name": "contacts_screen",
+              "element_type": "section"
+            },
+            {
+              "element_name": "add_contact_button",
+              "element_type": "button"
+            },
+            {
+              "element_name": "saved_contact_in_list",
+              "element_type": "list_item"
+            },
+            {
+              "element_name": "contacts_in_list",
+              "element_type": "list"
+            }
+          ],
+          "actions_on_this_page": [
+            "tap_add_contact",
+            "view_contacts_list"
+          ],
+          "navigates_to": [
+            "AddContactScreen"
+          ],
+          "navigated_from": [
+            "FaxSettingsScreen"
+          ],
+          "is_entry_point": false
+        },
+        {
+          "page_name": "AddContactScreen",
+          "page_name_pascal_case": "AddContactScreen",
+          "page_url_hint": null,
+          "appears_in_steps": [
+            8,
+            9,
+            10
+          ],
+          "elements_on_this_page": [
+            {
+              "element_name": "add_contact_form",
+              "element_type": "form"
+            },
+            {
+              "element_name": "contact_name_input",
+              "element_type": "text_input"
+            },
+            {
+              "element_name": "fax_number_input",
+              "element_type": "text_input"
+            },
+            {
+              "element_name": "country_code_input",
+              "element_type": "text_input"
+            },
+            {
+              "element_name": "save_contact_button",
+              "element_type": "button"
+            }
+          ],
+          "actions_on_this_page": [
+            "enter_contact_name",
+            "enter_fax_number",
+            "enter_country_code",
+            "tap_save_contact"
+          ],
+          "navigates_to": [
+            "ContactsScreen"
+          ],
+          "navigated_from": [
+            "ContactsScreen"
+          ],
+          "is_entry_point": false
+        },
+        {
+          "page_name": "ComposeFaxScreen",
+          "page_name_pascal_case": "ComposeFaxScreen",
+          "page_url_hint": null,
+          "appears_in_steps": [
+            11,
+            12,
+            13
+          ],
+          "elements_on_this_page": [
+            {
+              "element_name": "compose_fax_screen",
+              "element_type": "section"
+            },
+            {
+              "element_name": "to_section",
+              "element_type": "section"
+            },
+            {
+              "element_name": "contact_picker_icon",
+              "element_type": "icon"
+            },
+            {
+              "element_name": "contacts_list_picker",
+              "element_type": "section"
+            },
+            {
+              "element_name": "saved_contacts_list",
+              "element_type": "list"
+            },
+            {
+              "element_name": "contact_list_item",
+              "element_type": "list_item"
+            },
+            {
+              "element_name": "to_field",
+              "element_type": "text_input"
+            },
+            {
+              "element_name": "send_fax_button",
+              "element_type": "button"
+            },
+            {
+              "element_name": "fax_sent_confirmation",
+              "element_type": "toast_notification"
+            }
+          ],
+          "actions_on_this_page": [
+            "tap_contact_picker",
+            "select_contact_from_list",
+            "send_fax"
+          ],
+          "navigates_to": [
+            "MobileFaxScreen"
+          ],
+          "navigated_from": [
+            "MobileFaxScreen"
+          ],
+          "is_entry_point": false
+        }
+      ],
+      "flow_analysis": {
+        "flow_sequence": [
+          {
+            "order": 1,
+            "page": "DeviceHomeScreen",
+            "action_summary": "Launch HPX app",
+            "steps_involved": [
+              1
+            ]
+          },
+          {
+            "order": 2,
+            "page": "LoginScreen",
+            "action_summary": "Login if needed",
+            "steps_involved": [
+              2
+            ]
+          },
+          {
+            "order": 3,
+            "page": "HPXHomeScreen",
+            "action_summary": "Navigate to Mobile Fax",
+            "steps_involved": [
+              3,
+              4
+            ]
+          },
+          {
+            "order": 4,
+            "page": "MobileFaxScreen",
+            "action_summary": "Access Fax Settings",
+            "steps_involved": [
+              5,
+              6
+            ]
+          },
+          {
+            "order": 5,
+            "page": "FaxSettingsScreen",
+            "action_summary": "Navigate to Contacts",
+            "steps_involved": [
+              7
+            ]
+          },
+          {
+            "order": 6,
+            "page": "ContactsScreen",
+            "action_summary": "Add multiple contacts",
+            "steps_involved": [
+              8,
+              9,
+              10
+            ]
+          },
+          {
+            "order": 7,
+            "page": "MobileFaxScreen",
+            "action_summary": "Open Compose Fax",
+            "steps_involved": [
+              11
+            ]
+          },
+          {
+            "order": 8,
+            "page": "ComposeFaxScreen",
+            "action_summary": "Select saved contacts and send fax",
+            "steps_involved": [
+              12,
+              13
+            ]
+          }
+        ],
+        "critical_path": "Launch App → Login → Home → Mobile Fax → Settings → Contacts → Add Contacts (3x) → Compose Fax → Select Contact → Send Fax",
+        "alternate_paths": [
+          {
+            "path_name": "Already logged in path",
+            "description": "If user is already logged in after app launch, skip login step",
+            "steps_involved": [
+              2
+            ],
+            "is_explicitly_in_test_case": true,
+            "is_inferred": false
+          }
+        ],
+        "error_paths": [
+          {
+            "path_name": "Login failure",
+            "trigger": "Invalid credentials or login error",
+            "expected_behavior": "Error message displayed, test fails",
+            "is_explicitly_in_test_case": false,
+            "is_inferred": true
+          },
+          {
+            "path_name": "Contact save failure",
+            "trigger": "Validation error or save failure when adding contact",
+            "expected_behavior": "Error message displayed, contact not saved",
+            "is_explicitly_in_test_case": false,
+            "is_inferred": true
+          },
+          {
+            "path_name": "Fax send failure",
+            "trigger": "Network error or invalid recipient",
+            "expected_behavior": "Error message displayed, fax not sent",
+            "is_explicitly_in_test_case": false,
+            "is_inferred": true
+          }
+        ],
+        "setup_requirements": [
+          "HPX app installed and latest version",
+          "Device onboarded successfully",
+          "Device in Ready state",
+          "Backend systems available",
+          "Valid user credentials available"
+        ],
+        "teardown_requirements": [
+          "Delete added contacts",
+          "Logout user",
+          "Close app"
+        ],
+        "total_page_transitions": 7,
+        "estimated_execution_time_seconds": 180
+      }
+    }
+  ],
+  "component_needs_summary": {
+    "page_objects_needed": [
+      {
+        "page_name": "DeviceHomeScreen",
+        "purpose": "Represents the device home screen where apps are launched",
+        "elements_count": 1,
+        "actions_count": 1,
+        "priority": "critical",
+        "used_in_test_cases": [
+          "NPI_ID_C66377566"
+        ]
+      },
+      {
+        "page_name": "LoginScreen",
+        "purpose": "Represents the login screen for HPX app authentication",
+        "elements_count": 3,
+        "actions_count": 3,
+        "priority": "critical",
+        "used_in_test_cases": [
+          "NPI_ID_C66377566"
+        ]
+      },
+      {
+        "page_name": "HPXHomeScreen",
+        "purpose": "Represents the main home screen of HPX app after login",
+        "elements_count": 3,
+        "actions_count": 3,
+        "priority": "critical",
+        "used_in_test_cases": [
+          "NPI_ID_C66377566"
+        ]
+      },
+      {
+        "page_name": "MobileFaxScreen",
+        "purpose": "Represents the Mobile Fax main screen with fax list and options",
+        "elements_count": 5,
+        "actions_count": 3,
+        "priority": "critical",
+        "used_in_test_cases": [
+          "NPI_ID_C66377566"
+        ]
+      },
+      {
+        "page_name": "FaxSettingsScreen",
+        "purpose": "Represents the Fax Settings screen with configuration options",
+        "elements_count": 4,
+        "actions_count": 1,
+        "priority": "high",
+        "used_in_test_cases": [
+          "NPI_ID_C66377566"
+        ]
+      },
+      {
+        "page_name": "ContactsScreen",
+        "purpose": "Represents the Contacts management screen for fax contacts",
+        "elements_count": 4,
+        "actions_count": 2,
+        "priority": "critical",
+        "used_in_test_cases": [
+          "NPI_ID_C66377566"
+        ]
+      },
+      {
+        "page_name": "AddContactScreen",
+        "purpose": "Represents the Add/Edit Contact form screen",
+        "elements_count": 5,
+        "actions_count": 4,
+        "priority": "critical",
+        "used_in_test_cases": [
+          "NPI_ID_C66377566"
+        ]
+      },
+      {
+        "page_name": "ComposeFaxScreen",
+        "purpose": "Represents the Compose Fax screen for creating and sending faxes",
+        "elements_count": 9,
+        "actions_count": 3,
+        "priority": "critical",
+        "used_in_test_cases": [
+          "NPI_ID_C66377566"
+        ]
+      }
+    ],
+    "locators_needed": [
+      {
+        "element_name": "hpx_app_icon",
+        "element_type": "icon",
+        "page": "DeviceHomeScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.TextView[@text='HPX'] or iOS equivalent",
+        "interaction_types": [
+          "click"
+        ],
+        "used_in_steps": [
+          1
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "hpx_home_screen",
+        "element_type": "section",
+        "page": "HPXHomeScreen",
+        "locator_strategy_suggestion": "id",
+        "locator_value_hint": "home_screen_container or main_screen",
+        "interaction_types": [
+          "wait_for_visible"
+        ],
+        "used_in_steps": [
+          1,
+          2
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "home_screen_title",
+        "element_type": "label",
+        "page": "HPXHomeScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.TextView[contains(@text,'Home')] or title element",
+        "interaction_types": [
+          "read_text"
+        ],
+        "used_in_steps": [
+          1
+        ],
+        "priority": "medium"
+      },
+      {
+        "element_name": "username_input",
+        "element_type": "text_input",
+        "page": "LoginScreen",
+        "locator_strategy_suggestion": "id",
+        "locator_value_hint": "username or email or login_username",
+        "interaction_types": [
+          "type"
+        ],
+        "used_in_steps": [
+          2
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "password_input",
+        "element_type": "password_input",
+        "page": "LoginScreen",
+        "locator_strategy_suggestion": "id",
+        "locator_value_hint": "password or login_password",
+        "interaction_types": [
+          "type"
+        ],
+        "used_in_steps": [
+          2
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "login_button",
+        "element_type": "button",
+        "page": "LoginScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.Button[@text='Login' or @text='Sign In']",
+        "interaction_types": [
+          "click"
+        ],
+        "used_in_steps": [
+          2
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "mobile_fax_option",
+        "element_type": "button",
+        "page": "HPXHomeScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.TextView[@text='Mobile Fax'] or button with Mobile Fax text",
+        "interaction_types": [
+          "scroll_to",
+          "click"
+        ],
+        "used_in_steps": [
+          3,
+          4
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "mobile_fax_screen",
+        "element_type": "section",
+        "page": "MobileFaxScreen",
+        "locator_strategy_suggestion": "id",
+        "locator_value_hint": "mobile_fax_screen or fax_list_container",
+        "interaction_types": [
+          "wait_for_visible"
+        ],
+        "used_in_steps": [
+          4,
+          11
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "three_dot_menu_icon",
+        "element_type": "icon",
+        "page": "MobileFaxScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.ImageView[@content-desc='More options'] or overflow menu",
+        "interaction_types": [
+          "click"
+        ],
+        "used_in_steps": [
+          5
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "fax_options_menu",
+        "element_type": "menu",
+        "page": "MobileFaxScreen",
+        "locator_strategy_suggestion": "id",
+        "locator_value_hint": "options_menu or popup_menu",
+        "interaction_types": [
+          "wait_for_visible"
+        ],
+        "used_in_steps": [
+          5
+        ],
+        "priority": "high"
+      },
+      {
+        "element_name": "fax_settings_menu_item",
+        "element_type": "menu_item",
+        "page": "MobileFaxScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.TextView[@text='Fax Settings' or @text='Settings']",
+        "interaction_types": [
+          "click"
+        ],
+        "used_in_steps": [
+          6
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "fax_settings_screen",
+        "element_type": "section",
+        "page": "FaxSettingsScreen",
+        "locator_strategy_suggestion": "id",
+        "locator_value_hint": "fax_settings_screen or settings_container",
+        "interaction_types": [
+          "wait_for_visible"
+        ],
+        "used_in_steps": [
+          6
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "contacts_section",
+        "element_type": "section",
+        "page": "FaxSettingsScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.TextView[@text='Contacts'] or contacts section header",
+        "interaction_types": [
+          "wait_for_visible"
+        ],
+        "used_in_steps": [
+          6
+        ],
+        "priority": "high"
+      },
+      {
+        "element_name": "sending_section",
+        "element_type": "section",
+        "page": "FaxSettingsScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.TextView[@text='Sending'] or sending section header",
+        "interaction_types": [
+          "scroll_to"
+        ],
+        "used_in_steps": [
+          7
+        ],
+        "priority": "high"
+      },
+      {
+        "element_name": "contacts_option",
+        "element_type": "menu_item",
+        "page": "FaxSettingsScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.TextView[@text='Contacts'] under Sending section",
+        "interaction_types": [
+          "click"
+        ],
+        "used_in_steps": [
+          7
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "contacts_screen",
+        "element_type": "section",
+        "page": "ContactsScreen",
+        "locator_strategy_suggestion": "id",
+        "locator_value_hint": "contacts_screen or contacts_list_container",
+        "interaction_types": [
+          "wait_for_visible"
+        ],
+        "used_in_steps": [
+          7,
+          9
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "add_contact_button",
+        "element_type": "button",
+        "page": "ContactsScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.Button[@text='Add Contact'] or FAB with + icon",
+        "interaction_types": [
+          "click"
+        ],
+        "used_in_steps": [
+          8,
+          10
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "add_contact_form",
+        "element_type": "form",
+        "page": "AddContactScreen",
+        "locator_strategy_suggestion": "id",
+        "locator_value_hint": "add_contact_form or contact_form_container",
+        "interaction_types": [
+          "wait_for_visible"
+        ],
+        "used_in_steps": [
+          8
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "contact_name_input",
+        "element_type": "text_input",
+        "page": "AddContactScreen",
+        "locator_strategy_suggestion": "id",
+        "locator_value_hint": "contact_name or name_input",
+        "interaction_types": [
+          "type"
+        ],
+        "used_in_steps": [
+          9,
+          10
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "fax_number_input",
+        "element_type": "text_input",
+        "page": "AddContactScreen",
+        "locator_strategy_suggestion": "id",
+        "locator_value_hint": "fax_number or number_input",
+        "interaction_types": [
+          "type"
+        ],
+        "used_in_steps": [
+          9,
+          10
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "country_code_input",
+        "element_type": "text_input",
+        "page": "AddContactScreen",
+        "locator_strategy_suggestion": "id",
+        "locator_value_hint": "country_code or country_code_input",
+        "interaction_types": [
+          "type"
+        ],
+        "used_in_steps": [
+          9,
+          10
+        ],
+        "priority": "medium"
+      },
+      {
+        "element_name": "save_contact_button",
+        "element_type": "button",
+        "page": "AddContactScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.Button[@text='Save'] or save icon",
+        "interaction_types": [
+          "click"
+        ],
+        "used_in_steps": [
+          9,
+          10
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "saved_contact_in_list",
+        "element_type": "list_item",
+        "page": "ContactsScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.TextView[contains(@text,'contact_name')] in list",
+        "interaction_types": [
+          "wait_for_visible"
+        ],
+        "used_in_steps": [
+          9
+        ],
+        "priority": "high"
+      },
+      {
+        "element_name": "contacts_in_list",
+        "element_type": "list",
+        "page": "ContactsScreen",
+        "locator_strategy_suggestion": "id",
+        "locator_value_hint": "contacts_list or recycler_view",
+        "interaction_types": [
+          "read_text"
+        ],
+        "used_in_steps": [
+          10
+        ],
+        "priority": "high"
+      },
+      {
+        "element_name": "back_button",
+        "element_type": "button",
+        "page": "ContactsScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.ImageButton[@content-desc='Navigate up'] or back arrow",
+        "interaction_types": [
+          "click"
+        ],
+        "used_in_steps": [
+          11
+        ],
+        "priority": "high"
+      },
+      {
+        "element_name": "compose_button",
+        "element_type": "button",
+        "page": "MobileFaxScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.Button[@text='Compose'] at top-left or FAB",
+        "interaction_types": [
+          "click"
+        ],
+        "used_in_steps": [
+          11
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "compose_fax_screen",
+        "element_type": "section",
+        "page": "ComposeFaxScreen",
+        "locator_strategy_suggestion": "id",
+        "locator_value_hint": "compose_fax_screen or compose_container",
+        "interaction_types": [
+          "wait_for_visible"
+        ],
+        "used_in_steps": [
+          11
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "to_section",
+        "element_type": "section",
+        "page": "ComposeFaxScreen",
+        "locator_strategy_suggestion": "id",
+        "locator_value_hint": "to_section or recipient_section",
+        "interaction_types": [
+          "none_just_verify"
+        ],
+        "used_in_steps": [
+          12
+        ],
+        "priority": "high"
+      },
+      {
+        "element_name": "contact_picker_icon",
+        "element_type": "icon",
+        "page": "ComposeFaxScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.ImageView[@content-desc='Select contact'] or person icon in TO section",
+        "interaction_types": [
+          "click"
+        ],
+        "used_in_steps": [
+          12
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "contacts_list_picker",
+        "element_type": "section",
+        "page": "ComposeFaxScreen",
+        "locator_strategy_suggestion": "id",
+        "locator_value_hint": "contacts_picker or contact_selection_dialog",
+        "interaction_types": [
+          "wait_for_visible"
+        ],
+        "used_in_steps": [
+          12
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "saved_contacts_list",
+        "element_type": "list",
+        "page": "ComposeFaxScreen",
+        "locator_strategy_suggestion": "id",
+        "locator_value_hint": "contacts_list or picker_list",
+        "interaction_types": [
+          "read_text"
+        ],
+        "used_in_steps": [
+          12
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "contact_list_item",
+        "element_type": "list_item",
+        "page": "ComposeFaxScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.TextView[@text='contact_name'] in picker list",
+        "interaction_types": [
+          "click"
+        ],
+        "used_in_steps": [
+          12,
+          13
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "to_field",
+        "element_type": "text_input",
+        "page": "ComposeFaxScreen",
+        "locator_strategy_suggestion": "id",
+        "locator_value_hint": "to_field or recipient_field",
+        "interaction_types": [
+          "read_text"
+        ],
+        "used_in_steps": [
+          12,
+          13
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "send_fax_button",
+        "element_type": "button",
+        "page": "ComposeFaxScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.Button[@text='Send'] or send icon",
+        "interaction_types": [
+          "click"
+        ],
+        "used_in_steps": [
+          13
+        ],
+        "priority": "critical"
+      },
+      {
+        "element_name": "fax_sent_confirmation",
+        "element_type": "toast_notification",
+        "page": "ComposeFaxScreen",
+        "locator_strategy_suggestion": "xpath",
+        "locator_value_hint": "//android.widget.Toast[contains(@text,'sent')] or success message",
+        "interaction_types": [
+          "wait_for_visible"
+        ],
+        "used_in_steps": [
+          13
+        ],
+        "priority": "critical"
+      }
+    ],
+    "action_methods_needed": [
+      {
+        "method_name_suggestion": "launch_hpx_app",
+        "action_type": "click",
+        "page": "DeviceHomeScreen",
+        "parameters": [
+          "app_package_name: string"
+        ],
+        "description": "Launches the HPX mobile application from device home screen",
+        "used_in_steps": [
+          1
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "verify_hpx_home_screen_displayed",
+        "action_type": "verification",
+        "page": "HPXHomeScreen",
+        "parameters": [],
+        "description": "Verifies that HPX home screen is displayed after app launch",
+        "used_in_steps": [
+          1
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "enter_username",
+        "action_type": "type_text",
+        "page": "LoginScreen",
+        "parameters": [
+          "username: string"
+        ],
+        "description": "Enters username in the username input field",
+        "used_in_steps": [
+          2
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "enter_password",
+        "action_type": "type_text",
+        "page": "LoginScreen",
+        "parameters": [
+          "password: string"
+        ],
+        "description": "Enters password in the password input field",
+        "used_in_steps": [
+          2
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "click_login_button",
+        "action_type": "click",
+        "page": "LoginScreen",
+        "parameters": [],
+        "description": "Clicks the login button to submit credentials",
+        "used_in_steps": [
+          2
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "perform_login",
+        "action_type": "multi_action_composite",
+        "page": "LoginScreen",
+        "parameters": [
+          "username: string",
+          "password: string"
+        ],
+        "description": "Performs complete login flow - enters username, password, and clicks login",
+        "used_in_steps": [
+          2
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "scroll_to_mobile_fax_option",
+        "action_type": "scroll",
+        "page": "HPXHomeScreen",
+        "parameters": [],
+        "description": "Scrolls on home screen to locate Mobile Fax option",
+        "used_in_steps": [
+          3
+        ],
+        "priority": "high"
+      },
+      {
+        "method_name_suggestion": "tap_mobile_fax",
+        "action_type": "click",
+        "page": "HPXHomeScreen",
+        "parameters": [],
+        "description": "Taps on Mobile Fax option to navigate to Mobile Fax screen",
+        "used_in_steps": [
+          4
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "tap_three_dot_menu",
+        "action_type": "click",
+        "page": "MobileFaxScreen",
+        "parameters": [],
+        "description": "Taps on three-dot menu icon to open options menu",
+        "used_in_steps": [
+          5
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "select_fax_settings",
+        "action_type": "click",
+        "page": "MobileFaxScreen",
+        "parameters": [],
+        "description": "Selects Fax Settings from the options menu",
+        "used_in_steps": [
+          6
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "navigate_to_contacts",
+        "action_type": "click",
+        "page": "FaxSettingsScreen",
+        "parameters": [],
+        "description": "Navigates to Contacts option under Sending section",
+        "used_in_steps": [
+          7
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "tap_add_contact",
+        "action_type": "click",
+        "page": "ContactsScreen",
+        "parameters": [],
+        "description": "Taps Add Contact button to open add contact form",
+        "used_in_steps": [
+          8
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "enter_contact_name",
+        "action_type": "type_text",
+        "page": "AddContactScreen",
+        "parameters": [
+          "name: string"
+        ],
+        "description": "Enters contact name in the name input field",
+        "used_in_steps": [
+          9
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "enter_fax_number",
+        "action_type": "type_text",
+        "page": "AddContactScreen",
+        "parameters": [
+          "fax_number: string"
+        ],
+        "description": "Enters fax number in the fax number input field",
+        "used_in_steps": [
+          9
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "enter_country_code",
+        "action_type": "type_text",
+        "page": "AddContactScreen",
+        "parameters": [
+          "country_code: string"
+        ],
+        "description": "Enters country code in the country code input field",
+        "used_in_steps": [
+          9
+        ],
+        "priority": "medium"
+      },
+      {
+        "method_name_suggestion": "tap_save_contact",
+        "action_type": "click",
+        "page": "AddContactScreen",
+        "parameters": [],
+        "description": "Taps Save button to save the contact",
+        "used_in_steps": [
+          9
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "add_contact",
+        "action_type": "multi_action_composite",
+        "page": "AddContactScreen",
+        "parameters": [
+          "name: string",
+          "fax_number: string",
+          "country_code: string"
+        ],
+        "description": "Complete flow to add a contact - enters all details and saves",
+        "used_in_steps": [
+          9,
+          10
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "add_multiple_contacts",
+        "action_type": "multi_action_composite",
+        "page": "ContactsScreen",
+        "parameters": [
+          "contacts_list: array"
+        ],
+        "description": "Adds multiple contacts by repeating add contact flow",
+        "used_in_steps": [
+          10
+        ],
+        "priority": "high"
+      },
+      {
+        "method_name_suggestion": "navigate_back_to_mobile_fax",
+        "action_type": "click",
+        "page": "ContactsScreen",
+        "parameters": [],
+        "description": "Navigates back to Mobile Fax screen from Contacts",
+        "used_in_steps": [
+          11
+        ],
+        "priority": "high"
+      },
+      {
+        "method_name_suggestion": "tap_compose_button",
+        "action_type": "click",
+        "page": "MobileFaxScreen",
+        "parameters": [],
+        "description": "Taps Compose button to open Compose Fax screen",
+        "used_in_steps": [
+          11
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "tap_contact_picker_icon",
+        "action_type": "click",
+        "page": "ComposeFaxScreen",
+        "parameters": [],
+        "description": "Taps contact picker icon in TO section to open contacts list",
+        "used_in_steps": [
+          12
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "select_contact_from_list",
+        "action_type": "click",
+        "page": "ComposeFaxScreen",
+        "parameters": [
+          "contact_name: string"
+        ],
+        "description": "Selects a specific contact from the contacts picker list",
+        "used_in_steps": [
+          12,
+          13
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "tap_send_fax",
+        "action_type": "click",
+        "page": "ComposeFaxScreen",
+        "parameters": [],
+        "description": "Taps Send button to send the fax",
+        "used_in_steps": [
+          13
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "compose_and_send_fax_with_contact",
+        "action_type": "multi_action_composite",
+        "page": "ComposeFaxScreen",
+        "parameters": [
+          "contact_name: string"
+        ],
+        "description": "Complete flow to compose and send fax using saved contact",
+        "used_in_steps": [
+          12,
+          13
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "wait_for_page_load",
+        "action_type": "wait",
+        "page": "All",
+        "parameters": [
+          "page_identifier: string",
+          "timeout: int"
+        ],
+        "description": "Generic wait for page to load",
+        "used_in_steps": [
+          1,
+          2,
+          4,
+          6,
+          7,
+          8,
+          11
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "scroll_to_element",
+        "action_type": "scroll",
+        "page": "All",
+        "parameters": [
+          "element_identifier: string"
+        ],
+        "description": "Generic scroll to make element visible",
+        "used_in_steps": [
+          3,
+          7
+        ],
+        "priority": "high"
+      },
+      {
+        "method_name_suggestion": "verify_element_visible",
+        "action_type": "verification",
+        "page": "All",
+        "parameters": [
+          "element_identifier: string"
+        ],
+        "description": "Generic verification that element is visible",
+        "used_in_steps": [
+          1,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          11,
+          12
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "read_element_text",
+        "action_type": "verification",
+        "page": "All",
+        "parameters": [
+          "element_identifier: string"
+        ],
+        "description": "Reads and returns text from an element",
+        "used_in_steps": [
+          12,
+          13
+        ],
+        "priority": "high"
+      }
+    ],
+    "assertion_methods_needed": [
+      {
+        "method_name_suggestion": "verify_hpx_home_screen_displayed",
+        "assertion_type": "element_visible",
+        "page": "HPXHomeScreen",
+        "parameters": [],
+        "description": "Verifies HPX home screen is displayed",
+        "used_in_steps": [
+          1
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "verify_home_screen_title",
+        "assertion_type": "text_contains",
+        "page": "HPXHomeScreen",
+        "parameters": [
+          "expected_text: string"
+        ],
+        "description": "Verifies home screen title contains expected text",
+        "used_in_steps": [
+          1
+        ],
+        "priority": "medium"
+      },
+      {
+        "method_name_suggestion": "verify_user_logged_in",
+        "assertion_type": "element_visible",
+        "page": "HPXHomeScreen",
+        "parameters": [],
+        "description": "Verifies user is logged in by checking home screen elements",
+        "used_in_steps": [
+          1
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "verify_login_successful_home_displayed",
+        "assertion_type": "element_visible",
+        "page": "HPXHomeScreen",
+        "parameters": [],
+        "description": "Verifies login was successful and home screen is displayed",
+        "used_in_steps": [
+          2
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "verify_mobile_fax_option_visible",
+        "assertion_type": "element_visible",
+        "page": "HPXHomeScreen",
+        "parameters": [],
+        "description": "Verifies Mobile Fax option is visible on home screen",
+        "used_in_steps": [
+          3
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "verify_mobile_fax_screen_opened",
+        "assertion_type": "page_loaded",
+        "page": "MobileFaxScreen",
+        "parameters": [],
+        "description": "Verifies Mobile Fax screen opened successfully",
+        "used_in_steps": [
+          4
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "verify_fax_options_menu_displayed",
+        "assertion_type": "element_visible",
+        "page": "MobileFaxScreen",
+        "parameters": [],
+        "description": "Verifies fax options menu is displayed after tapping three-dot icon",
+        "used_in_steps": [
+          5
+        ],
+        "priority": "high"
+      },
+      {
+        "method_name_suggestion": "verify_fax_settings_screen_opened",
+        "assertion_type": "page_loaded",
+        "page": "FaxSettingsScreen",
+        "parameters": [],
+        "description": "Verifies Fax Settings screen opened successfully",
+        "used_in_steps": [
+          6
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "verify_contacts_section_visible",
+        "assertion_type": "element_visible",
+        "page": "FaxSettingsScreen",
+        "parameters": [],
+        "description": "Verifies Contacts section is visible on Fax Settings screen",
+        "used_in_steps": [
+          6
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "verify_contacts_screen_opened",
+        "assertion_type": "element_visible",
+        "page": "ContactsScreen",
+        "parameters": [],
+        "description": "Verifies Contacts screen opened successfully",
+        "used_in_steps": [
+          7
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "verify_add_contact_form_displayed",
+        "assertion_type": "element_visible",
+        "page": "AddContactScreen",
+        "parameters": [],
+        "description": "Verifies Add Contact form is displayed",
+        "used_in_steps": [
+          8
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "verify_returned_to_contacts_screen",
+        "assertion_type": "element_visible",
+        "page": "ContactsScreen",
+        "parameters": [],
+        "description": "Verifies user returned to Contacts screen after saving contact",
+        "used_in_steps": [
+          9
+        ],
+        "priority": "high"
+      },
+      {
+        "method_name_suggestion": "verify_contact_saved_in_list",
+        "assertion_type": "element_visible",
+        "page": "ContactsScreen",
+        "parameters": [
+          "contact_name: string"
+        ],
+        "description": "Verifies saved contact appears in contacts list",
+        "used_in_steps": [
+          9
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "verify_multiple_contacts_added",
+        "assertion_type": "element_count",
+        "page": "ContactsScreen",
+        "parameters": [
+          "expected_count: int"
+        ],
+        "description": "Verifies multiple contacts were added to the list",
+        "used_in_steps": [
+          10
+        ],
+        "priority": "high"
+      },
+      {
+        "method_name_suggestion": "verify_mobile_fax_screen_displayed",
+        "assertion_type": "page_loaded",
+        "page": "MobileFaxScreen",
+        "parameters": [],
+        "description": "Verifies Mobile Fax screen is displayed after navigation",
+        "used_in_steps": [
+          11
+        ],
+        "priority": "high"
+      },
+      {
+        "method_name_suggestion": "verify_compose_fax_screen_opened",
+        "assertion_type": "page_loaded",
+        "page": "ComposeFaxScreen",
+        "parameters": [],
+        "description": "Verifies Compose Fax screen opened successfully",
+        "used_in_steps": [
+          11
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "verify_contacts_list_displayed",
+        "assertion_type": "element_visible",
+        "page": "ComposeFaxScreen",
+        "parameters": [],
+        "description": "Verifies contacts list is displayed in picker",
+        "used_in_steps": [
+          12
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "verify_saved_contacts_in_list",
+        "assertion_type": "element_count",
+        "page": "ComposeFaxScreen",
+        "parameters": [
+          "expected_count: int"
+        ],
+        "description": "Verifies saved contacts appear in the picker list",
+        "used_in_steps": [
+          12
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "verify_contact_populated_in_to_field",
+        "assertion_type": "text_contains",
+        "page": "ComposeFaxScreen",
+        "parameters": [
+          "expected_contact: string"
+        ],
+        "description": "Verifies selected contact is populated in TO field",
+        "used_in_steps": [
+          12
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "verify_second_contact_selected",
+        "assertion_type": "text_contains",
+        "page": "ComposeFaxScreen",
+        "parameters": [
+          "expected_contact: string"
+        ],
+        "description": "Verifies second contact selection is successful",
+        "used_in_steps": [
+          13
+        ],
+        "priority": "critical"
+      },
+      {
+        "method_name_suggestion": "verify_fax_sent_successfully",
+        "assertion_type": "success_message_displayed",
+        "page": "ComposeFaxScreen",
+        "parameters": [],
+        "description": "Verifies fax was sent successfully with confirmation message",
+        "used_in_steps": [
+          13
+        ],
+        "priority": "critical"
+      }
+    ],
+    "utility_functions_needed": [
+      {
+        "function_name_suggestion": "wait_for_element_visible",
+        "purpose": "Waits for an element to become visible with timeout",
+        "parameters": [
+          "element_locator: string",
+          "timeout: int"
+        ],
+        "category": "wait_helper",
+        "priority": "critical"
+      },
+      {
+        "function_name_suggestion": "wait_for_element_clickable",
+        "purpose": "Waits for an element to become clickable with timeout",
+        "parameters": [
+          "element_locator: string",
+          "timeout: int"
+        ],
+        "category": "wait_helper",
+        "priority": "critical"
+      },
+      {
+        "function_name_suggestion": "scroll_until_element_visible",
+        "purpose": "Scrolls on screen until specified element becomes visible",
+        "parameters": [
+          "element_locator: string",
+          "scroll_direction: string",
+          "max_scrolls: int"
+        ],
+        "category": "scroll_helper",
+        "priority": "high"
+      },
+      {
+        "function_name_suggestion": "take_screenshot_on_failure",
+        "purpose": "Captures screenshot when test step fails",
+        "parameters": [
+          "test_name: string",
+          "step_number: int"
+        ],
+        "category": "debug_helper",
+        "priority": "high"
+      },
+      {
+        "function_name_suggestion": "verify_app_version",
+        "purpose": "Verifies installed app version matches expected version",
+        "parameters": [
+          "expected_version: string"
+        ],
+        "category": "verification_helper",
+        "priority": "medium"
+      },
+      {
+        "function_name_suggestion": "verify_device_onboarded",
+        "purpose": "Verifies device onboarding status",
+        "parameters": [],
+        "category": "verification_helper",
+        "priority": "medium"
+      },
+      {
+        "function_name_suggestion": "verify_app_ready_state",
+        "purpose": "Verifies app is in ready state and stable",
+        "parameters": [],
+        "category": "verification_helper",
+        "priority": "medium"
+      },
+      {
+        "function_name_suggestion": "generate_unique_contact_name",
+        "purpose": "Generates unique contact name for test data",
+        "parameters": [],
+        "category": "data_helper",
+        "priority": "low"
+      },
+      {
+        "function_name_suggestion": "generate_valid_fax_number",
+        "purpose": "Generates valid fax number for test data",
+        "parameters": [
+          "country_code: string"
+        ],
+        "category": "data_helper",
+        "priority": "low"
+      },
+      {
+        "function_name_suggestion": "restart_app",
+        "purpose": "Restarts the mobile application",
+        "parameters": [],
+        "category": "app_control",
+        "priority": "medium"
+      }
+    ],
+    "api_helpers_needed": [
+      {
+        "function_name_suggestion": "check_device_registration_status",
+        "purpose": "Checks device registration status via API",
+        "http_method": "GET",
+        "endpoint_hint": "/api/device/status",
+        "parameters": [
+          "device_id: string"
+        ],
+        "category": "precondition_check",
+        "priority": "medium"
+      },
+      {
+        "function_name_suggestion": "health_check_client_systems",
+        "purpose": "Performs health check on backend client systems",
+        "http_method": "GET",
+        "endpoint_hint": "/api/health",
+        "parameters": [],
+        "category": "precondition_check",
+        "priority": "medium"
+      },
+      {
+        "function_name_suggestion": "create_test_user_via_api",
+        "purpose": "Creates test user account via API for test data setup",
+        "http_method": "POST",
+        "endpoint_hint": "/api/users",
+        "parameters": [
+          "username: string",
+          "password: string"
+        ],
+        "category": "data_setup",
+        "priority": "low"
+      },
+      {
+        "function_name_suggestion": "delete_contact_via_api",
+        "purpose": "Deletes contact via API for cleanup",
+        "http_method": "DELETE",
+        "endpoint_hint": "/api/fax/contacts/{contact_id}",
+        "parameters": [
+          "contact_id: string"
+        ],
+        "category": "data_cleanup",
+        "priority": "high"
+      },
+      {
+        "function_name_suggestion": "get_contacts_list_via_api",
+        "purpose": "Retrieves contacts list via API for verification",
+        "http_method": "GET",
+        "endpoint_hint": "/api/fax/contacts",
+        "parameters": [],
+        "category": "verification",
+        "priority": "medium"
+      }
+    ],
+    "test_data_setup_needed": [
+      {
+        "setup_name": "valid_hpx_credentials",
+        "purpose": "Provide valid HPX account credentials for login",
+        "data_fields": [
+          "username",
+          "password"
+        ],
+        "setup_method": "test_data_file",
+        "priority": "critical",
+        "used_in_test_cases": [
+          "NPI_ID_C66377566"
+        ]
+      },
+      {
+        "setup_name": "multiple_contact_details",
+        "purpose": "Provide details for 3 contacts to be added during test",
+        "data_fields": [
+          "contact_1_name",
+          "contact_1_fax_number",
+          "contact_1_country_code",
+          "contact_2_name",
+          "contact_2_fax_number",
+          "contact_2_country_code",
+          "contact_3_name",
+          "contact_3_fax_number",
+          "contact_3_country_code"
+        ],
+        "setup_method": "test_data_file",
+        "priority": "critical",
+        "used_in_test_cases": [
+          "NPI_ID_C66377566"
+        ]
+      },
+      {
+        "setup_name": "app_configuration",
+        "purpose": "Provide app package name and version for app launch and verification",
+        "data_fields": [
+          "hpx_app_package_name",
+          "expected_app_version"
+        ],
+        "setup_method": "environment_config",
+        "priority": "critical",
+        "used_in_test_cases": [
+          "NPI_ID_C66377566"
+        ]
+      }
+    ],
+    "configuration_needed": [
+      {
+        "config_key": "hpx_app_package_name",
+        "purpose": "Package name of HPX mobile app for app launch",
+        "sample_value": "com.hp.hpx.mobile",
+        "config_source": "environment_config",
+        "priority": "critical"
+      },
+      {
+        "config_key": "default_timeout",
+        "purpose": "Default timeout for waits in seconds",
+        "sample_value": "30",
+        "config_source": "environment_config",
+        "priority": "critical"
+      },
+      {
+        "config_key": "platform",
+        "purpose": "Mobile platform - Android or iOS",
+        "sample_value": "Android",
+        "config_source": "environment_config",
+        "priority": "critical"
+      },
+      {
+        "config_key": "device_name",
+        "purpose": "Name or ID of test device",
+        "sample_value": "Pixel_5_API_30",
+        "config_source": "environment_config",
+        "priority": "high"
+      },
+      {
+        "config_key": "appium_server_url",
+        "purpose": "URL of Appium server for mobile automation",
+        "sample_value": "http://localhost:4723/wd/hub",
+        "config_source": "environment_config",
+        "priority": "critical"
+      },
+      {
+        "config_key": "implicit_wait",
+        "purpose": "Implicit wait time for element finding",
+        "sample_value": "10",
+        "config_source": "environment_config",
+        "priority": "high"
+      },
+      {
+        "config_key": "page_load_timeout",
+        "purpose": "Timeout for page/screen load",
+        "sample_value": "30",
+        "config_source": "environment_config",
+        "priority": "high"
+      },
+      {
+        "config_key": "screenshot_on_failure",
+        "purpose": "Whether to capture screenshot on test failure",
+        "sample_value": "true",
+        "config_source": "environment_config",
+        "priority": "medium"
+      }
+    ]
+  },
+  "automation_notes": {
+    "complexity_assessment": "high",
+    "complexity_justification": "This is a complex end-to-end mobile test case involving multiple screens (8 different pages), deep navigation flows (7 page transitions), data creation (adding 3 contacts), data selection (picking contacts from list), and final action verification (sending fax). The test requires mobile automation framework (Appium), handling of various mobile UI elements including menus, forms, lists, pickers, and notifications. The test has conditional logic (login if needed), loops (adding multiple contacts), and state dependencies between steps. Mobile automation adds complexity with app launch, screen transitions, and mobile-specific interactions.",
+    "estimated_locator_count": 34,
+    "estimated_page_objects": 8,
+    "estimated_action_methods": 28,
+    "estimated_assertions": 21,
+    "estimated_utility_functions": 10,
+    "estimated_api_helpers": 5,
+    "risks": [
+      {
+        "risk": "Mobile app stability - app may crash or hang during execution",
+        "severity": "high",
+        "mitigation": "Implement app restart capability and retry logic for critical steps"
+      },
+      {
+        "risk": "Dynamic element locators - mobile UI elements may have dynamic IDs or change between app versions",
+        "severity": "high",
+        "mitigation": "Use robust locator strategies like accessibility IDs, content descriptions, or XPath with text matching"
+      },
+      {
+        "risk": "Timing issues - mobile screens may load at different speeds on different devices",
+        "severity": "high",
+        "mitigation": "Use explicit waits with proper conditions instead of fixed delays"
+      },
+      {
+        "risk": "Test data dependency - test requires specific contacts to be added and available",
+        "severity": "medium",
+        "mitigation": "Implement proper test data setup and cleanup, verify data creation success before proceeding"
+      },
+      {
+        "risk": "Deep navigation flow - test navigates through many screens increasing chance of navigation failures",
+        "severity": "medium",
+        "mitigation": "Add navigation verification at each step, implement recovery mechanisms"
+      },
+      {
+        "risk": "Contact picker interaction - selecting from list may be flaky if list is scrollable or has many items",
+        "severity": "medium",
+        "mitigation": "Implement scroll-to-element logic for contact selection, verify contact appears before selecting"
+      },
+      {
+        "risk": "Fax sending may fail due to backend issues or network problems",
+        "severity": "medium",
+        "mitigation": "Add proper error handling and verification of fax send status, consider using mock/stub for fax backend in test environment"
+      },
+      {
+        "risk": "Platform differences - test may behave differently on Android vs iOS",
+        "severity": "medium",
+        "mitigation": "Use platform-specific locators and actions where needed, test on both platforms"
+      },
+      {
+        "risk": "Device-specific issues - different devices may have different screen sizes affecting element visibility",
+        "severity": "low",
+        "mitigation": "Test on multiple device configurations, use scroll helpers"
+      }
+    ],
+    "recommendations": [
+      "Implement Page Object Model pattern with separate page classes for each of the 8 screens identified",
+      "Use Appium for mobile automation with proper capabilities configuration for Android/iOS",
+      "Implement a robust wait strategy using explicit waits with expected conditions for all element interactions",
+      "Create a test data management layer that can provide contact details from JSON or CSV files",
+      "Implement proper test data cleanup in teardown to remove added contacts after test execution",
+      "Add screenshot capture on every assertion failure for debugging",
+      "Consider using Appium Inspector or similar tool to identify stable locators during development",
+      "Implement retry logic for flaky mobile interactions like menu taps and list selections",
+      "Use accessibility IDs or content descriptions for locators where available as they are more stable than XPath",
+      "Consider implementing API helpers for contact creation/deletion to speed up test data setup and cleanup",
+      "Add logging at each step to track test execution flow and aid debugging",
+      "Implement conditional logic properly for the login step to handle both logged-in and logged-out states",
+      "Consider parameterizing the number of contacts to add for flexibility",
+      "Implement scroll helpers that can scroll until element is visible with max scroll limit",
+      "Add verification that contacts added are actually visible in the list before proceeding to compose fax",
+      "Consider adding negative test scenarios like invalid contact details, empty fields, etc.",
+      "Implement proper exception handling for mobile-specific errors like app crashes, network issues",
+      "Use test data files (JSON/CSV) to store multiple sets of contact data for data-driven testing"
+    ],
+    "special_handling_notes": [
+      "This is a mobile test requiring Appium or similar mobile automation framework - cannot use Selenium WebDriver",
+      "App launch and initialization may take significant time - use generous timeouts for first screen",
+      "The test has a conditional step (step 2 - login if needed) which requires conditional logic in automation",
+      "Step 10 is a loop step requiring iteration to add 2-3 contacts - implement as a loop with array of contact data",
+      "Contact selection in steps 12-13 requires interaction with a picker/dialog which may be a separate context or overlay",
+      "The three-dot menu in step 5 is a common mobile pattern but may be implemented as popup menu or navigation",
+      "Back navigation in step 11 may require multiple back button presses depending on navigation stack depth",
+      "Fax sending in step 13 may be asynchronous - need to wait for confirmation message with appropriate timeout",
+      "The 'Steps-7' reference in step 13 appears to be a typo or internal reference and should be ignored",
+      "Country code field is marked as 'if applicable' suggesting it may be optional - handle accordingly",
+      "Test involves both UI interactions and likely backend API calls - consider API verification for critical operations",
+      "Mobile notifications/toasts for fax sent confirmation may disappear quickly - capture immediately",
+      "Consider that mobile keyboards may appear and hide during text entry affecting screen layout"
+    ],
+    "framework_compatibility_notes": "This test case analysis is structured for mobile automation using Appium framework. All page objects should extend BasePage with mobile-specific methods. Locators should use Appium locator strategies (accessibility ID, XPath, iOS UIAutomation, Android UIAutomator). The test requires mobile capabilities configuration including platformName, deviceName, app package/bundle ID. Consider using Appium's mobile gestures for scrolling and swiping. The framework should support both Android and iOS with platform-specific implementations where needed."
+  }
+}
